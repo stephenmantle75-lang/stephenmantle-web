@@ -9,7 +9,7 @@ import {
 import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react'
 
 const CONTACT_HREF = 'mailto:mantsai@zohomail.eu'
-const BOOKING_HREF = 'https://calendar.zoho.eu/zc/view/slot-booking/zz08011230efb8be90907d3606d46d6945806891fa1b40418ffc144b0c1b0e6779678c97d1f8a7df3c8bb1aaba7ccdff75500bf354'
+const BOOKING_HREF = 'https://mantaai.zohobookings.eu/#/254973000000048054'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
 const HOME_ABOUT_IMAGE = '/max-andrey--8-2YWKt8Ag-unsplash.jpg'
 const PORTRAIT_IMAGE = '/stephen.png'
