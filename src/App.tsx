@@ -268,40 +268,42 @@ const DIAGNOSTIC_SERVICES = [
   },
 ] as const
 
-const CREATIVE_WORKFLOW_CARDS = [
+const COMMON_PROBLEMS = [
   {
-    id: 'storyboard',
+    id: 'enquiries',
     number: '01',
-    title: 'Project Storyboard.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85',
-    items: [
-      'Map concepts, assets, and delivery steps in one working layer.',
-      'Clarify team handoffs before production starts moving.',
-      'Keep approvals, notes, and dependencies attached to the project.',
-      'Reduce back-and-forth without flattening the creative process.',
-    ],
+    title: 'Enquiries arrive when you\'re unavailable.',
+    body: 'Someone visits at 10pm looking for a quote. No reply comes. They move on. You never knew they were there.',
   },
   {
-    id: 'critiques',
+    id: 'quotes',
     number: '02',
-    title: 'Smart Critiques.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85',
-    items: [
-      'Use AI analysis to surface friction, inconsistencies, and missed opportunities.',
-      'Turn creative notes into cleaner next actions instead of long feedback loops.',
-      'Connect the critique layer to the tools already used to ship the work.',
-    ],
+    title: 'Quotes that go cold after one email.',
+    body: 'You sent the proposal. They went quiet. Most conversions happen on the second or third follow-up — which never gets sent.',
   },
   {
-    id: 'capsule',
+    id: 'invoices',
     number: '03',
-    title: 'Immersion Capsule.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85',
-    items: [
-      'Silence low-value notifications during focused work windows.',
-      'Layer in ambient cues and soundscapes that support deep execution.',
-      'Sync schedules and routines so vision time does not get fragmented.',
-    ],
+    title: 'Invoices you shouldn\'t have to chase.',
+    body: 'The work is done. The invoice sits unpaid. Chasing is uncomfortable, easy to postpone, and ultimately your problem.',
+  },
+  {
+    id: 'admin',
+    number: '04',
+    title: 'Admin that spills into the evening.',
+    body: 'Notes, summaries, updates, follow-ups. Repetitive work that accumulates every day and never quite gets finished.',
+  },
+  {
+    id: 'visibility',
+    number: '05',
+    title: 'No visibility without opening five apps.',
+    body: 'What\'s open, pending, and overdue? The information exists somewhere. Just never in one place at the right time.',
+  },
+  {
+    id: 'website',
+    number: '06',
+    title: 'A website that doesn\'t work while you\'re not watching.',
+    body: 'It lists your services. It has a phone number. But it doesn\'t capture leads, answer questions, or follow up on its own.',
   },
 ] as const
 
@@ -851,145 +853,48 @@ function PullUpHeadingLine({
   )
 }
 
-function CreativeWorkflowCard({
-  number,
-  title,
-  icon,
-  items,
-  isVisible,
-  delayIndex,
-  onLearnMore,
-}: {
-  number: string
-  title: string
-  icon: string
-  items: readonly string[]
-  isVisible: boolean
-  delayIndex: number
-  onLearnMore: () => void
-}) {
-  return (
-    <article
-      className="flex h-full flex-col rounded-[28px] border border-black/5 bg-white p-5 shadow-[0_18px_40px_rgba(0,0,0,0.05)] sm:p-6"
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'scale(1) translateY(0px)' : 'scale(0.95) translateY(18px)',
-        transitionProperty: 'transform, opacity',
-        transitionDuration: '820ms',
-        transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
-        transitionDelay: `${delayIndex * 150}ms`,
-      }}
-    >
-      <img
-        src={icon}
-        alt=""
-        className="h-10 w-10 rounded-xl object-cover sm:h-12 sm:w-12"
-      />
-
-      <div className="mt-6">
-        <p className="text-[12px] font-semibold tracking-[0.14em] text-gray-400">{number}</p>
-        <h3 className="mt-3 text-[20px] font-medium leading-[1.1] tracking-[-0.03em] text-gray-900">
-          {title}
-        </h3>
-      </div>
-
-      <div className="mt-6 space-y-3">
-        {items.map((item) => (
-          <div key={item} className="flex items-start gap-3">
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#F26522]" />
-            <p className="text-[13px] leading-relaxed text-gray-500 sm:text-[14px]">{item}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-auto pt-8">
-        <button
-          type="button"
-          onClick={onLearnMore}
-          className="inline-flex items-center gap-2 text-[13px] font-medium text-gray-900 transition-colors duration-300 hover:text-[#F26522]"
-        >
-          <span>Learn more</span>
-          <ArrowRight className="h-4 w-4 -rotate-45 text-[#F26522]" />
-        </button>
-      </div>
-    </article>
-  )
-}
-
-function CreativeWorkflowSection({
-  navigate,
-}: {
-  navigate: (to: RoutePath) => void
-}) {
-  const { ref, isInView } = useInViewOnce({ rootMargin: '-100px 0px' })
+function CommonProblemsSection() {
+  const { ref, isInView } = useInViewOnce({ rootMargin: '-80px 0px' })
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F5F5] pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.15]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(17,24,39,0.22)_1px,_transparent_0)] [background-size:16px_16px]" />
-      </div>
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,_rgba(242,101,34,0.12),_transparent_60%)]" />
-
-      <div ref={ref} className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="max-w-[880px]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
-            Creative operations
+    <section className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
+      <div ref={ref} className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="max-w-[640px]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+            Common problems
           </p>
-          <div className="mt-5 text-xl font-normal sm:text-2xl md:text-3xl lg:text-4xl">
-            <PullUpHeadingLine
-              text="Studio-grade workflows for visionary creators."
-              className="text-gray-900"
-              isVisible={isInView}
-              lineIndex={0}
-            />
-            <PullUpHeadingLine
-              text="Built for pure vision. Powered by art."
-              className="mt-2 text-gray-500"
-              isVisible={isInView}
-              lineIndex={1}
-            />
-          </div>
+          <h2 className="mt-4 text-[clamp(1.5rem,4vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900">
+            Six problems worth fixing before anything else.
+          </h2>
+          <p className="mt-4 text-[14px] leading-relaxed text-gray-500 sm:text-[15px]">
+            These are the most common operational gaps in service businesses. Each one costs time, money, or both — usually without anyone tracking the total.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-3 sm:gap-2 md:grid-cols-2 md:gap-1 lg:h-[480px] lg:grid-cols-4">
-          <article
-            className="relative overflow-hidden rounded-[28px] border border-black/5 bg-[#111827] shadow-[0_18px_40px_rgba(0,0,0,0.08)]"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? 'scale(1) translateY(0px)' : 'scale(0.95) translateY(18px)',
-              transitionProperty: 'transform, opacity',
-              transitionDuration: '820ms',
-              transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
-              transitionDelay: '0ms',
-            }}
-          >
-            <video
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,23,0.08),rgba(10,15,23,0.7))]" />
-            <div className="relative flex h-full items-end p-6 sm:p-7">
-              <p className="max-w-[11rem] text-[24px] font-medium leading-[1.04] tracking-[-0.03em] text-[#E1E0CC]">
-                Your creative canvas.
+        <div className="mt-10 grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {COMMON_PROBLEMS.map((problem, i) => (
+            <article
+              key={problem.id}
+              className="rounded-2xl border border-gray-100 bg-[#F8F8F7] p-5 sm:p-6"
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? 'translateY(0px)' : 'translateY(20px)',
+                transitionProperty: 'transform, opacity',
+                transitionDuration: '600ms',
+                transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                transitionDelay: `${i * 80}ms`,
+              }}
+            >
+              <p className="text-[12px] font-semibold tracking-[0.12em] text-[#F26522]">
+                {problem.number}
               </p>
-            </div>
-          </article>
-
-          {CREATIVE_WORKFLOW_CARDS.map((card, index) => (
-            <CreativeWorkflowCard
-              key={card.id}
-              number={card.number}
-              title={card.title}
-              icon={card.icon}
-              items={card.items}
-              isVisible={isInView}
-              delayIndex={index + 1}
-              onLearnMore={() => navigate('/services')}
-            />
+              <h3 className="mt-3 text-[15px] font-semibold leading-[1.3] text-gray-900 sm:text-[16px]">
+                {problem.title}
+              </h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-gray-500 sm:text-[14px]">
+                {problem.body}
+              </p>
+            </article>
           ))}
         </div>
       </div>
@@ -1232,7 +1137,7 @@ function HomePage({
         </div>
       </section>
 
-      <CreativeWorkflowSection navigate={navigate} />
+      <CommonProblemsSection />
 
       <section className="bg-[#F5F5F5] pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
