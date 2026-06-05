@@ -38,6 +38,11 @@ const ROUTE_META: Record<
       'Operational thinking, workflow clarity, and practical AI implementation for businesses that need systems people actually use.',
   },
   '/services': {
+    title: 'Services — Stephen Mantle',
+    description:
+      'Every service listed here is live at Mantle Studios. Website builds, automation systems, research agents, and diagnostics — with proof of concept for each.',
+  },
+  '/diagnostic': {
     title: 'AI Readiness Check — Stephen Mantle',
     description:
       'Take the AI Readiness Check to identify operational friction, score workflow readiness, and find the safest first system to improve.',
@@ -300,7 +305,113 @@ const CREATIVE_WORKFLOW_CARDS = [
   },
 ] as const
 
-type RoutePath = '/' | '/about' | '/services'
+type ServiceStatus = 'live' | 'template' | 'building'
+
+const SERVICES = [
+  {
+    id: 'website',
+    status: 'live' as ServiceStatus,
+    statusLabel: 'Live at Mantle Studios',
+    name: 'Website Design & Build',
+    description: 'Clean, credible sites that explain the offer clearly and make it easy for the right client to act.',
+    builtWith: ['React', 'Tailwind', 'Vercel'],
+    proofHeadline: 'The Mantle Studios site is the proof.',
+    proofBody: 'mantle-studios.com was built from scratch — copy, design, and full Vercel deployment. The commercial front door for Mantle Studios, built to earn trust with clients before the first conversation.',
+  },
+  {
+    id: 'mail-automation',
+    status: 'live' as ServiceStatus,
+    statusLabel: 'Live at Mantle Studios',
+    name: 'Morning Brief & Mail Automation',
+    description: 'Automated daily briefings, inbox triage, and follow-up flows that remove the morning admin pile.',
+    builtWith: ['Zapier', 'Zoho Mail', 'Claude API'],
+    proofHeadline: 'Mantle Studios runs a daily brief every morning.',
+    proofBody: 'The pipeline pulls overnight activity, flags anything that needs a reply, and formats it into a single briefing email. No manual inbox sorting before the workday starts.',
+  },
+  {
+    id: 'research-agent',
+    status: 'live' as ServiceStatus,
+    statusLabel: 'Live at Mantle Studios',
+    name: 'Research Agent System',
+    description: 'Automated research loops that surface competitor moves, industry signals, and client intelligence weekly.',
+    builtWith: ['Claude API', 'Exa', 'Zapier'],
+    proofHeadline: 'Mantle Studios runs a research loop weekly.',
+    proofBody: 'The agent monitors target industry trends, surfaces relevant signals, and outputs a structured report. Hours of manual reading replaced by a system that runs unattended.',
+  },
+  {
+    id: 'newsletter',
+    status: 'building' as ServiceStatus,
+    statusLabel: 'In Development',
+    name: 'Business Insights Newsletter',
+    description: 'A research-to-newsletter pipeline that turns agent output into a structured weekly send.',
+    builtWith: ['Claude API', 'Canva', 'Zapier'],
+    proofHeadline: 'The Mantle Studios Weekly Brief is in build.',
+    proofBody: 'Research agent output feeds directly into a formatted newsletter template. The pipeline handles structure, formatting, and scheduling — editorial decisions stay human.',
+  },
+  {
+    id: 'content-pipeline',
+    status: 'template' as ServiceStatus,
+    statusLabel: 'Template Available',
+    name: 'AI Content Pipeline',
+    description: 'A system for planning, drafting, and scheduling content across platforms without daily overhead.',
+    builtWith: ['Claude API', 'Notion', 'Zapier'],
+    proofHeadline: 'Built and templated for digital agencies.',
+    proofBody: 'Handles brief intake, draft generation, review routing, and posting schedules. Ready to adapt for any service business with a consistent content output requirement.',
+  },
+  {
+    id: 'booking',
+    status: 'template' as ServiceStatus,
+    statusLabel: 'Template Available',
+    name: 'Booking & Scheduling Automation',
+    description: 'Cal.com-based booking with automated reminders, no-show prevention, and confirmation flows.',
+    builtWith: ['Cal.com', 'Zapier', 'Zoho Mail'],
+    proofHeadline: 'Running on this site.',
+    proofBody: 'The booking system on stephenmantle.com uses the same stack. Appointment confirmed, reminder sent, follow-up triggered — without manual intervention.',
+  },
+  {
+    id: 'zapier-mcp',
+    status: 'building' as ServiceStatus,
+    statusLabel: 'In Development',
+    name: 'Zapier & MCP Workflow Layer',
+    description: 'A composable automation layer connecting AI tools, business apps, and internal systems.',
+    builtWith: ['Zapier', 'MCP', 'Claude API'],
+    proofHeadline: 'The antiagento layer powers Mantle Studios operations.',
+    proofBody: 'Every automation at Mantle Studios runs through a Zapier and MCP orchestration layer. This is the connective tissue between AI tools and business-critical apps.',
+  },
+  {
+    id: 'diagnostic',
+    status: 'live' as ServiceStatus,
+    statusLabel: 'Live Demo',
+    name: 'AI Readiness Diagnostic',
+    description: 'An 8-question diagnostic that scores a business across workflow, data, trust, and urgency — then identifies a first system worth building.',
+    builtWith: ['React', 'Webhook', 'Zoho Mail'],
+    proofHeadline: 'The full working diagnostic is on this site.',
+    proofBody: 'This is not a concept. The scoring logic, archetype classification, and follow-up webhook are live. The same diagnostic can sit inside a client onboarding or enquiry flow.',
+  },
+] as const
+
+const INQUIRY_PROJECT_TYPES = [
+  { value: 'new_build', title: 'New build', body: 'Starting from scratch — website, system, or automation.' },
+  { value: 'improve', title: 'Existing system', body: 'Something exists but needs improvement or extension.' },
+  { value: 'automation_first', title: 'Automation first', body: 'The site is fine — the workflow behind it needs fixing.' },
+  { value: 'exploring', title: 'Just exploring', body: 'No specific brief yet — seeing what is possible.' },
+] as const
+
+const INQUIRY_TIMELINES = [
+  { value: 'asap', label: 'ASAP' },
+  { value: '1_3m', label: '1–3 months' },
+  { value: '3_6m', label: '3–6 months' },
+  { value: 'exploring', label: 'Just exploring' },
+] as const
+
+const INQUIRY_BUDGETS = [
+  { value: 'under_1k', label: '< €1,000' },
+  { value: '1k_5k', label: '€1k–€5k' },
+  { value: '5k_15k', label: '€5k–€15k' },
+  { value: 'open', label: 'Open budget' },
+] as const
+
+type RoutePath = '/' | '/about' | '/services' | '/diagnostic'
 
 type QuizAnswers = {
   persona: string
@@ -316,6 +427,26 @@ type QuizAnswers = {
 }
 
 type LeadSubmitStatus = 'idle' | 'submitting' | 'success' | 'error'
+
+type InquiryAnswers = {
+  services: string[]
+  projectType: string
+  timeline: string
+  budget: string
+  name: string
+  email: string
+  note: string
+}
+type InquirySubmitStatus = 'idle' | 'submitting' | 'success' | 'error'
+const createInitialInquiryAnswers = (): InquiryAnswers => ({
+  services: [],
+  projectType: '',
+  timeline: '',
+  budget: '',
+  name: '',
+  email: '',
+  note: '',
+})
 
 type QuizScores = {
   workflow: number
@@ -876,7 +1007,8 @@ function normalizePath(pathname: string): RoutePath {
   if (
     cleanPath === '/' ||
     cleanPath === '/about' ||
-    cleanPath === '/services'
+    cleanPath === '/services' ||
+    cleanPath === '/diagnostic'
   ) {
     return cleanPath
   }
@@ -1016,7 +1148,8 @@ function App() {
           path={path}
         >
           {path === '/about' ? <AboutPage /> : null}
-          {path === '/services' ? <ServicesPage /> : null}
+          {path === '/services' ? <ServicesPage navigate={navigate} /> : null}
+          {path === '/diagnostic' ? <DiagnosticPage /> : null}
         </InnerPageShell>
       )}
     </main>
@@ -1289,7 +1422,553 @@ function AboutPage() {
   )
 }
 
-function ServicesPage() {
+function ServiceStatusBadge({ status, label }: { status: ServiceStatus; label: string }) {
+  const styles: Record<ServiceStatus, string> = {
+    live: 'bg-[#F26522] text-white',
+    template: 'bg-gray-200 text-gray-700',
+    building: 'bg-[#111827] text-white/80',
+  }
+  return (
+    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${styles[status]}`}>
+      {status === 'live' && <span className="text-white">⚡</span>}
+      {label}
+    </span>
+  )
+}
+
+function ServiceCardMockup({ id }: { id: string }) {
+  if (id === 'website') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-[#111827] flex flex-col">
+        <div className="flex items-center gap-1.5 px-3 pt-3 pb-2">
+          <div className="w-2 h-2 rounded-full bg-red-400 opacity-70" />
+          <div className="w-2 h-2 rounded-full bg-yellow-400 opacity-70" />
+          <div className="w-2 h-2 rounded-full bg-green-400 opacity-70" />
+        </div>
+        <div className="flex-1 px-4 pb-3 flex flex-col justify-center gap-2">
+          <div className="w-28 h-3 rounded bg-white/20" />
+          <div className="w-40 h-5 rounded bg-white/30" />
+          <div className="w-32 h-2 rounded bg-white/15" />
+          <div className="mt-1 w-20 h-6 rounded-full bg-[#F26522]" />
+        </div>
+      </div>
+    )
+  }
+  if (id === 'mail-automation') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-[#F5F5F5] p-3 flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-full bg-[#F26522] flex items-center justify-center text-white text-[10px] font-bold">S</div>
+          <div className="flex-1">
+            <div className="w-24 h-2.5 rounded bg-gray-300" />
+            <div className="w-16 h-2 rounded bg-gray-200 mt-1" />
+          </div>
+        </div>
+        <div className="flex-1 bg-white rounded-lg p-2.5 flex flex-col gap-1.5 shadow-sm">
+          <div className="text-[9px] font-bold text-gray-700 tracking-widest uppercase">Morning Brief</div>
+          <div className="w-full h-2 rounded bg-gray-100" />
+          <div className="w-4/5 h-2 rounded bg-gray-100" />
+          <div className="w-3/5 h-2 rounded bg-gray-100" />
+          <div className="flex gap-1 mt-1">
+            <div className="w-12 h-4 rounded-full bg-[#F26522]/20" />
+            <div className="w-10 h-4 rounded-full bg-gray-200" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  if (id === 'research-agent') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-[#111827] p-3 font-mono flex flex-col gap-1.5">
+        <div className="text-[9px] text-green-400">$ research-agent --run weekly</div>
+        <div className="text-[9px] text-white/40">→ fetching signals...</div>
+        <div className="text-[9px] text-white/40">→ 14 sources indexed</div>
+        <div className="text-[9px] text-green-300">→ 3 signals flagged</div>
+        <div className="flex-1 mt-1 bg-white/5 rounded p-2">
+          <div className="text-[8px] text-white/70 leading-relaxed">Competitor launched new pricing page · Beauty sector newsletter trend · 2 inbound leads from organic search</div>
+        </div>
+      </div>
+    )
+  }
+  if (id === 'newsletter') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-white border border-gray-200 flex flex-col">
+        <div className="bg-[#111827] px-3 py-2 flex items-center justify-between">
+          <div className="text-[9px] text-white/60 font-medium">Mantle Studios Weekly Brief</div>
+          <div className="w-12 h-3 rounded bg-white/20" />
+        </div>
+        <div className="flex-1 p-3 flex flex-col gap-1.5">
+          <div className="w-32 h-3 rounded bg-gray-200" />
+          <div className="w-full h-2 rounded bg-gray-100" />
+          <div className="w-4/5 h-2 rounded bg-gray-100" />
+          <div className="border-t border-gray-100 pt-1.5 mt-1 flex gap-2">
+            <div className="w-2 h-2 rounded-full bg-[#F26522]" />
+            <div className="w-24 h-2 rounded bg-gray-100" />
+          </div>
+          <div className="flex gap-2">
+            <div className="w-2 h-2 rounded-full bg-[#F26522]" />
+            <div className="w-20 h-2 rounded bg-gray-100" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  if (id === 'content-pipeline') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-[#F5F5F5] p-3 flex flex-col gap-2">
+        <div className="text-[9px] text-gray-500 uppercase tracking-widest font-semibold">Content Calendar</div>
+        <div className="flex-1 grid grid-cols-4 gap-1">
+          {['Mon', 'Tue', 'Wed', 'Thu'].map((d) => (
+            <div key={d} className="flex flex-col gap-1">
+              <div className="text-[8px] text-gray-400 text-center">{d}</div>
+              <div className={`rounded p-1 flex-1 ${d === 'Mon' ? 'bg-[#F26522]/20' : d === 'Wed' ? 'bg-green-100' : 'bg-white border border-gray-200'}`}>
+                <div className="w-full h-1.5 rounded bg-gray-300/60 mb-1" />
+                <div className="w-3/4 h-1.5 rounded bg-gray-300/40" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+  if (id === 'booking') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-white border border-gray-200 flex flex-col">
+        <div className="px-3 pt-2 pb-1 border-b border-gray-100">
+          <div className="text-[9px] font-semibold text-gray-700">Book a call</div>
+          <div className="text-[8px] text-gray-400">30 min · Zoom</div>
+        </div>
+        <div className="flex-1 p-2 grid grid-cols-4 gap-1">
+          {['9am', '10am', '11am', '2pm', '3pm', '4pm', '9am', '10am'].map((t, i) => (
+            <div key={i} className={`rounded text-[7px] text-center py-1 ${i === 2 ? 'bg-[#F26522] text-white font-semibold' : 'bg-gray-100 text-gray-500'}`}>{t}</div>
+          ))}
+        </div>
+        <div className="px-3 pb-2">
+          <div className="w-full h-5 rounded-full bg-[#F26522]" />
+        </div>
+      </div>
+    )
+  }
+  if (id === 'zapier-mcp') {
+    return (
+      <div className="h-36 rounded-xl overflow-hidden bg-[#111827] p-3 flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded bg-[#F26522] flex items-center justify-center text-white text-[9px] font-bold">Z</div>
+          <div className="w-3 h-px bg-white/30 flex-1" />
+          <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-white/60 text-[9px] font-bold">M</div>
+          <div className="w-3 h-px bg-white/30 flex-1" />
+          <div className="w-6 h-6 rounded bg-purple-500/50 flex items-center justify-center text-white text-[9px] font-bold">AI</div>
+        </div>
+        <div className="flex-1 flex flex-col gap-1.5">
+          {['Lead created → brief AI', 'Mail received → triage', 'Report ready → send'].map((t) => (
+            <div key={t} className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              <div className="text-[8px] text-white/60">{t}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+  // diagnostic
+  return (
+    <div className="h-36 rounded-xl overflow-hidden bg-[#F5F5F5] flex items-center justify-center">
+      <div className="relative w-20 h-20">
+        <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90">
+          <circle cx="40" cy="40" r="30" fill="none" stroke="#E5E7EB" strokeWidth="8" />
+          <circle cx="40" cy="40" r="30" fill="none" stroke="#F26522" strokeWidth="8" strokeLinecap="round"
+            strokeDasharray={`${Math.round(0.72 * 188.5)} ${188.5}`} />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-lg font-bold text-[#111827]">72</span>
+          <span className="text-[8px] text-gray-500">/ 100</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ServiceCard({
+  service,
+  onSeeProof,
+}: {
+  service: typeof SERVICES[number]
+  onSeeProof: (id: string) => void
+}) {
+  return (
+    <div className="flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
+      <div className="p-5 pb-3 flex flex-col gap-3 flex-1">
+        <ServiceStatusBadge status={service.status} label={service.statusLabel} />
+        <ServiceCardMockup id={service.id} />
+        <div className="flex flex-col gap-1.5 flex-1">
+          <h3 className="text-base font-semibold text-[#111827]">{service.name}</h3>
+          <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
+        </div>
+      </div>
+      <div className="px-5 pb-5">
+        <button
+          onClick={() => onSeeProof(service.id)}
+          className="text-sm font-medium text-[#F26522] hover:underline flex items-center gap-1 group"
+        >
+          See how I use this at Mantle Studios
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function ServiceProofBlock({
+  service,
+  index,
+  navigate,
+}: {
+  service: typeof SERVICES[number]
+  index: number
+  navigate?: (to: RoutePath) => void
+}) {
+  return (
+    <div className="flex flex-col gap-6 py-12 border-t border-gray-100" id={`proof-${service.id}`}>
+      <div className="flex flex-col gap-2 max-w-2xl">
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            Service {String(index + 1).padStart(2, '0')} — {service.name}
+          </span>
+          <ServiceStatusBadge status={service.status} label={service.statusLabel} />
+        </div>
+        <h3 className="text-2xl font-semibold text-[#111827] leading-snug">{service.proofHeadline}</h3>
+        <p className="text-base text-gray-600 leading-relaxed">{service.proofBody}</p>
+      </div>
+      <div className="max-w-sm">
+        <ServiceCardMockup id={service.id} />
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap gap-2">
+          {service.builtWith.map((tech) => (
+            <span key={tech} className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">{tech}</span>
+          ))}
+        </div>
+        {service.id === 'diagnostic' && navigate ? (
+          <button
+            onClick={() => navigate('/diagnostic')}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#F26522] hover:underline group"
+          >
+            Try the live diagnostic
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        ) : (
+          <span className="text-sm font-medium text-[#111827]">
+            I can build this for your business →
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
+  const [inquiryStep, setInquiryStep] = useState(0)
+  const [inquiry, setInquiry] = useState<InquiryAnswers>(() => createInitialInquiryAnswers())
+  const [submitStatus, setSubmitStatus] = useState<InquirySubmitStatus>('idle')
+  const [submitError, setSubmitError] = useState('')
+  const INQUIRY_STEPS = 4
+
+  const scrollToProof = (id: string) => {
+    const el = document.getElementById(`proof-${id}`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  const toggleService = (id: string) => {
+    setInquiry((prev) => ({
+      ...prev,
+      services: prev.services.includes(id)
+        ? prev.services.filter((s) => s !== id)
+        : [...prev.services, id],
+    }))
+  }
+
+  const canAdvance = (() => {
+    if (inquiryStep === 0) return inquiry.services.length > 0
+    if (inquiryStep === 1) return inquiry.projectType.length > 0
+    if (inquiryStep === 2) return inquiry.timeline.length > 0
+    if (inquiryStep === 3) return inquiry.name.trim().length > 0 && isValidEmail(inquiry.email)
+    return false
+  })()
+
+  const submitInquiry = async () => {
+    if (submitStatus === 'submitting') return
+    setSubmitStatus('submitting')
+    setSubmitError('')
+
+    const submissionId = `INQ-${Date.now().toString(36).toUpperCase()}`
+    const payload = {
+      source: 'stephenmantle-services-inquiry',
+      submissionId,
+      ...inquiry,
+      services: inquiry.services.join(', '),
+      submittedAt: new Date().toISOString(),
+    }
+
+    try {
+      if (!DIAGNOSTIC_WEBHOOK_URL) {
+        await new Promise((r) => setTimeout(r, 800))
+        setSubmitStatus('success')
+        return
+      }
+      const res = await fetch(DIAGNOSTIC_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setSubmitStatus('success')
+    } catch {
+      setSubmitStatus('error')
+      setSubmitError('Something went wrong. Drop me an email at mantsai@zohomail.eu')
+    }
+  }
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Services"
+        title="What I actually build."
+        body="Every service listed here is live at Mantle Studios. These are not concepts — each one has a proof of concept you can see."
+      />
+
+      {/* Services card grid */}
+      <section className="py-12">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {SERVICES.map((service) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              onSeeProof={scrollToProof}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Proof of concept blocks */}
+      <section className="py-4">
+        <SectionHeader
+          number="02"
+          label="Proof of concept"
+          title="Live at Mantle Studios."
+          containerClassName="px-0"
+        />
+        <div className="mt-4">
+          {SERVICES.map((service, i) => (
+            <ServiceProofBlock
+              key={service.id}
+              service={service}
+              index={i}
+              navigate={navigate}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Inquiry form */}
+      <section className="py-16">
+        <SectionHeader
+          number="03"
+          label="Get in touch"
+          title="Tell me what you're working on."
+          containerClassName="px-0"
+        />
+        <div className="mt-10 max-w-2xl">
+          {submitStatus === 'success' ? (
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
+              <div className="text-2xl font-semibold text-[#111827] mb-2">Enquiry sent.</div>
+              <p className="text-gray-600">I'll come back to you within one working day.</p>
+            </div>
+          ) : (
+            <>
+              {/* Progress bar */}
+              <div className="flex items-center gap-3 mb-8">
+                {Array.from({ length: INQUIRY_STEPS }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1 flex-1 rounded-full transition-all duration-300 ${i < inquiryStep ? 'bg-[#F26522]' : i === inquiryStep ? 'bg-[#F26522]/60' : 'bg-gray-200'}`}
+                  />
+                ))}
+                <span className="text-xs text-gray-400 tabular-nums whitespace-nowrap">{inquiryStep} / {INQUIRY_STEPS}</span>
+              </div>
+
+              {/* Step 0: service chips */}
+              {inquiryStep === 0 && (
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold text-[#111827]">What are you interested in?</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {SERVICES.map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => toggleService(s.id)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-150 ${
+                          inquiry.services.includes(s.id)
+                            ? 'bg-[#111827] text-white border-[#111827]'
+                            : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+                        }`}
+                      >
+                        {s.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 1: project type */}
+              {inquiryStep === 1 && (
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold text-[#111827]">What best describes the project?</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {INQUIRY_PROJECT_TYPES.map((pt) => (
+                      <button
+                        key={pt.value}
+                        onClick={() => setInquiry((prev) => ({ ...prev, projectType: pt.value }))}
+                        className={`text-left rounded-xl border p-4 transition-all duration-150 ${
+                          inquiry.projectType === pt.value
+                            ? 'border-[#F26522] bg-[#F26522]/5'
+                            : 'border-gray-200 bg-white hover:border-gray-400'
+                        }`}
+                      >
+                        <div className="font-semibold text-[#111827] mb-1">{pt.title}</div>
+                        <div className="text-sm text-gray-500">{pt.body}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2: timeline + budget */}
+              {inquiryStep === 2 && (
+                <div className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-lg font-semibold text-[#111827]">Timeline</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {INQUIRY_TIMELINES.map((t) => (
+                        <button
+                          key={t.value}
+                          onClick={() => setInquiry((prev) => ({ ...prev, timeline: t.value }))}
+                          className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-150 ${
+                            inquiry.timeline === t.value
+                              ? 'bg-[#111827] text-white border-[#111827]'
+                              : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+                          }`}
+                        >
+                          {t.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-sm font-semibold text-gray-600">Budget <span className="font-normal text-gray-400">(optional)</span></h3>
+                    <div className="flex flex-wrap gap-2">
+                      {INQUIRY_BUDGETS.map((b) => (
+                        <button
+                          key={b.value}
+                          onClick={() => setInquiry((prev) => ({ ...prev, budget: b.value }))}
+                          className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-150 ${
+                            inquiry.budget === b.value
+                              ? 'bg-[#111827] text-white border-[#111827]'
+                              : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+                          }`}
+                        >
+                          {b.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3: contact details */}
+              {inquiryStep === 3 && (
+                <div className="flex flex-col gap-5">
+                  <h3 className="text-lg font-semibold text-[#111827]">Your details</h3>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-gray-700">Name</label>
+                      <input
+                        type="text"
+                        value={inquiry.name}
+                        onChange={(e) => setInquiry((prev) => ({ ...prev, name: e.target.value }))}
+                        placeholder="Your name"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-gray-700">Email</label>
+                      <input
+                        type="email"
+                        value={inquiry.email}
+                        onChange={(e) => setInquiry((prev) => ({ ...prev, email: e.target.value }))}
+                        placeholder="your@email.com"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-gray-700">Anything specific you'd like to mention? <span className="text-gray-400 font-normal">(optional)</span></label>
+                      <textarea
+                        value={inquiry.note}
+                        onChange={(e) => setInquiry((prev) => ({ ...prev, note: e.target.value }))}
+                        placeholder="Context, constraints, questions..."
+                        rows={3}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors resize-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Navigation */}
+              <div className="flex items-center justify-between mt-8">
+                {inquiryStep > 0 ? (
+                  <button
+                    onClick={() => setInquiryStep((s) => s - 1)}
+                    className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                  >
+                    ← Back
+                  </button>
+                ) : <div />}
+                {inquiryStep < INQUIRY_STEPS - 1 ? (
+                  <RollingButton
+                    label="Continue"
+                    onClick={canAdvance ? () => setInquiryStep((s) => s + 1) : undefined}
+                    className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 ${canAdvance ? 'bg-[#111827] text-white hover:bg-[#1f2937]' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                    arrowCircleClassName="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center"
+                    arrowClassName="w-3 h-3 text-white"
+                  />
+                ) : (
+                  <button
+                    onClick={canAdvance && submitStatus !== 'submitting' ? submitInquiry : undefined}
+                    disabled={!canAdvance || submitStatus === 'submitting'}
+                    className="rounded-full px-6 py-3 text-sm font-semibold bg-[#F26522] text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#d4571d] transition-colors"
+                  >
+                    {submitStatus === 'submitting' ? 'Sending…' : 'Send enquiry'}
+                  </button>
+                )}
+              </div>
+              {submitError && <p className="mt-3 text-sm text-red-600">{submitError}</p>}
+            </>
+          )}
+        </div>
+      </section>
+
+      <FinalCta
+        title="Ready to build something real?"
+        body="Book a 30-minute call and we'll map the first system worth building."
+        ctaLabel="Book a call"
+        href={BOOKING_HREF}
+      />
+    </>
+  )
+}
+
+function DiagnosticPage() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<QuizAnswers>(() => createInitialQuizAnswers())
   const [showResults, setShowResults] = useState(false)
