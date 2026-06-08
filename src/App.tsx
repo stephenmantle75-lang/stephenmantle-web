@@ -1153,6 +1153,10 @@ function HomePage({
               clearer workflows and less admin.
             </h1>
 
+            <p className="mt-6 max-w-[44rem] text-[15px] leading-[1.65] text-gray-700 sm:mt-8 sm:text-[17px]">
+              Every system I sell is already running live on my own business first. Fixed price. Fixed scope. Written down before you sign.
+            </p>
+
             <div className="mt-8 flex flex-col items-start gap-4 sm:mt-12 sm:flex-row sm:items-center sm:gap-5">
               <RollingButton
                 label="Start a project"
@@ -1182,10 +1186,49 @@ function HomePage({
 
       <CommonProblemsSection />
 
+      <section id="approach" className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-28">
+        <div className="mx-auto max-w-[1440px]">
+          <SectionHeader
+            number="01"
+            label="Approach"
+            title="How a build actually goes."
+            containerClassName="px-5 sm:px-8 lg:px-12"
+          />
+          <div className="grid grid-cols-1 gap-5 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
+            {APPROACH_STEPS.map((step) => (
+              <div
+                key={step.number}
+                className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
+              >
+                <div className="flex items-baseline gap-3">
+                  <span className="text-[13px] font-medium tabular-nums text-[#F26522]">
+                    {step.number}
+                  </span>
+                  <span className="text-[13px] uppercase tracking-wide text-gray-500">
+                    {step.label}
+                  </span>
+                </div>
+                <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.01em] text-gray-900">
+                  {step.title}
+                </h3>
+                <ul className="mt-1 flex flex-col gap-2 text-[14px] leading-relaxed text-gray-600">
+                  {step.bullets.map((b) => (
+                    <li key={b} className="flex gap-2">
+                      <span className="mt-2 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-gray-400" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#F5F5F5] pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
-            number="1"
+            number="02"
             label="Selected solutions"
             title="Admin days are over, let automations free you up and chase revenue leaks in your business."
             containerClassName="px-5 sm:px-8 lg:px-12"
@@ -1258,9 +1301,59 @@ function HomePage({
         </div>
       </section>
 
+      <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-16 sm:pt-16 lg:px-12">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="flex flex-col gap-5 rounded-2xl border border-black/5 bg-[#1E1E1E] px-6 py-8 text-white sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
+            <div className="max-w-[44rem]">
+              <p className="text-[12px] uppercase tracking-[0.22em] text-white/60">
+                Proven on my own business
+              </p>
+              <p className="mt-3 text-[18px] font-medium leading-[1.25] tracking-[-0.02em] sm:text-[22px]">
+                Every system you'd buy is already running live at Mantle Studios.
+              </p>
+              <p className="mt-3 text-[14px] leading-relaxed text-white/70 sm:text-[15px]">
+                No concepts, no decks. See the inbox triage, the briefs, the dashboards in production before you commit.
+              </p>
+            </div>
+            <RollingButton
+              label="See it live"
+              href="https://mantle-studios.com"
+              className="w-fit bg-white py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-gray-900"
+              arrowCircleClassName="h-7 w-7 bg-[#F26522] text-white"
+              arrowClassName="h-4 w-4"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-[#FAF8F5] px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
+            <div className="max-w-[44rem]">
+              <p className="text-[12px] uppercase tracking-[0.22em] text-gray-500">
+                Not sure where to start
+              </p>
+              <p className="mt-3 text-[18px] font-medium leading-[1.25] tracking-[-0.02em] text-gray-900 sm:text-[22px]">
+                Take the 2-minute diagnostic.
+              </p>
+              <p className="mt-3 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
+                Five questions. You'll see which of the three solution paths fits, with a fixed-price range, before any call.
+              </p>
+            </div>
+            <RollingButton
+              label="Start the diagnostic"
+              href="/diagnostic"
+              className="w-fit bg-gray-900 py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-white"
+              arrowCircleClassName="h-7 w-7 bg-white text-gray-900"
+              arrowClassName="h-4 w-4"
+            />
+          </div>
+        </div>
+      </section>
+
       <FinalCta
-        title="If something in the business keeps dragging, that is where the work should start."
-        body="You do not need a full specification to begin. If you can describe the friction, that is enough."
+        title="Describe the friction. I'll quote a fixed price against a written scope."
+        body="No hourly billing. No retainers. If the scope changes, the price changes — on paper, before any work moves."
         ctaLabel="Book a free intro call"
         href={BOOKING_HREF}
       />
