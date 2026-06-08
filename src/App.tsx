@@ -3048,7 +3048,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['web', 'brand'],
     summary:
       'Editorial marketing site for the studio itself — built to demonstrate the same engineering and design standards client work runs against.',
-    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/mantle-studios-site.png',
     outcome: 'Live at mantle-studios.com. Studio’s primary inbound channel.',
   },
   {
@@ -3059,7 +3059,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['web', 'brand'],
     summary:
       'The site you are reading now. Editorial home for systems work, automation case notes, and direct contact with the operator behind Mantle Studios.',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/stephenmantle-com.png',
     outcome: 'Anchors trust for studio prospects researching who is behind the work.',
   },
   {
@@ -3070,7 +3070,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['systems'],
     summary:
       'Single-pane dashboard pulling studio billing, content pipeline status, and prospect routing into one daily review screen.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/ops-dashboard.svg',
     outcome: 'Replaced four-tab spreadsheet review with one daily glance.',
   },
   {
@@ -3081,7 +3081,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['automation'],
     summary:
       'HTML → Playwright → PNG rendering pipeline that turns a single weekly content brief into a finished social carousel.',
-    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/content-pipeline.png',
     outcome: 'Weekly carousels ship in roughly eight minutes vs ninety minutes manual layout.',
   },
   {
@@ -3092,7 +3092,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['automation', 'brand'],
     summary:
       'Canva-driven, brief-first publishing flow. Page one runs an editorial note, page two carries the in-progress work, and the issue ships every Sunday.',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/newsletter-system.png',
     outcome: 'Newsletter ships weekly on autopilot from one Monday brief document.',
   },
   {
@@ -3103,7 +3103,7 @@ const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     categories: ['systems', 'automation'],
     summary:
       'Daily competitive-signal scraper that summarises landing-page and positioning changes across the service-business benchmarks Mantle Studios tracks.',
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
+    image: '/work/strategic-intel-engine.svg',
     outcome: 'Surfaces positioning shifts across tracked competitors in under five minutes.',
   },
 ] as const
