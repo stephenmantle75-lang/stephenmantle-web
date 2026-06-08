@@ -392,6 +392,49 @@ const SERVICES = [
   },
 ] as const
 
+const APPROACH_STEPS = [
+  {
+    number: '01',
+    label: 'Brief',
+    title: 'Establish what you actually need.',
+    bullets: [
+      '30-minute call plus a short async questionnaire.',
+      'Map what exists, what is in the way, what success looks like.',
+      'Output: a one-page summary you sign off before any scope work.',
+    ],
+  },
+  {
+    number: '02',
+    label: 'Scope',
+    title: 'Fixed price, fixed deliverables, written down.',
+    bullets: [
+      'Scope document with exact deliverables, timeline, and dependencies.',
+      'No hourly billing. No surprise change orders mid-build.',
+      'Output: a signed scope you can hold me to.',
+    ],
+  },
+  {
+    number: '03',
+    label: 'Build',
+    title: 'Working drafts every week.',
+    bullets: [
+      'You see real progress weekly, not a big reveal at the end.',
+      'Redirect early — nothing in the build is precious.',
+      'Output: a working site or system you have already used.',
+    ],
+  },
+  {
+    number: '04',
+    label: 'Handover',
+    title: 'Live, documented, and yours to run.',
+    bullets: [
+      'Site or system goes live with a clean handover doc.',
+      'Walkthrough on what to change yourself versus what to send back.',
+      '30 days of post-launch support included by default.',
+    ],
+  },
+] as const
+
 const INQUIRY_PROJECT_TYPES = [
   { value: 'new_build', title: 'New build', body: 'Starting from scratch — website, system, or automation.' },
   { value: 'improve', title: 'Existing system', body: 'Something exists but needs improvement or extension.' },
@@ -1652,6 +1695,44 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
               service={service}
               onSeeProof={scrollToProof}
             />
+          ))}
+        </div>
+      </section>
+
+      {/* Approach — 4-step build process */}
+      <section id="approach" className="py-16">
+        <SectionHeader
+          number="01"
+          label="Approach"
+          title="How a build actually goes."
+          containerClassName="px-0"
+        />
+        <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {APPROACH_STEPS.map((step) => (
+            <div
+              key={step.number}
+              className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
+            >
+              <div className="flex items-baseline gap-3">
+                <span className="text-[13px] font-medium tabular-nums text-[#F26522]">
+                  {step.number}
+                </span>
+                <span className="text-[13px] uppercase tracking-wide text-gray-500">
+                  {step.label}
+                </span>
+              </div>
+              <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.01em] text-gray-900">
+                {step.title}
+              </h3>
+              <ul className="mt-1 flex flex-col gap-2 text-[14px] leading-relaxed text-gray-600">
+                {step.bullets.map((b) => (
+                  <li key={b} className="flex gap-2">
+                    <span className="mt-2 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-gray-400" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </section>
