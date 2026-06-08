@@ -15,7 +15,8 @@ import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react
 const CONTACT_HREF = 'mailto:mantsai@zohomail.eu'
 const BOOKING_HREF = 'https://mantaai.zohobookings.eu/#/254973000000048054'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
-const HOME_ABOUT_IMAGE = '/max-andrey--8-2YWKt8Ag-unsplash.jpg'
+const HOME_ABOUT_IMAGE =
+  'https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=1600&q=80'
 const PORTRAIT_IMAGE = '/stephen.png'
 
 const LINKTREE_HREF = 'https://linktr.ee/stephenmantle'
@@ -461,7 +462,7 @@ const APPROACH_STEPS = [
 
 const SERVICES_STATS = [
   { label: 'Years building', value: '8+', note: 'Web, systems, and automation work shipped since 2017.' },
-  { label: 'Projects delivered', value: '30+', note: 'Sites, internal tools, and operational systems live in production.' },
+  { label: 'Live systems', value: '6+', note: 'Studio sites, internal tools, and automations currently in production.' },
   { label: 'On-time launches', value: '100%', note: 'Every engagement landed on the agreed launch window.' },
   { label: 'Avg response', value: '<24h', note: 'First reply on every new enquiry inside one working day.' },
 ] as const
@@ -3040,70 +3041,70 @@ type PortfolioProject = {
 
 const PORTFOLIO_PROJECTS: PortfolioProject[] = [
   {
-    slug: 'mantle-studios',
-    title: 'Mantle Studios — studio identity & site',
+    slug: 'mantle-studios-site',
+    title: 'Mantle Studios — studio site',
     client: 'Mantle Studios',
     year: '2026',
     categories: ['web', 'brand'],
     summary:
-      'Editorial-direction marketing site for a one-person web design studio. Built to credibly position the studio to service-business clients.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Inbound from cold visitors within first 14 days of relaunch.',
+      'Editorial marketing site for the studio itself — built to demonstrate the same engineering and design standards client work runs against.',
+    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Live at mantle-studios.com. Studio’s primary inbound channel.',
   },
   {
-    slug: 'ai-readiness-diagnostic',
-    title: 'AI Readiness Check — interactive diagnostic',
+    slug: 'stephenmantle-com',
+    title: 'stephenmantle.com — founder proof site',
     client: 'Stephen Mantle',
     year: '2026',
-    categories: ['systems', 'automation'],
-    summary:
-      'Self-serve diagnostic that scores operational friction across people, process, and tooling — then routes leads into a real conversation.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Replaces 30 minutes of intake calls with a guided 6-minute flow.',
-  },
-  {
-    slug: 'service-business-ops',
-    title: 'Service-business operations layer',
-    client: 'Private client',
-    year: '2025',
-    categories: ['systems', 'automation'],
-    summary:
-      'Lightweight dashboard + Zapier-backed routing replacing a four-tab spreadsheet for daily job allocation.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Two hours of admin per day eliminated; zero missed handovers in week one.',
-  },
-  {
-    slug: 'consultancy-site-rebuild',
-    title: 'Consultancy site rebuild',
-    client: 'Private client',
-    year: '2025',
     categories: ['web', 'brand'],
     summary:
-      'Replatformed a Squarespace site into a hand-built Vite + Tailwind build with editorial layout, case studies, and faster Core Web Vitals.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Lighthouse performance score moved from 54 → 96.',
+      'The site you are reading now. Editorial home for systems work, automation case notes, and direct contact with the operator behind Mantle Studios.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Anchors trust for studio prospects researching who is behind the work.',
   },
   {
-    slug: 'lead-routing-automation',
-    title: 'Lead-routing automation',
-    client: 'Private client',
+    slug: 'ops-dashboard',
+    title: 'Ops Dashboard — studio operations view',
+    client: 'Studio internal',
+    year: '2025',
+    categories: ['systems'],
+    summary:
+      'Single-pane dashboard pulling studio billing, content pipeline status, and prospect routing into one daily review screen.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Replaced four-tab spreadsheet review with one daily glance.',
+  },
+  {
+    slug: 'content-pipeline',
+    title: 'Content pipeline — weekly carousel automation',
+    client: 'Studio internal',
     year: '2025',
     categories: ['automation'],
     summary:
-      'Form intake → CRM → Slack → calendar booking, with conditional follow-up sequences and fallback owners when no one claims a lead in 15 minutes.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Median lead response time down from 22 hours to under 12 minutes.',
+      'HTML → Playwright → PNG rendering pipeline that turns a single weekly content brief into a finished social carousel.',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Weekly carousels ship in roughly eight minutes vs ninety minutes manual layout.',
   },
   {
-    slug: 'studio-brand-system',
-    title: 'Studio brand & visual system',
-    client: 'Mantle Studios',
-    year: '2026',
-    categories: ['brand'],
+    slug: 'newsletter-system',
+    title: 'Studio newsletter system',
+    client: 'Studio internal',
+    year: '2025',
+    categories: ['automation', 'brand'],
     summary:
-      'Editorial type pairing, ember accent palette, and an SM monogram codified as a required mark across product surfaces.',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-    outcome: 'Single brand system covers web, social, and proposal documents.',
+      'Canva-driven, brief-first publishing flow. Page one runs an editorial note, page two carries the in-progress work, and the issue ships every Sunday.',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Newsletter ships weekly on autopilot from one Monday brief document.',
+  },
+  {
+    slug: 'strategic-intel-engine',
+    title: 'Strategic intel engine',
+    client: 'Studio internal',
+    year: '2026',
+    categories: ['systems', 'automation'],
+    summary:
+      'Daily competitive-signal scraper that summarises landing-page and positioning changes across the service-business benchmarks Mantle Studios tracks.',
+    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
+    outcome: 'Surfaces positioning shifts across tracked competitors in under five minutes.',
   },
 ] as const
 
@@ -3132,70 +3133,70 @@ type BlogPost = {
 
 const BLOG_POSTS: BlogPost[] = [
   {
-    slug: 'why-most-service-business-sites-leak',
-    title: 'Why most service-business websites quietly leak revenue',
+    slug: 'self-documenting-features-with-mermaid',
+    title: 'Every feature should ship with its own Mermaid diagram',
     excerpt:
-      'Five recurring patterns in service-business websites that look fine but lose interested visitors before they ever reach a contact form.',
-    category: 'web',
-    categoryLabel: 'Web design',
-    date: '2026-05-21',
-    readTime: '6 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-  },
-  {
-    slug: 'one-system-rule',
-    title: 'The one-system rule for replacing spreadsheets you actually love',
-    excerpt:
-      'A small framework for deciding when a spreadsheet has earned a real system, and when leaving it alone is the more honest answer.',
-    category: 'systems',
-    categoryLabel: 'Operations',
-    date: '2026-05-08',
-    readTime: '5 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-  },
-  {
-    slug: 'automation-without-handovers',
-    title: 'Automations only work when the handover is designed first',
-    excerpt:
-      'Why most automation projects collapse the moment a human needs to take over — and the simple change in scoping that prevents it.',
-    category: 'automation',
-    categoryLabel: 'Automation',
-    date: '2026-04-19',
-    readTime: '7 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
-  },
-  {
-    slug: 'building-in-public-as-a-solo-studio',
-    title: 'Building in public as a one-person studio — without the noise',
-    excerpt:
-      'A working policy for what to ship publicly, what to keep private, and how to make the work itself the case study.',
+      'After rebuilding the same dashboard twice in six months, I now embed a flow diagram next to the code. It is the only way I trust next-month-me to understand what was actually built.',
     category: 'practice',
     categoryLabel: 'Studio practice',
-    date: '2026-04-02',
-    readTime: '4 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    date: '2026-05-22',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'website-as-operating-asset',
-    title: 'Treat the website as an operating asset, not a brochure',
+    slug: 'newsletter-page-one-page-two',
+    title: 'Why the studio newsletter has a page one and a page two',
     excerpt:
-      'The shift in how a service-business website earns its keep when it is wired into the actual operational stack underneath.',
+      'Editorial up top, work-in-progress below. The split is what stopped the weekly note becoming a content channel and turned it back into a studio update.',
+    category: 'practice',
+    categoryLabel: 'Studio practice',
+    date: '2026-05-09',
+    readTime: '4 min read',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    slug: 'builder-or-challenger',
+    title: 'Builder or Challenger — a two-word decision frame for solo studios',
+    excerpt:
+      'When a client floats an idea, the first move is asking which mode they want from you. It changes whether you ship the thing or pressure-test the premise first.',
+    category: 'practice',
+    categoryLabel: 'Studio practice',
+    date: '2026-04-22',
+    readTime: '4 min read',
+    image: 'https://images.unsplash.com/photo-1518621012420-8ab10887ce0c?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    slug: 'fraunces-manrope-for-service-businesses',
+    title: 'Fraunces and Manrope — a working type pair for service-business sites',
+    excerpt:
+      'Service businesses do not need display-typography flair. They need a serif that reads as confident and a sans that disappears under the message. This is the pair I default to and why.',
     category: 'web',
     categoryLabel: 'Web design',
-    date: '2026-03-18',
-    readTime: '8 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    date: '2026-04-04',
+    readTime: '6 min read',
+    image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'ai-readiness-mistakes',
-    title: 'Three mistakes I see in AI readiness assessments',
+    slug: 'mcp-routing-for-solo-operators',
+    title: 'Routing twenty MCP servers as a one-person studio',
     excerpt:
-      'The pattern repeats: businesses score themselves on the wrong axes, then prioritise tools instead of the workflow underneath.',
-    category: 'systems',
-    categoryLabel: 'Operations',
-    date: '2026-03-04',
-    readTime: '6 min read',
-    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+      'Notes from wiring Notion, Figma, Vercel, Supabase, and a dozen others into a single agent surface — without each new connector slowing the rest of the stack down.',
+    category: 'automation',
+    categoryLabel: 'Automation',
+    date: '2026-03-19',
+    readTime: '7 min read',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    slug: 'service-pages-need-proof-of-concept',
+    title: 'Every service page should ship with a working proof of concept',
+    excerpt:
+      'A bullet list of capabilities convinces nobody. A small live tool that demonstrates the capability convinces visitors before they ever reach a contact form.',
+    category: 'web',
+    categoryLabel: 'Web design',
+    date: '2026-03-02',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
   },
 ]
 
