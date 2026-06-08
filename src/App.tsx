@@ -3,7 +3,11 @@ import {
   ArrowRight,
   Check,
   Clock,
+  Instagram,
+  Linkedin,
+  Link as LinkIcon,
   Menu,
+  Twitter,
   X,
 } from 'lucide-react'
 import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react'
@@ -13,6 +17,14 @@ const BOOKING_HREF = 'https://mantaai.zohobookings.eu/#/254973000000048054'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
 const HOME_ABOUT_IMAGE = '/max-andrey--8-2YWKt8Ag-unsplash.jpg'
 const PORTRAIT_IMAGE = '/stephen.png'
+
+const LINKTREE_HREF = 'https://linktr.ee/stephenmantle'
+const SOCIAL_LINKS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/stephenmantle/', Icon: Linkedin },
+  { label: 'Instagram', href: 'https://instagram.com/mantle_studios', Icon: Instagram },
+  { label: 'X / Twitter', href: 'https://x.com/stephenmantle', Icon: Twitter },
+  { label: 'All links', href: LINKTREE_HREF, Icon: LinkIcon },
+] as const
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -1357,6 +1369,8 @@ function HomePage({
         ctaLabel="Book a free intro call"
         href={BOOKING_HREF}
       />
+
+      <SiteFooter navigate={navigate} />
     </>
   )
 }
@@ -2936,6 +2950,7 @@ function InnerPageShell({
         />
       </section>
       {children}
+      <SiteFooter navigate={navigate} />
     </>
   )
 }
@@ -2971,6 +2986,115 @@ function ShaderLayer() {
         </FilmGrain>
       </Shader>
     </div>
+  )
+}
+
+function SiteFooter({ navigate }: { navigate: (to: RoutePath) => void }) {
+  const year = new Date().getFullYear()
+  return (
+    <footer className="bg-[#1E1E1E] px-5 pb-10 pt-16 text-[#FAF8F5] sm:px-8 sm:pb-12 sm:pt-20 lg:px-12 lg:pt-24">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-16">
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[11px] font-bold tracking-tight text-[#1E1E1E]">
+                SM
+              </div>
+              <p className="font-serif text-[20px] leading-none tracking-[-0.01em]">Stephen Mantle</p>
+            </div>
+            <p className="mt-5 max-w-[28rem] text-[14px] leading-[1.65] text-white/60">
+              Web design and operational systems for businesses that need clearer workflows and less admin. Based in Dublin.
+            </p>
+            <a
+              href={LINKTREE_HREF}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[13px] leading-[13px] text-white/80 transition-colors hover:border-white/60 hover:text-white"
+            >
+              <LinkIcon size={14} strokeWidth={1.8} />
+              <span>All links · Linktree</span>
+            </a>
+          </div>
+
+          <div>
+            <p className="text-[12px] uppercase tracking-[0.18em] text-white/40">Pages</p>
+            <ul className="mt-5 flex flex-col gap-3 text-[14px] text-white/75">
+              {NAV_LINKS.map((link) => (
+                <li key={link.to}>
+                  <a
+                    href={link.to}
+                    onClick={(event) => {
+                      event.preventDefault()
+                      navigate(link.to)
+                    }}
+                    className="transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="/diagnostic"
+                  onClick={(event) => {
+                    event.preventDefault()
+                    navigate('/diagnostic')
+                  }}
+                  className="transition-colors hover:text-white"
+                >
+                  AI Readiness Check
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[12px] uppercase tracking-[0.18em] text-white/40">Connect</p>
+            <ul className="mt-5 flex flex-col gap-3 text-[14px] text-white/75">
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="inline-flex items-center gap-3 transition-colors hover:text-white"
+                  >
+                    <Icon size={16} strokeWidth={1.7} />
+                    <span>{label}</span>
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href={CONTACT_HREF}
+                  className="inline-flex items-center gap-3 transition-colors hover:text-white"
+                >
+                  <span>{CONTACT_HREF.replace('mailto:', '')}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 pt-8 text-[12px] text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Stephen Mantle. Built in Dublin.</p>
+          <div className="flex items-center gap-3">
+            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+              <a
+                key={`mark-${label}`}
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={label}
+                className="rounded-full border border-white/15 p-2 transition-colors hover:border-white/60 hover:text-white"
+              >
+                <Icon size={14} strokeWidth={1.8} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
   )
 }
 
@@ -3107,6 +3231,21 @@ function MobileMenu({
             textClassName="items-start"
           />
         </div>
+
+        <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+          {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+            <a
+              key={`mobile-${label}`}
+              href={href}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={label}
+              className="rounded-full border border-gray-200 p-2 text-gray-600 transition-colors hover:border-gray-900 hover:text-gray-900"
+            >
+              <Icon size={16} strokeWidth={1.7} />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -3122,15 +3261,16 @@ function PageHero({
   body: string
 }) {
   return (
-    <section className="bg-[#EFEFEF] pb-14 pt-8 sm:pb-16 lg:pb-20">
+    <section className="grain-overlay relative bg-[#EFEFEF] pb-14 pt-10 sm:pb-16 lg:pb-24 lg:pt-14">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <p className="text-[13px] leading-[13px] tracking-wide text-gray-900 sm:text-[14px] sm:leading-[14px]">
-          {eyebrow}
-        </p>
-        <h1 className="mt-6 max-w-[1080px] text-[clamp(1.9rem,6vw,4.1rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-700">
+          <span className="inline-block h-px w-8 bg-[var(--teal)]" />
+          <span>{eyebrow}</span>
+        </div>
+        <h1 className="mt-6 max-w-[1080px] font-display text-[clamp(2rem,6.4vw,4.4rem)] font-medium leading-[1.04] tracking-editorial text-gray-900">
           {title}
         </h1>
-        <p className="mt-6 max-w-[52rem] text-[15px] leading-[1.75] text-gray-700 sm:text-[18px]">
+        <p className="mt-7 max-w-[52rem] text-[15px] leading-[1.75] text-gray-700 sm:text-[18px]">
           {body}
         </p>
       </div>
@@ -3158,7 +3298,7 @@ function SectionHeader({
         <SectionPill label={label} borderClassName={borderClassName} />
       </div>
       <div className={`${containerClassName}`}>
-        <h2 className="mb-12 max-w-[1020px] text-[clamp(1.5rem,4vw,3.2rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 sm:mb-16 lg:mb-20">
+        <h2 className="mb-12 max-w-[1020px] font-display text-[clamp(1.6rem,4.2vw,3.4rem)] font-medium leading-[1.08] tracking-editorial text-gray-900 sm:mb-16 lg:mb-20">
           {title}
         </h2>
       </div>
@@ -3180,23 +3320,31 @@ function FinalCta({
   return (
     <section className="bg-white px-5 pb-16 pt-14 sm:px-8 sm:pb-20 sm:pt-16 lg:px-12 lg:pb-24 lg:pt-20">
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col gap-4 rounded-2xl border border-black/5 bg-[#F5F5F5] px-5 py-5 shadow-[0_12px_40px_rgba(0,0,0,0.05)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="max-w-[50rem]">
-            <p className="text-[18px] font-medium leading-[1.2] tracking-[-0.02em] text-gray-900 sm:text-[22px]">
-              {title}
-            </p>
-            <p className="mt-3 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
-              {body}
-            </p>
-          </div>
+        <div className="grain-overlay relative overflow-hidden rounded-3xl bg-[#1E1E1E] px-6 py-10 text-[#FAF8F5] shadow-[0_24px_80px_rgba(0,0,0,0.18)] sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+          <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-[var(--teal)] opacity-30 blur-3xl" aria-hidden />
+          <div className="absolute -bottom-16 left-1/3 h-48 w-48 rounded-full bg-[var(--ember)] opacity-20 blur-3xl" aria-hidden />
+          <div className="relative flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-[42rem]">
+              <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-white/55">
+                <span className="inline-block h-px w-8 bg-[var(--ember)]" />
+                <span>Next step</span>
+              </div>
+              <h2 className="mt-5 font-display text-[clamp(1.8rem,3.6vw,2.6rem)] font-medium leading-[1.1] tracking-editorial text-white">
+                {title}
+              </h2>
+              <p className="mt-4 text-[14px] leading-[1.7] text-white/65 sm:text-[15px]">
+                {body}
+              </p>
+            </div>
 
-          <RollingButton
-            label={ctaLabel}
-            href={href}
-            className="w-fit bg-gray-900 py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-white"
-            arrowCircleClassName="h-7 w-7 bg-white text-gray-900"
-            arrowClassName="h-4 w-4"
-          />
+            <RollingButton
+              label={ctaLabel}
+              href={href}
+              className="w-fit bg-[#FAF8F5] py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-[#1E1E1E]"
+              arrowCircleClassName="h-7 w-7 bg-[#1E1E1E] text-[#FAF8F5]"
+              arrowClassName="h-4 w-4"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -3327,7 +3475,8 @@ function RollingButton({
 
 function NumberBadge({ number }: { number: string }) {
   return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-900 text-[11px] font-semibold text-white sm:h-7 sm:w-7 sm:text-[12px]">
+    <span className="inline-flex items-center font-mono text-[11px] tabular-nums uppercase tracking-[0.18em] text-[var(--teal)]">
+      <span className="mr-2 inline-block h-px w-6 bg-[var(--teal)]" />
       {number}
     </span>
   )
@@ -3342,7 +3491,7 @@ function SectionPill({
 }) {
   return (
     <span
-      className={`rounded-full border px-3 py-1 text-[12px] font-medium text-gray-900 sm:px-4 sm:py-1.5 sm:text-[13px] ${borderClassName}`}
+      className={`rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-gray-900 sm:px-4 sm:py-1.5 sm:text-[12px] ${borderClassName}`}
     >
       {label}
     </span>
