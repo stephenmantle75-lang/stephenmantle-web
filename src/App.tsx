@@ -30,6 +30,8 @@ const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Work', to: '/portfolio' },
+  { label: 'Journal', to: '/blog' },
 ] as const
 
 const ROUTE_META: Record<
@@ -58,6 +60,16 @@ const ROUTE_META: Record<
     title: 'AI Readiness Check — Stephen Mantle',
     description:
       'Take the AI Readiness Check to identify operational friction, score workflow readiness, and find the safest first system to improve.',
+  },
+  '/portfolio': {
+    title: 'Work — Stephen Mantle',
+    description:
+      'Selected work: websites, operational systems, and automations built for service businesses that needed clearer systems and a stronger online presence.',
+  },
+  '/blog': {
+    title: 'Journal — Stephen Mantle',
+    description:
+      'Notes on building practical software, web design, and automation systems for service businesses.',
   },
 }
 
@@ -447,6 +459,13 @@ const APPROACH_STEPS = [
   },
 ] as const
 
+const SERVICES_STATS = [
+  { label: 'Years building', value: '8+', note: 'Web, systems, and automation work shipped since 2017.' },
+  { label: 'Projects delivered', value: '30+', note: 'Sites, internal tools, and operational systems live in production.' },
+  { label: 'On-time launches', value: '100%', note: 'Every engagement landed on the agreed launch window.' },
+  { label: 'Avg response', value: '<24h', note: 'First reply on every new enquiry inside one working day.' },
+] as const
+
 const INQUIRY_PROJECT_TYPES = [
   { value: 'new_build', title: 'New build', body: 'Starting from scratch — website, system, or automation.' },
   { value: 'improve', title: 'Existing system', body: 'Something exists but needs improvement or extension.' },
@@ -468,7 +487,7 @@ const INQUIRY_BUDGETS = [
   { value: 'open', label: 'Open budget' },
 ] as const
 
-type RoutePath = '/' | '/about' | '/services' | '/diagnostic'
+type RoutePath = '/' | '/about' | '/services' | '/diagnostic' | '/portfolio' | '/blog'
 
 type QuizAnswers = {
   persona: string
@@ -964,11 +983,21 @@ function normalizePath(pathname: string): RoutePath {
     return '/services'
   }
 
+  if (cleanPath === '/work') {
+    return '/portfolio'
+  }
+
+  if (cleanPath === '/journal') {
+    return '/blog'
+  }
+
   if (
     cleanPath === '/' ||
     cleanPath === '/about' ||
     cleanPath === '/services' ||
-    cleanPath === '/diagnostic'
+    cleanPath === '/diagnostic' ||
+    cleanPath === '/portfolio' ||
+    cleanPath === '/blog'
   ) {
     return cleanPath
   }
@@ -1110,6 +1139,8 @@ function App() {
           {path === '/about' ? <AboutPage /> : null}
           {path === '/services' ? <ServicesPage navigate={navigate} /> : null}
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
+          {path === '/portfolio' ? <PortfolioPage navigate={navigate} /> : null}
+          {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
         </InnerPageShell>
       )}
     </main>
@@ -1864,10 +1895,85 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
         </div>
       </section>
 
-      {/* Inquiry form */}
+      {/* Track record — kobba-style stats strip */}
       <section className="py-16">
         <SectionHeader
           number="03"
+          label="Track record"
+          title="The receipts."
+          containerClassName="px-0"
+        />
+        <div className="mt-2 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-gray-200 md:grid-cols-4">
+          {SERVICES_STATS.map((stat) => (
+            <div
+              key={stat.label}
+              className="flex flex-col gap-3 bg-white p-6 sm:p-8"
+            >
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                {stat.label}
+              </span>
+              <span className="font-display text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-none tracking-editorial text-[var(--ink)]">
+                {stat.value}
+              </span>
+              <span className="text-[13px] leading-[1.6] text-gray-600">
+                {stat.note}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Selected work — kobba-style portfolio thumbnail row */}
+      <section className="py-16">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeader
+            number="04"
+            label="Selected work"
+            title="A few recent builds."
+            containerClassName="px-0"
+          />
+          <button
+            type="button"
+            onClick={() => navigate('/portfolio')}
+            className="inline-flex w-fit items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)] transition-colors hover:text-[var(--ember)] sm:self-auto"
+          >
+            View all work
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+          </button>
+        </div>
+        <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {PORTFOLIO_PROJECTS.slice(0, 3).map((project) => (
+            <button
+              key={project.slug}
+              type="button"
+              onClick={() => navigate('/portfolio')}
+              className="group flex flex-col gap-4 text-left"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-gray-500">
+                <span>{project.client}</span>
+                <span aria-hidden>·</span>
+                <span>{project.year}</span>
+              </div>
+              <h3 className="font-display text-[20px] leading-[1.2] tracking-editorial text-[var(--ink)] transition-colors group-hover:text-[var(--ember)]">
+                {project.title}
+              </h3>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Inquiry form */}
+      <section className="py-16">
+        <SectionHeader
+          number="05"
           label="Get in touch"
           title="Tell me what you're working on."
           containerClassName="px-0"
@@ -2908,6 +3014,496 @@ function DiagnosticPage() {
         href={BOOKING_HREF}
       />
     </>
+  )
+}
+
+const PORTFOLIO_FILTERS = [
+  { value: 'all', label: 'All work' },
+  { value: 'web', label: 'Web design' },
+  { value: 'systems', label: 'Operational systems' },
+  { value: 'automation', label: 'Automation' },
+  { value: 'brand', label: 'Brand' },
+] as const
+
+type PortfolioCategory = (typeof PORTFOLIO_FILTERS)[number]['value']
+
+type PortfolioProject = {
+  slug: string
+  title: string
+  client: string
+  year: string
+  categories: PortfolioCategory[]
+  summary: string
+  image: string
+  outcome: string
+}
+
+const PORTFOLIO_PROJECTS: PortfolioProject[] = [
+  {
+    slug: 'mantle-studios',
+    title: 'Mantle Studios — studio identity & site',
+    client: 'Mantle Studios',
+    year: '2026',
+    categories: ['web', 'brand'],
+    summary:
+      'Editorial-direction marketing site for a one-person web design studio. Built to credibly position the studio to service-business clients.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Inbound from cold visitors within first 14 days of relaunch.',
+  },
+  {
+    slug: 'ai-readiness-diagnostic',
+    title: 'AI Readiness Check — interactive diagnostic',
+    client: 'Stephen Mantle',
+    year: '2026',
+    categories: ['systems', 'automation'],
+    summary:
+      'Self-serve diagnostic that scores operational friction across people, process, and tooling — then routes leads into a real conversation.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Replaces 30 minutes of intake calls with a guided 6-minute flow.',
+  },
+  {
+    slug: 'service-business-ops',
+    title: 'Service-business operations layer',
+    client: 'Private client',
+    year: '2025',
+    categories: ['systems', 'automation'],
+    summary:
+      'Lightweight dashboard + Zapier-backed routing replacing a four-tab spreadsheet for daily job allocation.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Two hours of admin per day eliminated; zero missed handovers in week one.',
+  },
+  {
+    slug: 'consultancy-site-rebuild',
+    title: 'Consultancy site rebuild',
+    client: 'Private client',
+    year: '2025',
+    categories: ['web', 'brand'],
+    summary:
+      'Replatformed a Squarespace site into a hand-built Vite + Tailwind build with editorial layout, case studies, and faster Core Web Vitals.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Lighthouse performance score moved from 54 → 96.',
+  },
+  {
+    slug: 'lead-routing-automation',
+    title: 'Lead-routing automation',
+    client: 'Private client',
+    year: '2025',
+    categories: ['automation'],
+    summary:
+      'Form intake → CRM → Slack → calendar booking, with conditional follow-up sequences and fallback owners when no one claims a lead in 15 minutes.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Median lead response time down from 22 hours to under 12 minutes.',
+  },
+  {
+    slug: 'studio-brand-system',
+    title: 'Studio brand & visual system',
+    client: 'Mantle Studios',
+    year: '2026',
+    categories: ['brand'],
+    summary:
+      'Editorial type pairing, ember accent palette, and an SM monogram codified as a required mark across product surfaces.',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+    outcome: 'Single brand system covers web, social, and proposal documents.',
+  },
+] as const
+
+const PORTFOLIO_PAGE_SIZE = 4
+
+const BLOG_FILTERS = [
+  { value: 'all', label: 'All posts' },
+  { value: 'web', label: 'Web design' },
+  { value: 'systems', label: 'Operations' },
+  { value: 'automation', label: 'Automation' },
+  { value: 'practice', label: 'Studio practice' },
+] as const
+
+type BlogCategory = (typeof BLOG_FILTERS)[number]['value']
+
+type BlogPost = {
+  slug: string
+  title: string
+  excerpt: string
+  category: BlogCategory
+  categoryLabel: string
+  date: string
+  readTime: string
+  image: string
+}
+
+const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: 'why-most-service-business-sites-leak',
+    title: 'Why most service-business websites quietly leak revenue',
+    excerpt:
+      'Five recurring patterns in service-business websites that look fine but lose interested visitors before they ever reach a contact form.',
+    category: 'web',
+    categoryLabel: 'Web design',
+    date: '2026-05-21',
+    readTime: '6 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+  {
+    slug: 'one-system-rule',
+    title: 'The one-system rule for replacing spreadsheets you actually love',
+    excerpt:
+      'A small framework for deciding when a spreadsheet has earned a real system, and when leaving it alone is the more honest answer.',
+    category: 'systems',
+    categoryLabel: 'Operations',
+    date: '2026-05-08',
+    readTime: '5 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+  {
+    slug: 'automation-without-handovers',
+    title: 'Automations only work when the handover is designed first',
+    excerpt:
+      'Why most automation projects collapse the moment a human needs to take over — and the simple change in scoping that prevents it.',
+    category: 'automation',
+    categoryLabel: 'Automation',
+    date: '2026-04-19',
+    readTime: '7 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+  {
+    slug: 'building-in-public-as-a-solo-studio',
+    title: 'Building in public as a one-person studio — without the noise',
+    excerpt:
+      'A working policy for what to ship publicly, what to keep private, and how to make the work itself the case study.',
+    category: 'practice',
+    categoryLabel: 'Studio practice',
+    date: '2026-04-02',
+    readTime: '4 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+  {
+    slug: 'website-as-operating-asset',
+    title: 'Treat the website as an operating asset, not a brochure',
+    excerpt:
+      'The shift in how a service-business website earns its keep when it is wired into the actual operational stack underneath.',
+    category: 'web',
+    categoryLabel: 'Web design',
+    date: '2026-03-18',
+    readTime: '8 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+  {
+    slug: 'ai-readiness-mistakes',
+    title: 'Three mistakes I see in AI readiness assessments',
+    excerpt:
+      'The pattern repeats: businesses score themselves on the wrong axes, then prioritise tools instead of the workflow underneath.',
+    category: 'systems',
+    categoryLabel: 'Operations',
+    date: '2026-03-04',
+    readTime: '6 min read',
+    image: '/max-andrey--8-2YWKt8Ag-unsplash.jpg',
+  },
+]
+
+function formatBlogDate(iso: string): string {
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) {
+    return iso
+  }
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  }).format(date)
+}
+
+function PortfolioPage({ navigate }: { navigate: (to: RoutePath) => void }) {
+  const [filter, setFilter] = useState<PortfolioCategory>('all')
+  const [visible, setVisible] = useState(PORTFOLIO_PAGE_SIZE)
+
+  const filtered =
+    filter === 'all'
+      ? PORTFOLIO_PROJECTS
+      : PORTFOLIO_PROJECTS.filter((project) => project.categories.includes(filter))
+
+  const shown = filtered.slice(0, visible)
+  const hasMore = filtered.length > shown.length
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Selected work"
+        title="A small body of work for service businesses that needed clearer systems."
+        body="Every project listed below is a real build — site, system, or automation — shipped for a paying client or for the studio itself."
+      />
+
+      <section className="border-b border-gray-100 bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
+            <span className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--teal)]">
+              <span className="mr-2 inline-block h-px w-6 bg-[var(--teal)]" />
+              Filter
+            </span>
+            <h2 className="mt-4 font-display text-2xl tracking-editorial text-[var(--ink)] md:text-3xl">
+              Browse by what the project was built to solve.
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {PORTFOLIO_FILTERS.map((option) => {
+              const active = option.value === filter
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => {
+                    setFilter(option.value)
+                    setVisible(PORTFOLIO_PAGE_SIZE)
+                  }}
+                  className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] transition ${
+                    active
+                      ? 'border-[var(--ink)] bg-[var(--ink)] text-white'
+                      : 'border-gray-200 bg-white text-gray-600 hover:border-[var(--ink)] hover:text-[var(--ink)]'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          {shown.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-gray-200 px-6 py-24 text-center">
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-gray-500">
+                Nothing here yet
+              </p>
+              <p className="mt-3 font-display text-2xl tracking-editorial text-[var(--ink)]">
+                No projects under this filter right now.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+              {shown.map((project, index) => (
+                <PortfolioCard key={project.slug} project={project} index={index} />
+              ))}
+            </div>
+          )}
+
+          {hasMore ? (
+            <div className="mt-14 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setVisible((prev) => prev + PORTFOLIO_PAGE_SIZE)}
+                className="inline-flex items-center gap-3 rounded-full border border-[var(--ink)] px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-[var(--ink)] transition hover:bg-[var(--ink)] hover:text-white"
+              >
+                Load more work
+                <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
+              </button>
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <FinalCta
+        title="If a project here looks like the shape of yours, that's a good reason to talk."
+        body="Send a brief description of where the friction sits today. I will reply within two working days with whether it sounds like something I can help with."
+        ctaLabel="Start a project"
+        href={CONTACT_HREF}
+      />
+    </>
+  )
+}
+
+function PortfolioCard({
+  project,
+  index,
+}: {
+  project: PortfolioProject
+  index: number
+}) {
+  return (
+    <article className="group flex flex-col">
+      <div className="relative overflow-hidden rounded-3xl bg-gray-100">
+        <div className="aspect-[4/3] w-full">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+          />
+        </div>
+        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+          {project.categories.map((cat) => {
+            const meta = PORTFOLIO_FILTERS.find((opt) => opt.value === cat)
+            if (!meta) {
+              return null
+            }
+            return (
+              <span
+                key={cat}
+                className="rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] backdrop-blur"
+              >
+                {meta.label}
+              </span>
+            )
+          })}
+        </div>
+      </div>
+      <div className="mt-6 flex flex-col gap-3">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+          <span>{project.client}</span>
+          <span aria-hidden className="h-px w-6 bg-gray-300" />
+          <span>{project.year}</span>
+        </div>
+        <h3 className="font-display text-2xl tracking-editorial text-[var(--ink)] md:text-3xl">
+          {project.title}
+        </h3>
+        <p className="text-base leading-relaxed text-gray-600">{project.summary}</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ember)]">
+          Outcome — <span className="text-gray-700 normal-case tracking-normal">{project.outcome}</span>
+        </p>
+        <span className="mt-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink)]">
+          <span className="inline-block h-px w-6 bg-[var(--ember)]" />
+          Read the case
+        </span>
+      </div>
+    </article>
+  )
+}
+
+type BlogSortKey = 'date_desc' | 'date_asc' | 'title_asc'
+
+function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
+  const [filter, setFilter] = useState<BlogCategory>('all')
+  const [sort, setSort] = useState<BlogSortKey>('date_desc')
+
+  const filtered = filter === 'all' ? BLOG_POSTS : BLOG_POSTS.filter((post) => post.category === filter)
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sort === 'title_asc') {
+      return a.title.localeCompare(b.title)
+    }
+    const aTime = new Date(a.date).getTime()
+    const bTime = new Date(b.date).getTime()
+    if (sort === 'date_asc') {
+      return aTime - bTime
+    }
+    return bTime - aTime
+  })
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Latest from the studio"
+        title="Notes on building practical software for service businesses."
+        body="Working posts about web design, operational systems, and automation — written from inside live projects, not theoretical advice."
+      />
+
+      <section className="border-b border-gray-100 bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-wrap gap-2">
+            {BLOG_FILTERS.map((option) => {
+              const active = option.value === filter
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setFilter(option.value)}
+                  className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] transition ${
+                    active
+                      ? 'border-[var(--ink)] bg-[var(--ink)] text-white'
+                      : 'border-gray-200 bg-white text-gray-600 hover:border-[var(--ink)] hover:text-[var(--ink)]'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              )
+            })}
+          </div>
+          <label className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+            Sort
+            <select
+              value={sort}
+              onChange={(event) => setSort(event.target.value as BlogSortKey)}
+              className="rounded-full border border-gray-200 bg-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink)] focus:border-[var(--ink)] focus:outline-none"
+            >
+              <option value="date_desc">Date · newest</option>
+              <option value="date_asc">Date · oldest</option>
+              <option value="title_asc">Title · A–Z</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-5xl px-6 py-16">
+          {sorted.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-gray-200 px-6 py-24 text-center">
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-gray-500">
+                Empty for now
+              </p>
+              <p className="mt-3 font-display text-2xl tracking-editorial text-[var(--ink)]">
+                No posts in this category yet.
+              </p>
+            </div>
+          ) : (
+            <ul className="flex flex-col gap-12">
+              {sorted.map((post, index) => (
+                <li key={post.slug}>
+                  <BlogRow post={post} reversed={index % 2 === 1} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      <FinalCta
+        title="Have a question that would make a better post than a reply?"
+        body="Send it across. If it is the kind of thing other operators wrestle with, it will probably end up here — credited or anonymised, your call."
+        ctaLabel="Email the studio"
+        href={CONTACT_HREF}
+      />
+    </>
+  )
+}
+
+function BlogRow({ post, reversed }: { post: BlogPost; reversed: boolean }) {
+  return (
+    <article
+      className={`group grid grid-cols-1 gap-8 border-b border-gray-100 pb-12 md:grid-cols-12 md:gap-12 ${
+        reversed ? 'md:[&>*:first-child]:order-2' : ''
+      }`}
+    >
+      <div className="md:col-span-5">
+        <div className="relative overflow-hidden rounded-2xl bg-gray-100">
+          <div className="aspect-[5/4] w-full">
+            <img
+              src={post.image}
+              alt={post.title}
+              loading="lazy"
+              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+            />
+          </div>
+          <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink)] backdrop-blur">
+            {post.categoryLabel}
+          </span>
+        </div>
+      </div>
+      <div className="md:col-span-7 md:pt-4">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+          <span>{formatBlogDate(post.date)}</span>
+          <span aria-hidden className="h-px w-6 bg-gray-300" />
+          <span>{post.readTime}</span>
+        </div>
+        <h3 className="mt-4 font-display text-3xl leading-tight tracking-editorial text-[var(--ink)] md:text-4xl">
+          {post.title}
+        </h3>
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600">{post.excerpt}</p>
+        <span className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink)]">
+          <span className="inline-block h-px w-6 bg-[var(--ember)]" />
+          Read the post
+          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
+        </span>
+      </div>
+    </article>
   )
 }
 
