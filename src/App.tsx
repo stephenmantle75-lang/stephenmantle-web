@@ -96,17 +96,6 @@ const ROUTE_META: Record<
   },
 }
 
-const HOME_PROOF = [
-  {
-    title: 'Operational systems',
-    body: 'Dashboards, reporting layers, workflow logic, and AI-assisted admin built around real business friction.',
-  },
-  {
-    title: 'Business websites',
-    body: 'Clear, credible sites for service businesses that need to explain the offer properly and turn attention into contact.',
-  },
-] as const
-
 const ABOUT_PROBLEMS = [
   'Work gets duplicated because ownership is unclear.',
   'Important updates live across inboxes, chats, spreadsheets, and memory.',
@@ -117,19 +106,19 @@ const ABOUT_PROBLEMS = [
 const ABOUT_BACKGROUND = [
   {
     title: 'Luxury operations',
-    body: 'Years inside LVMH brands. How premium teams run service, retail, and customer experience without breaking the polish.',
+    body: "Years inside LVMH brands. I watched premium teams keep service, retail, and CX feeling effortless — and saw how much human glue held the back of house together.",
   },
   {
     title: 'Data & reporting',
-    body: 'Accenture data consulting. Reporting layers, analytics, and dashboards translated for the people who actually make the decisions.',
+    body: 'Accenture data consulting. I built reporting layers for non-technical leaders. Most of the work was translation, not SQL.',
   },
   {
     title: 'Under the hood',
-    body: 'Reading APIs, schemas, integrations. Turning the wiring into plain English non-technical teams can act on with confidence.',
+    body: "Somewhere in there I got curious about the wiring. APIs, schemas, integrations. Once you can read them, the 'tech problem' usually turns out to be a process problem in costume.",
   },
   {
     title: 'AI developer tools',
-    body: 'Cursor, Claude, agentic workflows, MCP servers. Genuinely exciting kit — harnessed inside real operational workflows, not as a demo.',
+    body: "Cursor, Claude, MCP, agentic workflows. I use them every day now. Not as a headline — as the cheapest way I've ever found to put operational ideas in front of a real business.",
   },
 ] as const
 
@@ -1283,7 +1272,7 @@ function HomePage({
 
             <div className="mt-8 flex flex-col items-start gap-4 sm:mt-12 sm:flex-row sm:items-center sm:gap-5">
               <RollingButton
-                label="Start a project"
+                label="Book a call"
                 href={BOOKING_HREF}
                 className="bg-[#2A7D6E] py-2 pl-5 pr-2 text-[13px] leading-[13px] text-white hover:bg-[#1f5e54] sm:pl-6 sm:text-[14px] sm:leading-[14px]"
                 arrowCircleClassName="h-7 w-7 bg-white text-[#2A7D6E] sm:h-8 sm:w-8"
@@ -1313,177 +1302,141 @@ function HomePage({
         </div>
       </section>
 
-      <CommonProblemsSection />
-
-      <section id="approach" className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-28">
+      <section className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
             number="01"
-            label="Approach"
-            title="How a build actually goes."
+            label="The shape of the work"
+            title="Pull the moving parts into one place."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
-          <figure className="mb-12 mt-8 px-5 sm:mb-16 sm:px-8 lg:mb-20 lg:px-12">
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/hero/notebook-systems-2026-06-09@1x.webp 656w, /hero/notebook-systems-2026-06-09.webp 1312w"
-                sizes="(min-width: 1440px) 1392px, 100vw"
-              />
-              <img
-                src="/hero/notebook-systems-2026-06-09.png"
-                srcSet="/hero/notebook-systems-2026-06-09@1x.png 656w, /hero/notebook-systems-2026-06-09.png 1312w"
-                sizes="(min-width: 1440px) 1392px, 100vw"
-                alt="Hand-drawn system diagram in a notebook beside a teal pen, sketched before any code is written"
-                width={1312}
-                height={684}
-                loading="lazy"
-                decoding="async"
-                className="block w-full"
-              />
-              <figcaption className="mt-3 text-[12px] uppercase tracking-[0.22em] text-gray-500">
-                Sketch first. Build second.
-              </figcaption>
-            </picture>
-          </figure>
-
-          <div className="grid grid-cols-1 gap-5 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
-            {APPROACH_STEPS.map((step) => (
-              <div
-                key={step.number}
-                className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
+          <div className="px-5 sm:px-8 lg:px-12">
+            <div className="overflow-hidden rounded-2xl bg-[#1E1E1E] p-6 sm:p-10 lg:p-14">
+              <svg
+                viewBox="0 0 1200 560"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-auto w-full"
+                role="img"
+                aria-label="Diagram: inbox, bookings and spreadsheets flow into one dashboard, which gives back hours."
               >
-                <div className="flex items-baseline gap-3">
-                  <span className="text-[13px] font-medium tabular-nums text-[#2A7D6E]">
-                    {step.number}
-                  </span>
-                  <span className="text-[13px] uppercase tracking-wide text-gray-500">
-                    {step.label}
-                  </span>
-                </div>
-                <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.01em] text-gray-900">
-                  {step.title}
-                </h3>
-                <ul className="mt-1 flex flex-col gap-2 text-[14px] leading-relaxed text-gray-600">
-                  {step.bullets.map((b) => (
-                    <li key={b} className="flex gap-2">
-                      <span className="mt-2 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-gray-400" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#2A7D6E" />
+                  </marker>
+                </defs>
+
+                <g fontFamily="Manrope, sans-serif" fill="#FAF8F5">
+                  <g>
+                    <rect x="60" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
+                    <text x="200" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your inbox</text>
+                    <text x="200" y="145" textAnchor="middle" fontSize="14" opacity="0.6">enquiries, quotes, follow-ups</text>
+                  </g>
+                  <g>
+                    <rect x="460" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
+                    <text x="600" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your bookings</text>
+                    <text x="600" y="145" textAnchor="middle" fontSize="14" opacity="0.6">calendar, confirmations, no-shows</text>
+                  </g>
+                  <g>
+                    <rect x="860" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
+                    <text x="1000" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your spreadsheets</text>
+                    <text x="1000" y="145" textAnchor="middle" fontSize="14" opacity="0.6">invoices, suppliers, jobs done</text>
+                  </g>
+
+                  <path d="M200 170 L590 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
+                  <path d="M600 170 L600 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
+                  <path d="M1000 170 L610 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
+
+                  <g>
+                    <rect x="380" y="270" width="440" height="120" rx="14" fill="#2A7D6E" />
+                    <text x="600" y="320" textAnchor="middle" fontSize="24" fontWeight="600" fill="#FAF8F5">One place to see it all</text>
+                    <text x="600" y="355" textAnchor="middle" fontSize="14" fill="#FAF8F5" opacity="0.85">a small dashboard built around the way the business actually runs</text>
+                  </g>
+
+                  <path d="M600 390 L600 460" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
+
+                  <g>
+                    <rect x="320" y="470" width="560" height="70" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" strokeDasharray="6 6" />
+                    <text x="600" y="513" textAnchor="middle" fontSize="20" fontWeight="500" fill="#FAF8F5">Hours back. Fewer dropped balls.</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <p className="mt-8 max-w-[640px] text-[15px] leading-relaxed text-gray-700 sm:text-[16px]">
+              Most small businesses do not need new software. They need the bits they already use to talk to each other, in plain sight, on one screen. That is the work.
+            </p>
+
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={() => navigate('/services')}
+                className="text-[12px] uppercase tracking-[0.18em] text-[#2A7D6E] hover:underline"
+              >
+                See how it gets built →
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#F5F5F5] pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-28">
+      <section className="bg-[#F5F5F5] pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
             number="02"
-            label="Selected solutions"
-            title="Admin days are over, let automations free you up and chase revenue leaks in your business."
+            label="From the journal"
+            title="Notes from inside the studio."
             containerClassName="px-5 sm:px-8 lg:px-12"
             borderClassName="border-gray-300"
           />
 
-          <div className="grid grid-cols-1 gap-5 px-5 sm:gap-6 sm:px-8 md:grid-cols-2 lg:gap-7 lg:px-12">
-            <article className="rounded-2xl bg-white p-5 shadow-[0_12px_40px_rgba(0,0,0,0.05)] sm:p-6">
-              <div className="overflow-hidden rounded-2xl bg-[#11131d]">
-                <video
-                  src="/stephen-mantle-loop.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="aspect-[329/246] h-full w-full object-cover"
-                />
-              </div>
-              <p className="mt-4 text-[13px] leading-relaxed text-gray-600 sm:text-[14px]">
-                Morning briefs, inbox workflows, internal dashboards, and unattended
-                operations designed to reduce manual work and improve visibility.
-              </p>
-              <h3 className="mt-1 text-[14px] font-semibold text-gray-900 sm:text-[15px]">
-                Automation Systems
-              </h3>
-            </article>
-
-            <article className="rounded-2xl bg-white p-5 shadow-[0_12px_40px_rgba(0,0,0,0.05)] sm:p-6">
-              <div className="relative overflow-hidden rounded-2xl bg-[#e9e3d8] p-5 sm:p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(42,125,110,0.22),_transparent_34%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(241,236,228,0.94))]" />
-                <div className="relative rounded-[22px] bg-white/90 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:p-5">
-                  <div className="mb-4 flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#2A7D6E]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-                  </div>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500">
-                    Stephen Mantle
-                  </p>
-                  <h4 className="mt-3 max-w-[12ch] text-[clamp(1.35rem,3vw,2.2rem)] font-medium leading-[1.02] tracking-[-0.03em] text-gray-900">
-                    Look clear. Build trust. Get contacted.
-                  </h4>
-                </div>
-              </div>
-              <p className="mt-4 text-[13px] leading-relaxed text-gray-600 sm:text-[14px]">
-                Clean, credible websites for service businesses that need to explain the
-                offer properly and make it easier for the right client to act.
-              </p>
-              <h3 className="mt-1 text-[14px] font-semibold text-gray-900 sm:text-[15px]">
-                Websites for Service Businesses
-              </h3>
-            </article>
-          </div>
-
-          <div className="mt-10 grid gap-4 px-5 sm:px-8 md:grid-cols-2 lg:px-12">
-            {HOME_PROOF.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl bg-white p-5 shadow-[0_12px_40px_rgba(0,0,0,0.04)] sm:p-6"
-              >
-                <p className="text-[14px] font-semibold text-gray-900 sm:text-[15px]">
-                  {item.title}
-                </p>
-                <p className="mt-2 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
-                  {item.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-16 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-[#FAF8F5] px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
-            <div className="max-w-[44rem]">
-              <p className="text-[12px] uppercase tracking-[0.22em] text-gray-500">
-                Not sure where to start
-              </p>
-              <p className="mt-3 text-[18px] font-medium leading-[1.25] tracking-[-0.02em] text-gray-900 sm:text-[22px]">
-                Take the 2-minute diagnostic.
-              </p>
-              <p className="mt-3 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
-                Eight questions. You'll see which of the three solution paths fits, with a fixed-price range, before any call.
-              </p>
-            </div>
-            <RollingButton
-              label="Start the diagnostic"
-              href="/diagnostic"
-              className="w-fit bg-gray-900 py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-white"
-              arrowCircleClassName="h-7 w-7 bg-white text-gray-900"
-              arrowClassName="h-4 w-4"
-            />
+          <div className="grid grid-cols-1 gap-5 px-5 sm:gap-6 sm:px-8 md:grid-cols-2 lg:px-12">
+            {[...BLOG_POSTS]
+              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+              .slice(0, 2)
+              .map((post) => {
+                const route = BLOG_POST_ROUTES[post.slug]
+                return (
+                  <button
+                    key={post.slug}
+                    type="button"
+                    onClick={() => navigate(route ?? '/blog')}
+                    className="flex flex-col overflow-hidden rounded-2xl bg-white text-left shadow-[0_12px_40px_rgba(0,0,0,0.05)] transition-shadow hover:shadow-[0_16px_50px_rgba(0,0,0,0.08)]"
+                  >
+                    <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3 p-5 sm:p-6">
+                      <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                        {formatBlogDate(post.date)} · {post.readTime}
+                      </p>
+                      <h3 className="text-[18px] font-medium leading-[1.25] tracking-[-0.01em] text-gray-900 sm:text-[20px]">
+                        {post.title}
+                      </h3>
+                      <p className="text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
+                        {post.excerpt}
+                      </p>
+                      <span className="mt-1 text-[12px] uppercase tracking-[0.18em] text-[#2A7D6E]">
+                        Read post →
+                      </span>
+                    </div>
+                  </button>
+                )
+              })}
           </div>
         </div>
       </section>
 
       <FinalCta
-        title="Describe the friction."
-        body="Fixed price. Written scope. No hourly. No retainers."
-        ctaLabel="Book a free intro call"
+        title="Got a problem worth a conversation?"
+        body="Free intro call. No pitch."
+        ctaLabel="Book a call"
         href={BOOKING_HREF}
       />
 
@@ -1497,30 +1450,30 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="Operational problems look like tooling problems."
-        body="They aren't. Cause is usually ownership, workflow, visibility, decisions."
+        title="I kept finding the same problem in every business I worked in."
+        body="It was never the tools. It was how the work moved between people."
       />
 
       <section className="overflow-hidden bg-white pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
             number="1"
-            label="Positioning"
-            title="Operational thinking. AI implementation. Websites built around how a business actually works."
+            label="Where I started"
+            title="Luxury floors, enterprise dashboards, the same broken handoffs."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
           <div className="grid gap-5 px-5 sm:px-8 lg:grid-cols-[0.75fr_1fr] lg:px-12">
             <div className="rounded-2xl bg-[#F5F5F5] p-5 sm:p-6">
               <p className="text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
-                Years inside LVMH luxury brands and Accenture data operations.
-                Reporting layers, analytics, dashboards — built for non-technical
-                leaders who need the numbers in plain English.
+                I spent years inside LVMH brands watching premium operations up close.
+                Then years at Accenture building reporting layers for people who needed
+                numbers in plain English, not pivot tables.
               </p>
               <p className="mt-4 text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
-                The instinct: find the friction first. Build the cleaner system around
-                it. AI developer tools applied with an operational frame — never as
-                the headline.
+                Two very different worlds. The same pattern underneath. The polish on
+                top was hiding a mess of spreadsheets, manual updates, and handoffs
+                nobody owned.
               </p>
 
               <div className="mt-7">
@@ -1550,7 +1503,7 @@ function AboutPage() {
           <SectionHeader
             number="2"
             label="Background"
-            title="Luxury operations. Enterprise data. AI implementation. Translation across all three."
+            title="Four worlds. One throughline: translating what's actually going on into something a business can use."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
@@ -1576,23 +1529,27 @@ function AboutPage() {
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
             number="3"
-            label="The real problem"
-            title="Most operational problems do not start as technical problems."
+            label="Why now"
+            title="Small businesses get sold software. They need someone who'll look at the workflow first."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
           <div className="grid gap-6 px-5 sm:px-8 lg:grid-cols-[1fr_0.95fr] lg:px-12">
             <div>
               <p className="max-w-[44rem] text-[15px] leading-[1.75] text-gray-600 sm:text-[17px]">
-                They start when different parts of the business are working from
-                different assumptions. One team thinks a task is owned. Another thinks it
-                is shared. Information lives in too many places. Reporting is slow.
-                Requests get duplicated. People build workarounds because the real
-                process no longer fits the work.
+                Big consultancies don't take small jobs. Web agencies sell pages, not
+                process. Most "AI for business" pitches are demos.
               </p>
               <p className="mt-5 max-w-[44rem] text-[15px] leading-[1.75] text-gray-600 sm:text-[17px]">
-                That is when a business starts paying twice: once in time, and again in
-                missed visibility, delayed decisions, and avoidable friction.
+                What I kept seeing — in luxury, in enterprise, in every SME I've spoken
+                to since going solo — was the same gap. Someone who can sit with the
+                owner, map how the business actually runs, and then build the smallest
+                possible system around that. Website, dashboard, automation, whichever
+                the work calls for.
+              </p>
+              <p className="mt-5 max-w-[44rem] text-[15px] leading-[1.75] text-gray-600 sm:text-[17px]">
+                That gap is what Mantle Studios is for. One person, end to end, no
+                jargon, no upsell.
               </p>
             </div>
 
@@ -1611,8 +1568,8 @@ function AboutPage() {
       </section>
 
       <FinalCta
-        title="Busier than it should be? The system is the issue."
-        body="Fix the workflow first. Automate after."
+        title="Busier than the business should be? It's almost never the software."
+        body="Let's map the workflow first. Build only what's missing."
         ctaLabel="Book a free intro call"
         href={BOOKING_HREF}
       />
