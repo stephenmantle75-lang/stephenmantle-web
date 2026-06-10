@@ -15,8 +15,6 @@ import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react
 const CONTACT_HREF = 'mailto:hello@stephenmantle.com'
 const BOOKING_HREF = 'https://www.cal.eu/stephen-mantle/meeting?user=stephen-mantle&overlayCalendar=true'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
-const HOME_ABOUT_IMAGE =
-  'https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=1600&q=80'
 const PORTRAIT_IMAGE = '/stephen.png'
 
 const LINKTREE_HREF = 'https://linktr.ee/stephenmantle'
@@ -31,7 +29,6 @@ const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Work', to: '/portfolio' },
   { label: 'Journal', to: '/blog' },
 ] as const
 
@@ -61,11 +58,6 @@ const ROUTE_META: Record<
     title: 'AI Readiness Check — Stephen Mantle',
     description:
       'Take the AI Readiness Check to identify operational friction, score workflow readiness, and find the safest first system to improve.',
-  },
-  '/portfolio': {
-    title: 'Work — Stephen Mantle',
-    description:
-      'Selected work: websites, operational systems, and automations built for service businesses that needed clearer systems and a stronger online presence.',
   },
   '/blog': {
     title: 'Journal — Stephen Mantle',
@@ -120,6 +112,25 @@ const ABOUT_PROBLEMS = [
   'Important updates live across inboxes, chats, spreadsheets, and memory.',
   'Manual reporting delays decisions that should be obvious earlier.',
   'Teams create workarounds because the real process no longer fits the work.',
+] as const
+
+const ABOUT_BACKGROUND = [
+  {
+    title: 'Luxury operations',
+    body: 'Years inside LVMH brands. How premium teams run service, retail, and customer experience without breaking the polish.',
+  },
+  {
+    title: 'Data & reporting',
+    body: 'Accenture data consulting. Reporting layers, analytics, and dashboards translated for the people who actually make the decisions.',
+  },
+  {
+    title: 'Under the hood',
+    body: 'Reading APIs, schemas, integrations. Turning the wiring into plain English non-technical teams can act on with confidence.',
+  },
+  {
+    title: 'AI developer tools',
+    body: 'Cursor, Claude, agentic workflows, MCP servers. Genuinely exciting kit — harnessed inside real operational workflows, not as a demo.',
+  },
 ] as const
 
 const QUIZ_STAGES = [
@@ -384,8 +395,8 @@ const SERVICES = [
     name: 'Morning Brief & Mail Automation',
     description: 'Daily briefings, inbox triage, and follow-up flows that remove the morning admin pile.',
     builtWith: ['Zapier', 'Zoho Mail', 'Claude API'],
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80',
-    imageAlt: 'Editorial close-up of handwritten letter and pen on paper.',
+    image: 'https://images.unsplash.com/photo-1499914485622-a88fac536970?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Open notebook beside a coffee cup at a clean desk, morning workspace setup.',
     proofHeadline: 'One briefing email, every morning.',
     proofBody: 'Overnight activity pulled, replies flagged, formatted into a single brief. No manual inbox sorting before the workday starts.',
   },
@@ -408,8 +419,8 @@ const SERVICES = [
     name: 'Business Insights Newsletter',
     description: 'A research-to-newsletter pipeline that turns agent output into a structured weekly send.',
     builtWith: ['Claude API', 'Canva', 'Zapier'],
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
-    imageAlt: 'Editorial newspaper folded on a table, monochrome print layout.',
+    image: 'https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Stack of folded broadsheet newspapers on a neutral surface.',
     proofHeadline: 'Research to publication, on rails.',
     proofBody: 'Agent output flows into a formatted template. Structure, formatting, and scheduling automated. Editorial decisions stay human.',
   },
@@ -539,7 +550,6 @@ type RoutePath =
   | '/about'
   | '/services'
   | '/diagnostic'
-  | '/portfolio'
   | '/blog'
   | '/routing'
   | '/mermaid-diagrams'
@@ -1042,10 +1052,6 @@ function normalizePath(pathname: string): RoutePath {
     return '/services'
   }
 
-  if (cleanPath === '/work') {
-    return '/portfolio'
-  }
-
   if (cleanPath === '/journal') {
     return '/blog'
   }
@@ -1055,7 +1061,6 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/about' ||
     cleanPath === '/services' ||
     cleanPath === '/diagnostic' ||
-    cleanPath === '/portfolio' ||
     cleanPath === '/blog' ||
     cleanPath === '/routing' ||
     cleanPath === '/mermaid-diagrams' ||
@@ -1204,7 +1209,6 @@ function App() {
           {path === '/about' ? <AboutPage /> : null}
           {path === '/services' ? <ServicesPage navigate={navigate} /> : null}
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
-          {path === '/portfolio' ? <PortfolioPage navigate={navigate} /> : null}
           {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
           {path === '/routing' ? <JournalPostPage slug="routing" navigate={navigate} /> : null}
           {path === '/mermaid-diagrams' ? (
@@ -1509,9 +1513,14 @@ function AboutPage() {
           <div className="grid gap-5 px-5 sm:px-8 lg:grid-cols-[0.75fr_1fr] lg:px-12">
             <div className="rounded-2xl bg-[#F5F5F5] p-5 sm:p-6">
               <p className="text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
-                Years across luxury brands and tech operations. Start at the friction —
-                where time leaks, work duplicates, decisions stall. Build the cleaner
-                system around it. Tools come last.
+                Years inside LVMH luxury brands and Accenture data operations.
+                Reporting layers, analytics, dashboards — built for non-technical
+                leaders who need the numbers in plain English.
+              </p>
+              <p className="mt-4 text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
+                The instinct: find the friction first. Build the cleaner system around
+                it. AI developer tools applied with an operational frame — never as
+                the headline.
               </p>
 
               <div className="mt-7">
@@ -1525,18 +1534,40 @@ function AboutPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            <div>
               <img
                 src={PORTRAIT_IMAGE}
                 alt="Stephen Mantle portrait"
-                className="aspect-[438/346] w-full rounded-xl object-cover sm:rounded-2xl"
-              />
-              <img
-                src={HOME_ABOUT_IMAGE}
-                alt="Stephen Mantle workspace"
-                className="aspect-[900/600] w-full rounded-xl object-cover sm:rounded-2xl"
+                className="aspect-[3/2] w-full rounded-xl object-cover sm:rounded-2xl"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white pb-12 pt-12 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
+        <div className="mx-auto max-w-[1440px]">
+          <SectionHeader
+            number="2"
+            label="Background"
+            title="Luxury operations. Enterprise data. AI implementation. Translation across all three."
+            containerClassName="px-5 sm:px-8 lg:px-12"
+          />
+
+          <div className="grid gap-4 px-5 sm:px-8 sm:grid-cols-2 lg:px-12">
+            {ABOUT_BACKGROUND.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl bg-[#F5F5F5] p-5 sm:p-6"
+              >
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#2A7D6E]">
+                  {item.title}
+                </p>
+                <p className="mt-3 text-[15px] leading-[1.7] text-gray-800 sm:text-[16px]">
+                  {item.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -1544,7 +1575,7 @@ function AboutPage() {
       <section className="bg-white pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
-            number="2"
+            number="3"
             label="The real problem"
             title="Most operational problems do not start as technical problems."
             containerClassName="px-5 sm:px-8 lg:px-12"
@@ -1934,143 +1965,10 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
         </div>
       </section>
 
-      {/* Approach — 4-step build process */}
-      <section id="approach" className="py-16">
-        <SectionHeader
-          number="01"
-          label="Approach"
-          title="How a build actually goes."
-          containerClassName="px-0"
-        />
-        <div className="mt-4 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {APPROACH_STEPS.map((step) => (
-            <div
-              key={step.number}
-              className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
-            >
-              <div className="flex items-baseline gap-3">
-                <span className="text-[13px] font-medium tabular-nums text-[#2A7D6E]">
-                  {step.number}
-                </span>
-                <span className="text-[13px] uppercase tracking-wide text-gray-500">
-                  {step.label}
-                </span>
-              </div>
-              <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.01em] text-gray-900">
-                {step.title}
-              </h3>
-              <ul className="mt-1 flex flex-col gap-2 text-[14px] leading-relaxed text-gray-600">
-                {step.bullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <span className="mt-2 inline-block h-1 w-1 flex-shrink-0 rounded-full bg-gray-400" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Proof of concept blocks */}
-      <section className="py-4">
-        <SectionHeader
-          number="02"
-          label="Proof of concept"
-          title="How each system runs."
-          containerClassName="px-0"
-        />
-        <div className="mt-4">
-          {SERVICES.map((service, i) => (
-            <ServiceProofBlock
-              key={service.id}
-              service={service}
-              index={i}
-              navigate={navigate}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Track record — kobba-style stats strip */}
-      <section className="py-16">
-        <SectionHeader
-          number="03"
-          label="Track record"
-          title="The receipts."
-          containerClassName="px-0"
-        />
-        <div className="mt-2 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-gray-200 md:grid-cols-4">
-          {SERVICES_STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex flex-col gap-3 bg-white p-6 sm:p-8"
-            >
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
-                {stat.label}
-              </span>
-              <span className="font-display text-[clamp(2.2rem,4vw,3.4rem)] font-medium leading-none tracking-editorial text-[var(--ink)]">
-                {stat.value}
-              </span>
-              <span className="text-[13px] leading-[1.6] text-gray-600">
-                {stat.note}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Selected work — kobba-style portfolio thumbnail row */}
-      <section className="py-16">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader
-            number="04"
-            label="Selected work"
-            title="A few recent builds."
-            containerClassName="px-0"
-          />
-          <button
-            type="button"
-            onClick={() => navigate('/portfolio')}
-            className="inline-flex w-fit items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--ink)] transition-colors hover:text-[var(--ember)] sm:self-auto"
-          >
-            View all work
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-          </button>
-        </div>
-        <div className="mt-2 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {PORTFOLIO_PROJECTS.slice(0, 3).map((project) => (
-            <button
-              key={project.slug}
-              type="button"
-              onClick={() => navigate('/portfolio')}
-              className="group flex flex-col gap-4 text-left"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-gray-500">
-                <span>{project.client}</span>
-                <span aria-hidden>·</span>
-                <span>{project.year}</span>
-              </div>
-              <h3 className="font-display text-[20px] leading-[1.2] tracking-editorial text-[var(--ink)] transition-colors group-hover:text-[var(--ember)]">
-                {project.title}
-              </h3>
-            </button>
-          ))}
-        </div>
-      </section>
-
       {/* Inquiry form */}
       <section className="py-16">
         <SectionHeader
-          number="05"
+          number="01"
           label="Get in touch"
           title="What are you working on?"
           containerClassName="px-0"
@@ -2254,12 +2152,6 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
         </div>
       </section>
 
-      <FinalCta
-        title="Ready to build something real?"
-        body="30-minute call. Maps the first system worth building."
-        ctaLabel="Book a call"
-        href={BOOKING_HREF}
-      />
     </>
   )
 }
@@ -3113,98 +3005,6 @@ function DiagnosticPage() {
   )
 }
 
-const PORTFOLIO_FILTERS = [
-  { value: 'all', label: 'All work' },
-  { value: 'web', label: 'Web design' },
-  { value: 'systems', label: 'Operational systems' },
-  { value: 'automation', label: 'Automation' },
-  { value: 'brand', label: 'Brand' },
-] as const
-
-type PortfolioCategory = (typeof PORTFOLIO_FILTERS)[number]['value']
-
-type PortfolioProject = {
-  slug: string
-  title: string
-  client: string
-  year: string
-  categories: PortfolioCategory[]
-  summary: string
-  image: string
-  outcome: string
-}
-
-const PORTFOLIO_PROJECTS: PortfolioProject[] = [
-  {
-    slug: 'mantle-studios-site',
-    title: 'Mantle Studios — studio site',
-    client: 'Mantle Studios',
-    year: '2026',
-    categories: ['web', 'brand'],
-    summary:
-      'Editorial marketing site for the studio itself — built to demonstrate the same engineering and design standards client work runs against.',
-    image: '/work/mantle-studios-site.png',
-    outcome: 'Live at mantle-studios.com. Studio’s primary inbound channel.',
-  },
-  {
-    slug: 'stephenmantle-com',
-    title: 'stephenmantle.com — founder proof site',
-    client: 'Stephen Mantle',
-    year: '2026',
-    categories: ['web', 'brand'],
-    summary:
-      'The site you are reading now. Editorial home for systems work, automation case notes, and direct contact with the operator behind Mantle Studios.',
-    image: '/work/stephenmantle-com.png',
-    outcome: 'Anchors trust for studio prospects researching who is behind the work.',
-  },
-  {
-    slug: 'ops-dashboard',
-    title: 'Ops Dashboard — studio operations view',
-    client: 'Studio internal',
-    year: '2025',
-    categories: ['systems'],
-    summary:
-      'Single-pane dashboard pulling studio billing, content pipeline status, and prospect routing into one daily review screen.',
-    image: '/work/ops-dashboard.svg',
-    outcome: 'Replaced four-tab spreadsheet review with one daily glance.',
-  },
-  {
-    slug: 'content-pipeline',
-    title: 'Content pipeline — weekly carousel automation',
-    client: 'Studio internal',
-    year: '2025',
-    categories: ['automation'],
-    summary:
-      'HTML → Playwright → PNG rendering pipeline that turns a single weekly content brief into a finished social carousel.',
-    image: '/work/content-pipeline.png',
-    outcome: 'Weekly carousels ship in roughly eight minutes vs ninety minutes manual layout.',
-  },
-  {
-    slug: 'newsletter-system',
-    title: 'Studio newsletter system',
-    client: 'Studio internal',
-    year: '2025',
-    categories: ['automation', 'brand'],
-    summary:
-      'Canva-driven, brief-first publishing flow. Page one runs an editorial note, page two carries the in-progress work, and the issue ships every Sunday.',
-    image: '/work/newsletter-system.png',
-    outcome: 'Newsletter ships weekly on autopilot from one Monday brief document.',
-  },
-  {
-    slug: 'strategic-intel-engine',
-    title: 'Strategic intel engine',
-    client: 'Studio internal',
-    year: '2026',
-    categories: ['systems', 'automation'],
-    summary:
-      'Daily competitive-signal scraper that summarises landing-page and positioning changes across the service-business benchmarks Mantle Studios tracks.',
-    image: '/work/strategic-intel-engine.svg',
-    outcome: 'Surfaces positioning shifts across tracked competitors in under five minutes.',
-  },
-] as const
-
-const PORTFOLIO_PAGE_SIZE = 4
-
 const BLOG_FILTERS = [
   { value: 'all', label: 'All posts' },
   { value: 'web', label: 'Web design' },
@@ -3305,163 +3105,6 @@ function formatBlogDate(iso: string): string {
     month: 'short',
     year: 'numeric',
   }).format(date)
-}
-
-function PortfolioPage({ navigate }: { navigate: (to: RoutePath) => void }) {
-  const [filter, setFilter] = useState<PortfolioCategory>('all')
-  const [visible, setVisible] = useState(PORTFOLIO_PAGE_SIZE)
-
-  const filtered =
-    filter === 'all'
-      ? PORTFOLIO_PROJECTS
-      : PORTFOLIO_PROJECTS.filter((project) => project.categories.includes(filter))
-
-  const shown = filtered.slice(0, visible)
-  const hasMore = filtered.length > shown.length
-
-  return (
-    <>
-      <PageHero
-        eyebrow="Selected work"
-        title="A small body of work for service businesses that needed clearer systems."
-        body="Every project listed below is a real build — site, system, or automation — shipped for a paying client or for the studio itself."
-      />
-
-      <section className="border-b border-gray-100 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-xl">
-            <span className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--teal)]">
-              <span className="mr-2 inline-block h-px w-6 bg-[var(--teal)]" />
-              Filter
-            </span>
-            <h2 className="mt-4 font-display text-2xl tracking-editorial text-[var(--ink)] md:text-3xl">
-              Browse by what the project was built to solve.
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {PORTFOLIO_FILTERS.map((option) => {
-              const active = option.value === filter
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    setFilter(option.value)
-                    setVisible(PORTFOLIO_PAGE_SIZE)
-                  }}
-                  className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] transition ${
-                    active
-                      ? 'border-[var(--ink)] bg-[var(--ink)] text-white'
-                      : 'border-gray-200 bg-white text-gray-600 hover:border-[var(--ink)] hover:text-[var(--ink)]'
-                  }`}
-                >
-                  {option.label}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          {shown.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-gray-200 px-6 py-24 text-center">
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-gray-500">
-                Nothing here yet
-              </p>
-              <p className="mt-3 font-display text-2xl tracking-editorial text-[var(--ink)]">
-                No projects under this filter right now.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-              {shown.map((project, index) => (
-                <PortfolioCard key={project.slug} project={project} index={index} />
-              ))}
-            </div>
-          )}
-
-          {hasMore ? (
-            <div className="mt-14 flex justify-center">
-              <button
-                type="button"
-                onClick={() => setVisible((prev) => prev + PORTFOLIO_PAGE_SIZE)}
-                className="inline-flex items-center gap-3 rounded-full border border-[var(--ink)] px-6 py-3 text-sm font-medium uppercase tracking-[0.18em] text-[var(--ink)] transition hover:bg-[var(--ink)] hover:text-white"
-              >
-                Load more work
-                <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
-              </button>
-            </div>
-          ) : null}
-        </div>
-      </section>
-
-      <FinalCta
-        title="Shape of your project here? Reason to talk."
-        body="Send the friction. Reply inside 24 hours. Yes, no, or sharper question."
-        ctaLabel="Start a project"
-        href={CONTACT_HREF}
-      />
-    </>
-  )
-}
-
-function PortfolioCard({
-  project,
-  index,
-}: {
-  project: PortfolioProject
-  index: number
-}) {
-  return (
-    <article className="group flex flex-col">
-      <div className="relative overflow-hidden rounded-3xl bg-gray-100">
-        <div className="aspect-[4/3] w-full">
-          <img
-            src={project.image}
-            alt={project.title}
-            loading={index < 2 ? 'eager' : 'lazy'}
-            className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-          />
-        </div>
-        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          {project.categories.map((cat) => {
-            const meta = PORTFOLIO_FILTERS.find((opt) => opt.value === cat)
-            if (!meta) {
-              return null
-            }
-            return (
-              <span
-                key={cat}
-                className="rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)] backdrop-blur"
-              >
-                {meta.label}
-              </span>
-            )
-          })}
-        </div>
-      </div>
-      <div className="mt-6 flex flex-col gap-3">
-        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
-          <span>{project.client}</span>
-          <span aria-hidden className="h-px w-6 bg-gray-300" />
-          <span>{project.year}</span>
-        </div>
-        <h3 className="font-display text-2xl tracking-editorial text-[var(--ink)] md:text-3xl">
-          {project.title}
-        </h3>
-        <p className="text-base leading-relaxed text-gray-600">{project.summary}</p>
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ember)]">
-          Outcome — <span className="text-gray-700 normal-case tracking-normal">{project.outcome}</span>
-        </p>
-        <span className="mt-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink)]">
-          <span className="inline-block h-px w-6 bg-[var(--ember)]" />
-          Read the case
-        </span>
-      </div>
-    </article>
-  )
 }
 
 type BlogSortKey = 'date_desc' | 'date_asc' | 'title_asc'
