@@ -12,8 +12,8 @@ import {
 } from 'lucide-react'
 import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react'
 
-const CONTACT_HREF = 'mailto:mantsai@zohomail.eu'
-const BOOKING_HREF = 'https://mantaai.zohobookings.eu/#/254973000000048054'
+const CONTACT_HREF = 'mailto:hello@stephenmantle.com'
+const BOOKING_HREF = 'https://www.cal.eu/stephen-mantle/meeting?user=stephen-mantle&overlayCalendar=true'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
 const HOME_ABOUT_IMAGE =
   'https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&w=1600&q=80'
@@ -71,6 +71,11 @@ const ROUTE_META: Record<
     title: 'Journal — Stephen Mantle',
     description:
       'Notes on building practical software, web design, and automation systems for service businesses.',
+  },
+  '/routing': {
+    title: 'Routing twenty MCP servers as a one-person studio — Stephen Mantle',
+    description:
+      'How a one-person studio runs twenty-plus connected services without each new tool slowing the rest of the stack down.',
   },
 }
 
@@ -435,7 +440,7 @@ const APPROACH_STEPS = [
     bullets: [
       'Scope document with exact deliverables, timeline, and dependencies.',
       'No hourly billing. No surprise change orders mid-build.',
-      'Output: a signed scope you can hold me to.',
+      'Output: a signed scope. Held to in writing.',
     ],
   },
   {
@@ -461,7 +466,7 @@ const APPROACH_STEPS = [
 ] as const
 
 const SERVICES_STATS = [
-  { label: 'Years building', value: '8+', note: 'Web, systems, and automation work shipped since 2017.' },
+  { label: 'Years building', value: '9+', note: 'Web, systems, and automation work shipped since 2017.' },
   { label: 'Live systems', value: '6+', note: 'Studio sites, internal tools, and automations currently in production.' },
   { label: 'On-time launches', value: '100%', note: 'Every engagement landed on the agreed launch window.' },
   { label: 'Avg response', value: '<24h', note: 'First reply on every new enquiry inside one working day.' },
@@ -488,7 +493,7 @@ const INQUIRY_BUDGETS = [
   { value: 'open', label: 'Open budget' },
 ] as const
 
-type RoutePath = '/' | '/about' | '/services' | '/diagnostic' | '/portfolio' | '/blog'
+type RoutePath = '/' | '/about' | '/services' | '/diagnostic' | '/portfolio' | '/blog' | '/routing'
 
 type QuizAnswers = {
   persona: string
@@ -772,7 +777,7 @@ function buildDiagnosticEmailHref(answers: QuizAnswers, scores: QuizScores, rec:
 
   const subject = encodeURIComponent(`AI Readiness Check — ${rec.archetype.title}`)
   const body = encodeURIComponent(lines.join('\n'))
-  return `mailto:mantsai@zohomail.eu?subject=${subject}&body=${body}`
+  return `mailto:hello@stephenmantle.com?subject=${subject}&body=${body}`
 }
 
 function formatChoiceLabel(value: string) {
@@ -818,7 +823,7 @@ function buildVisitorEmailBody(
     buildBookingHref(answers),
     '',
     'Stephen Mantle',
-    'mantsai@zohomail.eu',
+    'hello@stephenmantle.com',
   ].join('\n')
 }
 
@@ -960,7 +965,7 @@ function CommonProblemsSection() {
                 transitionDelay: `${i * 80}ms`,
               }}
             >
-              <p className="text-[12px] font-semibold tracking-[0.12em] text-[#F26522]">
+              <p className="text-[12px] font-semibold tracking-[0.12em] text-[#2A7D6E]">
                 {problem.number}
               </p>
               <h3 className="mt-3 text-[15px] font-semibold leading-[1.3] text-gray-900 sm:text-[16px]">
@@ -998,7 +1003,8 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/services' ||
     cleanPath === '/diagnostic' ||
     cleanPath === '/portfolio' ||
-    cleanPath === '/blog'
+    cleanPath === '/blog' ||
+    cleanPath === '/routing'
   ) {
     return cleanPath
   }
@@ -1142,6 +1148,7 @@ function App() {
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
           {path === '/portfolio' ? <PortfolioPage navigate={navigate} /> : null}
           {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
+          {path === '/routing' ? <RoutingPostPage navigate={navigate} /> : null}
         </InnerPageShell>
       )}
     </main>
@@ -1197,25 +1204,26 @@ function HomePage({
               clearer workflows and less admin.
             </h1>
 
-            <p className="mt-6 max-w-[44rem] text-[15px] leading-[1.65] text-gray-700 sm:mt-8 sm:text-[17px]">
-              Every system I sell is already running live on my own business first. Fixed price. Fixed scope. Written down before you sign.
-            </p>
-
             <div className="mt-8 flex flex-col items-start gap-4 sm:mt-12 sm:flex-row sm:items-center sm:gap-5">
               <RollingButton
                 label="Start a project"
                 href={BOOKING_HREF}
-                className="bg-[#F26522] py-2 pl-5 pr-2 text-[13px] leading-[13px] text-white hover:bg-[#e05a1a] sm:pl-6 sm:text-[14px] sm:leading-[14px]"
-                arrowCircleClassName="h-7 w-7 bg-white text-[#F26522] sm:h-8 sm:w-8"
+                className="bg-[#2A7D6E] py-2 pl-5 pr-2 text-[13px] leading-[13px] text-white hover:bg-[#1f5e54] sm:pl-6 sm:text-[14px] sm:leading-[14px]"
+                arrowCircleClassName="h-7 w-7 bg-white text-[#2A7D6E] sm:h-8 sm:w-8"
                 arrowClassName="h-4 w-4"
               />
 
               <div className="inline-flex w-fit items-center gap-3 rounded-[4px] bg-white px-3 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-shadow duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] sm:px-4">
-                <img
-                  src="/sm-logo.png"
-                  alt="Stephen Mantle logo"
-                  className="h-5 w-5 rounded-sm object-cover sm:h-6 sm:w-6"
-                />
+                <svg
+                  viewBox="0 0 240 250"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
+                  aria-label="Stephen Mantle"
+                  role="img"
+                >
+                  <text x="120" y="104" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#2A7D6E">S</text>
+                  <line x1="75" y1="132" x2="165" y2="132" stroke="#2A7D6E" strokeWidth="6" />
+                  <text x="120" y="222" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#2A7D6E">M</text>
+                </svg>
                 <span className="text-[13px] font-medium leading-[13px] text-gray-900 sm:text-[14px] sm:leading-[14px]">
                   Systems First
                 </span>
@@ -1238,6 +1246,31 @@ function HomePage({
             title="How a build actually goes."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
+
+          <figure className="mb-12 mt-8 px-5 sm:mb-16 sm:px-8 lg:mb-20 lg:px-12">
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/hero/notebook-systems-2026-06-09@1x.webp 656w, /hero/notebook-systems-2026-06-09.webp 1312w"
+                sizes="(min-width: 1440px) 1392px, 100vw"
+              />
+              <img
+                src="/hero/notebook-systems-2026-06-09.png"
+                srcSet="/hero/notebook-systems-2026-06-09@1x.png 656w, /hero/notebook-systems-2026-06-09.png 1312w"
+                sizes="(min-width: 1440px) 1392px, 100vw"
+                alt="Hand-drawn system diagram in a notebook beside a teal pen, sketched before any code is written"
+                width={1312}
+                height={684}
+                loading="lazy"
+                decoding="async"
+                className="block w-full"
+              />
+              <figcaption className="mt-3 text-[12px] uppercase tracking-[0.22em] text-gray-500">
+                Sketch first. Build second.
+              </figcaption>
+            </picture>
+          </figure>
+
           <div className="grid grid-cols-1 gap-5 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
             {APPROACH_STEPS.map((step) => (
               <div
@@ -1245,7 +1278,7 @@ function HomePage({
                 className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
               >
                 <div className="flex items-baseline gap-3">
-                  <span className="text-[13px] font-medium tabular-nums text-[#F26522]">
+                  <span className="text-[13px] font-medium tabular-nums text-[#2A7D6E]">
                     {step.number}
                   </span>
                   <span className="text-[13px] uppercase tracking-wide text-gray-500">
@@ -1302,10 +1335,10 @@ function HomePage({
 
             <article className="rounded-2xl bg-white p-5 shadow-[0_12px_40px_rgba(0,0,0,0.05)] sm:p-6">
               <div className="relative overflow-hidden rounded-2xl bg-[#e9e3d8] p-5 sm:p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(242,101,34,0.22),_transparent_34%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(241,236,228,0.94))]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(42,125,110,0.22),_transparent_34%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(241,236,228,0.94))]" />
                 <div className="relative rounded-[22px] bg-white/90 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:p-5">
                   <div className="mb-4 flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#F26522]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#2A7D6E]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
                     <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
                   </div>
@@ -1350,20 +1383,17 @@ function HomePage({
           <div className="flex flex-col gap-5 rounded-2xl border border-black/5 bg-[#1E1E1E] px-6 py-8 text-white sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
             <div className="max-w-[44rem]">
               <p className="text-[12px] uppercase tracking-[0.22em] text-white/60">
-                Proven on my own business
+                Proven in production
               </p>
               <p className="mt-3 text-[18px] font-medium leading-[1.25] tracking-[-0.02em] sm:text-[22px]">
-                Every system you'd buy is already running live at Mantle Studios.
-              </p>
-              <p className="mt-3 text-[14px] leading-relaxed text-white/70 sm:text-[15px]">
-                No concepts, no decks. See the inbox triage, the briefs, the dashboards in production before you commit.
+                Inbox triage. Morning briefs. Dashboards.
               </p>
             </div>
             <RollingButton
               label="See it live"
               href="https://mantle-studios.com"
               className="w-fit bg-white py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-gray-900"
-              arrowCircleClassName="h-7 w-7 bg-[#F26522] text-white"
+              arrowCircleClassName="h-7 w-7 bg-[#2A7D6E] text-white"
               arrowClassName="h-4 w-4"
             />
           </div>
@@ -1381,7 +1411,7 @@ function HomePage({
                 Take the 2-minute diagnostic.
               </p>
               <p className="mt-3 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
-                Five questions. You'll see which of the three solution paths fits, with a fixed-price range, before any call.
+                Eight questions. You'll see which of the three solution paths fits, with a fixed-price range, before any call.
               </p>
             </div>
             <RollingButton
@@ -1396,8 +1426,8 @@ function HomePage({
       </section>
 
       <FinalCta
-        title="Describe the friction. I'll quote a fixed price against a written scope."
-        body="No hourly billing. No retainers. If the scope changes, the price changes — on paper, before any work moves."
+        title="Describe the friction."
+        body="Fixed price. Written scope. No hourly. No retainers."
         ctaLabel="Book a free intro call"
         href={BOOKING_HREF}
       />
@@ -1412,8 +1442,8 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="I look at businesses the same way I look at broken systems."
-        body="When teams are chasing updates, duplicating work, or managing key steps in inboxes and spreadsheets, the problem is rarely just the tool. It is usually ownership, workflow, visibility, and decision-making."
+        title="Operational problems look like tooling problems."
+        body="They aren't. Cause is usually ownership, workflow, visibility, decisions."
       />
 
       <section className="overflow-hidden bg-white pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-24 lg:pt-28">
@@ -1421,25 +1451,24 @@ function AboutPage() {
           <SectionHeader
             number="1"
             label="Positioning"
-            title="Operational thinking, AI implementation, and websites built around how a business actually works."
+            title="Operational thinking. AI implementation. Websites built around how a business actually works."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
           <div className="grid gap-5 px-5 sm:px-8 lg:grid-cols-[0.75fr_1fr] lg:px-12">
             <div className="rounded-2xl bg-[#F5F5F5] p-5 sm:p-6">
               <p className="text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
-                I come from years across luxury brands and tech operations. That means I
-                do not start with tools. I start with the point where a business is
-                leaking time, duplicating work, or delaying decisions, then build the
-                cleaner system around it.
+                Years across luxury brands and tech operations. Start at the friction —
+                where time leaks, work duplicates, decisions stall. Build the cleaner
+                system around it. Tools come last.
               </p>
 
               <div className="mt-7">
                 <RollingButton
                   label="Book a call"
                   href={BOOKING_HREF}
-                  className="bg-[#F26522] py-2 pl-5 pr-2 text-[13px] leading-[13px] text-white hover:bg-[#e05a1a] sm:text-[14px] sm:leading-[14px]"
-                  arrowCircleClassName="h-7 w-7 bg-white text-[#F26522]"
+                  className="bg-[#2A7D6E] py-2 pl-5 pr-2 text-[13px] leading-[13px] text-white hover:bg-[#1f5e54] sm:text-[14px] sm:leading-[14px]"
+                  arrowCircleClassName="h-7 w-7 bg-white text-[#2A7D6E]"
                   arrowClassName="h-4 w-4"
                 />
               </div>
@@ -1500,8 +1529,8 @@ function AboutPage() {
       </section>
 
       <FinalCta
-        title="If your business feels busier than it should, the system is usually the issue."
-        body="I can help identify where the friction is, what should be fixed first, and what should only be automated after the workflow is clear."
+        title="Busier than it should be? The system is the issue."
+        body="Fix the workflow first. Automate after."
         ctaLabel="Book a free intro call"
         href={BOOKING_HREF}
       />
@@ -1511,7 +1540,7 @@ function AboutPage() {
 
 function ServiceStatusBadge({ status, label }: { status: ServiceStatus; label: string }) {
   const styles: Record<ServiceStatus, string> = {
-    live: 'bg-[#F26522] text-white',
+    live: 'bg-[#2A7D6E] text-white',
     template: 'bg-gray-200 text-gray-700',
     building: 'bg-[#111827] text-white/80',
   }
@@ -1536,7 +1565,7 @@ function ServiceCardMockup({ id }: { id: string }) {
           <div className="w-28 h-3 rounded bg-white/20" />
           <div className="w-40 h-5 rounded bg-white/30" />
           <div className="w-32 h-2 rounded bg-white/15" />
-          <div className="mt-1 w-20 h-6 rounded-full bg-[#F26522]" />
+          <div className="mt-1 w-20 h-6 rounded-full bg-[#2A7D6E]" />
         </div>
       </div>
     )
@@ -1545,7 +1574,7 @@ function ServiceCardMockup({ id }: { id: string }) {
     return (
       <div className="h-36 rounded-xl overflow-hidden bg-[#F5F5F5] p-3 flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-[#F26522] flex items-center justify-center text-white text-[10px] font-bold">S</div>
+          <div className="w-7 h-7 rounded-full bg-[#2A7D6E] flex items-center justify-center text-white text-[10px] font-bold">S</div>
           <div className="flex-1">
             <div className="w-24 h-2.5 rounded bg-gray-300" />
             <div className="w-16 h-2 rounded bg-gray-200 mt-1" />
@@ -1557,7 +1586,7 @@ function ServiceCardMockup({ id }: { id: string }) {
           <div className="w-4/5 h-2 rounded bg-gray-100" />
           <div className="w-3/5 h-2 rounded bg-gray-100" />
           <div className="flex gap-1 mt-1">
-            <div className="w-12 h-4 rounded-full bg-[#F26522]/20" />
+            <div className="w-12 h-4 rounded-full bg-[#2A7D6E]/20" />
             <div className="w-10 h-4 rounded-full bg-gray-200" />
           </div>
         </div>
@@ -1589,11 +1618,11 @@ function ServiceCardMockup({ id }: { id: string }) {
           <div className="w-full h-2 rounded bg-gray-100" />
           <div className="w-4/5 h-2 rounded bg-gray-100" />
           <div className="border-t border-gray-100 pt-1.5 mt-1 flex gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#F26522]" />
+            <div className="w-2 h-2 rounded-full bg-[#2A7D6E]" />
             <div className="w-24 h-2 rounded bg-gray-100" />
           </div>
           <div className="flex gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#F26522]" />
+            <div className="w-2 h-2 rounded-full bg-[#2A7D6E]" />
             <div className="w-20 h-2 rounded bg-gray-100" />
           </div>
         </div>
@@ -1608,7 +1637,7 @@ function ServiceCardMockup({ id }: { id: string }) {
           {['Mon', 'Tue', 'Wed', 'Thu'].map((d) => (
             <div key={d} className="flex flex-col gap-1">
               <div className="text-[8px] text-gray-400 text-center">{d}</div>
-              <div className={`rounded p-1 flex-1 ${d === 'Mon' ? 'bg-[#F26522]/20' : d === 'Wed' ? 'bg-green-100' : 'bg-white border border-gray-200'}`}>
+              <div className={`rounded p-1 flex-1 ${d === 'Mon' ? 'bg-[#2A7D6E]/20' : d === 'Wed' ? 'bg-green-100' : 'bg-white border border-gray-200'}`}>
                 <div className="w-full h-1.5 rounded bg-gray-300/60 mb-1" />
                 <div className="w-3/4 h-1.5 rounded bg-gray-300/40" />
               </div>
@@ -1627,11 +1656,11 @@ function ServiceCardMockup({ id }: { id: string }) {
         </div>
         <div className="flex-1 p-2 grid grid-cols-4 gap-1">
           {['9am', '10am', '11am', '2pm', '3pm', '4pm', '9am', '10am'].map((t, i) => (
-            <div key={i} className={`rounded text-[7px] text-center py-1 ${i === 2 ? 'bg-[#F26522] text-white font-semibold' : 'bg-gray-100 text-gray-500'}`}>{t}</div>
+            <div key={i} className={`rounded text-[7px] text-center py-1 ${i === 2 ? 'bg-[#2A7D6E] text-white font-semibold' : 'bg-gray-100 text-gray-500'}`}>{t}</div>
           ))}
         </div>
         <div className="px-3 pb-2">
-          <div className="w-full h-5 rounded-full bg-[#F26522]" />
+          <div className="w-full h-5 rounded-full bg-[#2A7D6E]" />
         </div>
       </div>
     )
@@ -1640,7 +1669,7 @@ function ServiceCardMockup({ id }: { id: string }) {
     return (
       <div className="h-36 rounded-xl overflow-hidden bg-[#111827] p-3 flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-[#F26522] flex items-center justify-center text-white text-[9px] font-bold">Z</div>
+          <div className="w-6 h-6 rounded bg-[#2A7D6E] flex items-center justify-center text-white text-[9px] font-bold">Z</div>
           <div className="w-3 h-px bg-white/30 flex-1" />
           <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center text-white/60 text-[9px] font-bold">M</div>
           <div className="w-3 h-px bg-white/30 flex-1" />
@@ -1663,7 +1692,7 @@ function ServiceCardMockup({ id }: { id: string }) {
       <div className="relative w-20 h-20">
         <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90">
           <circle cx="40" cy="40" r="30" fill="none" stroke="#E5E7EB" strokeWidth="8" />
-          <circle cx="40" cy="40" r="30" fill="none" stroke="#F26522" strokeWidth="8" strokeLinecap="round"
+          <circle cx="40" cy="40" r="30" fill="none" stroke="#2A7D6E" strokeWidth="8" strokeLinecap="round"
             strokeDasharray={`${Math.round(0.72 * 188.5)} ${188.5}`} />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -1695,9 +1724,9 @@ function ServiceCard({
       <div className="px-5 pb-5">
         <button
           onClick={() => onSeeProof(service.id)}
-          className="text-sm font-medium text-[#F26522] hover:underline flex items-center gap-1 group"
+          className="text-sm font-medium text-[#2A7D6E] hover:underline flex items-center gap-1 group"
         >
-          See how I use this at Mantle Studios
+          See it live at Mantle Studios
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
         </button>
       </div>
@@ -1738,14 +1767,14 @@ function ServiceProofBlock({
         {service.id === 'diagnostic' && navigate ? (
           <button
             onClick={() => navigate('/diagnostic')}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#F26522] hover:underline group"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2A7D6E] hover:underline group"
           >
             Try the live diagnostic
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
         ) : (
           <span className="text-sm font-medium text-[#111827]">
-            I can build this for your business →
+            Build this →
           </span>
         )}
       </div>
@@ -1813,7 +1842,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
       setSubmitStatus('success')
     } catch {
       setSubmitStatus('error')
-      setSubmitError('Something went wrong. Drop me an email at mantsai@zohomail.eu')
+      setSubmitError('Something went wrong. Email hello@stephenmantle.com')
     }
   }
 
@@ -1821,8 +1850,8 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
     <>
       <PageHero
         eyebrow="Services"
-        title="What I actually build."
-        body="Every service listed here is live at Mantle Studios. These are not concepts — each one has a proof of concept you can see."
+        title="What gets built."
+        body="Every service. Running live at Mantle Studios."
       />
 
       {/* Services card grid */}
@@ -1853,7 +1882,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
               className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-colors hover:border-gray-400"
             >
               <div className="flex items-baseline gap-3">
-                <span className="text-[13px] font-medium tabular-nums text-[#F26522]">
+                <span className="text-[13px] font-medium tabular-nums text-[#2A7D6E]">
                   {step.number}
                 </span>
                 <span className="text-[13px] uppercase tracking-wide text-gray-500">
@@ -1976,14 +2005,14 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
         <SectionHeader
           number="05"
           label="Get in touch"
-          title="Tell me what you're working on."
+          title="What are you working on?"
           containerClassName="px-0"
         />
         <div className="mt-10 max-w-2xl">
           {submitStatus === 'success' ? (
             <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
               <div className="text-2xl font-semibold text-[#111827] mb-2">Enquiry sent.</div>
-              <p className="text-gray-600">I'll come back to you within one working day.</p>
+              <p className="text-gray-600">Reply inside one working day.</p>
             </div>
           ) : (
             <>
@@ -1992,7 +2021,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                 {Array.from({ length: INQUIRY_STEPS }).map((_, i) => (
                   <div
                     key={i}
-                    className={`h-1 flex-1 rounded-full transition-all duration-300 ${i < inquiryStep ? 'bg-[#F26522]' : i === inquiryStep ? 'bg-[#F26522]/60' : 'bg-gray-200'}`}
+                    className={`h-1 flex-1 rounded-full transition-all duration-300 ${i < inquiryStep ? 'bg-[#2A7D6E]' : i === inquiryStep ? 'bg-[#2A7D6E]/60' : 'bg-gray-200'}`}
                   />
                 ))}
                 <span className="text-xs text-gray-400 tabular-nums whitespace-nowrap">{inquiryStep} / {INQUIRY_STEPS}</span>
@@ -2031,7 +2060,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                         onClick={() => setInquiry((prev) => ({ ...prev, projectType: pt.value }))}
                         className={`text-left rounded-xl border p-4 transition-all duration-150 ${
                           inquiry.projectType === pt.value
-                            ? 'border-[#F26522] bg-[#F26522]/5'
+                            ? 'border-[#2A7D6E] bg-[#2A7D6E]/5'
                             : 'border-gray-200 bg-white hover:border-gray-400'
                         }`}
                       >
@@ -2097,7 +2126,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                         value={inquiry.name}
                         onChange={(e) => setInquiry((prev) => ({ ...prev, name: e.target.value }))}
                         placeholder="Your name"
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#2A7D6E] transition-colors"
                       />
                     </div>
                     <div className="flex flex-col gap-1.5">
@@ -2107,7 +2136,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                         value={inquiry.email}
                         onChange={(e) => setInquiry((prev) => ({ ...prev, email: e.target.value }))}
                         placeholder="your@email.com"
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#2A7D6E] transition-colors"
                       />
                     </div>
                     <div className="flex flex-col gap-1.5">
@@ -2117,7 +2146,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                         onChange={(e) => setInquiry((prev) => ({ ...prev, note: e.target.value }))}
                         placeholder="Context, constraints, questions..."
                         rows={3}
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#F26522] transition-colors resize-none"
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-[#2A7D6E] transition-colors resize-none"
                       />
                     </div>
                   </div>
@@ -2146,7 +2175,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                   <button
                     onClick={canAdvance && submitStatus !== 'submitting' ? submitInquiry : undefined}
                     disabled={!canAdvance || submitStatus === 'submitting'}
-                    className="rounded-full px-6 py-3 text-sm font-semibold bg-[#F26522] text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#d4571d] transition-colors"
+                    className="rounded-full px-6 py-3 text-sm font-semibold bg-[#2A7D6E] text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#1f5e54] transition-colors"
                   >
                     {submitStatus === 'submitting' ? 'Sending…' : 'Send enquiry'}
                   </button>
@@ -2160,7 +2189,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 
       <FinalCta
         title="Ready to build something real?"
-        body="Book a 30-minute call and we'll map the first system worth building."
+        body="30-minute call. Maps the first system worth building."
         ctaLabel="Book a call"
         href={BOOKING_HREF}
       />
@@ -2295,7 +2324,7 @@ function DiagnosticPage() {
         visitorEmailTo: answers.gateEmail.trim(),
         visitorEmailSubject: visitorSubject,
         visitorEmailBody: visitorBody,
-        internalEmailTo: 'mantsai@zohomail.eu',
+        internalEmailTo: 'hello@stephenmantle.com',
         internalEmailSubject: internalSubject,
         internalEmailBody: internalBody,
         rawPayload: JSON.stringify({
@@ -2366,7 +2395,7 @@ function DiagnosticPage() {
           <SectionHeader
             number="1"
             label="How this works"
-            title="This is the main CTA because diagnosis should come before a pitch."
+            title="Diagnosis before pitch."
             containerClassName="px-5 sm:px-8 lg:px-12"
           />
 
@@ -2405,12 +2434,11 @@ function DiagnosticPage() {
           </div>
 
           <div className="px-5 pt-8 sm:px-8 lg:px-12">
-            <div className="rounded-2xl border border-[#F26522]/15 bg-[#F5F5F5] p-5 shadow-[0_12px_40px_rgba(0,0,0,0.04)] sm:p-6">
+            <div className="rounded-2xl border border-[#2A7D6E]/15 bg-[#F5F5F5] p-5 shadow-[0_12px_40px_rgba(0,0,0,0.04)] sm:p-6">
               <p className="text-[14px] leading-relaxed text-gray-700 sm:text-[15px]">
-                <span className="font-semibold text-gray-900">This page is the demo.</span>{' '}
-                The same logic can sit behind a client enquiry flow, operations audit, or
-                internal diagnostic. The point is to identify the real bottleneck before
-                anyone starts talking about tooling.
+                <span className="font-semibold text-gray-900">Live demo.</span>{' '}
+                Same logic powers client enquiry flows, ops audits, internal diagnostics.
+                Identify the bottleneck before anyone talks tooling.
               </p>
             </div>
           </div>
@@ -2497,7 +2525,7 @@ function DiagnosticPage() {
 
                 <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 sm:w-[160px]">
                   <div
-                    className="h-full rounded-full bg-[#F26522] transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    className="h-full rounded-full bg-[#2A7D6E] transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -2505,7 +2533,7 @@ function DiagnosticPage() {
 
               {!showResults ? (
                 <div className="overflow-hidden rounded-2xl border border-black/5 bg-[#F9F9F9]">
-                  <div className="border-b border-black/5 bg-[radial-gradient(circle_at_top_left,_rgba(242,101,34,0.12),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.98),_rgba(245,245,245,0.96))] px-5 py-6 sm:px-7 sm:py-7">
+                  <div className="border-b border-black/5 bg-[radial-gradient(circle_at_top_left,_rgba(42,125,110,0.12),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.98),_rgba(245,245,245,0.96))] px-5 py-6 sm:px-7 sm:py-7">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
                       {question.kicker}
                     </p>
@@ -2567,7 +2595,7 @@ function DiagnosticPage() {
                               frequency: Number(event.target.value),
                             }))
                           }
-                          className="w-full accent-[#F26522]"
+                          className="w-full accent-[#2A7D6E]"
                         />
                         <div className="mt-4 grid grid-cols-4 gap-2 text-[12px] text-gray-500">
                           <span>Rarely</span>
@@ -2683,7 +2711,7 @@ function DiagnosticPage() {
                             <div
                               className="flex h-28 w-28 items-center justify-center rounded-full"
                               style={{
-                                background: `radial-gradient(circle at center, #fff 48%, transparent 49%), conic-gradient(#F26522 0 ${scoreFill}deg, rgba(0,0,0,0.08) ${scoreFill}deg 360deg)`,
+                                background: `radial-gradient(circle at center, #fff 48%, transparent 49%), conic-gradient(#2A7D6E 0 ${scoreFill}deg, rgba(0,0,0,0.08) ${scoreFill}deg 360deg)`,
                               }}
                             >
                               <div className="text-center">
@@ -2758,7 +2786,7 @@ function DiagnosticPage() {
                         </div>
 
                         {leadSubmitError ? (
-                          <div className="rounded-2xl border border-[#F26522]/25 bg-[#fff4ee] p-4 text-[14px] leading-relaxed text-gray-700">
+                          <div className="rounded-2xl border border-[#2A7D6E]/25 bg-[#eef5f3] p-4 text-[14px] leading-relaxed text-gray-700">
                             {leadSubmitError}
                           </div>
                         ) : null}
@@ -2779,7 +2807,7 @@ function DiagnosticPage() {
                         type="button"
                         onClick={goNext}
                         disabled={!canContinue || isSubmittingLead}
-                        className="rounded-full bg-[#F26522] px-5 py-2 text-[14px] font-medium text-white transition-colors duration-300 hover:bg-[#e05a1a] disabled:cursor-not-allowed disabled:opacity-40"
+                        className="rounded-full bg-[#2A7D6E] px-5 py-2 text-[14px] font-medium text-white transition-colors duration-300 hover:bg-[#1f5e54] disabled:cursor-not-allowed disabled:opacity-40"
                       >
                         {isSubmittingLead
                           ? 'Submitting...'
@@ -2792,7 +2820,7 @@ function DiagnosticPage() {
                 </div>
               ) : (
                 <div className="overflow-hidden rounded-2xl border border-black/5 bg-[#F9F9F9]">
-                  <div className="bg-[radial-gradient(circle_at_top_left,_rgba(242,101,34,0.16),_transparent_26%),linear-gradient(145deg,_#111827,_#1f2937)] px-5 py-6 text-white sm:px-7 sm:py-7">
+                  <div className="bg-[radial-gradient(circle_at_top_left,_rgba(42,125,110,0.16),_transparent_26%),linear-gradient(145deg,_#111827,_#1f2937)] px-5 py-6 text-white sm:px-7 sm:py-7">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
                       Personalised result
                     </p>
@@ -2809,7 +2837,7 @@ function DiagnosticPage() {
                       <div
                         className="mx-auto flex h-36 w-36 items-center justify-center rounded-full"
                         style={{
-                          background: `radial-gradient(circle at center, #fff 48%, transparent 49%), conic-gradient(#F26522 0 ${scoreFill}deg, rgba(0,0,0,0.08) ${scoreFill}deg 360deg)`,
+                          background: `radial-gradient(circle at center, #fff 48%, transparent 49%), conic-gradient(#2A7D6E 0 ${scoreFill}deg, rgba(0,0,0,0.08) ${scoreFill}deg 360deg)`,
                         }}
                       >
                         <div>
@@ -2876,7 +2904,7 @@ function DiagnosticPage() {
                         </div>
                       </div>
 
-                      <div className="rounded-2xl border border-[#F26522]/20 bg-[#F5F5F5] p-5 sm:p-6">
+                      <div className="rounded-2xl border border-[#2A7D6E]/20 bg-[#F5F5F5] p-5 sm:p-6">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
                           What this suggests operationally
                         </p>
@@ -2891,7 +2919,7 @@ function DiagnosticPage() {
                     <div
                       className={`rounded-2xl border p-5 sm:p-6 ${
                         leadSubmitSucceeded
-                          ? 'border-[#F26522]/20 bg-[#fff7f2]'
+                          ? 'border-[#2A7D6E]/20 bg-[#eef5f3]'
                           : 'border-gray-200 bg-white'
                       }`}
                     >
@@ -2922,7 +2950,7 @@ function DiagnosticPage() {
                           ['Next action clarified', 'You now know whether this is worth discussing further.'],
                         ].map(([title, body], index) => (
                           <div key={title} className="border-l border-white/10 pl-4 first:border-l-0 first:pl-0 md:first:border-l md:first:pl-4">
-                            <p className="text-[11px] font-semibold tracking-[0.16em] text-[#F26522]">
+                            <p className="text-[11px] font-semibold tracking-[0.16em] text-[#2A7D6E]">
                               0{index + 1}
                             </p>
                             <p className="mt-3 text-[15px] font-medium text-white">{title}</p>
@@ -2938,8 +2966,8 @@ function DiagnosticPage() {
                       <RollingButton
                         label="Book a call"
                         href={bookingHref}
-                        className="bg-[#F26522] py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-white hover:bg-[#e05a1a]"
-                        arrowCircleClassName="h-7 w-7 bg-white text-[#F26522]"
+                        className="bg-[#2A7D6E] py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-white hover:bg-[#1f5e54]"
+                        arrowCircleClassName="h-7 w-7 bg-white text-[#2A7D6E]"
                         arrowClassName="h-4 w-4"
                       />
                       <RollingButton
@@ -3177,14 +3205,14 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'mcp-routing-for-solo-operators',
+    slug: 'routing',
     title: 'Routing twenty MCP servers as a one-person studio',
     excerpt:
       'Notes from wiring Notion, Figma, Vercel, Supabase, and a dozen others into a single agent surface — without each new connector slowing the rest of the stack down.',
     category: 'automation',
     categoryLabel: 'Automation',
-    date: '2026-03-19',
-    readTime: '7 min read',
+    date: '2026-06-10',
+    readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
   },
   {
@@ -3303,8 +3331,8 @@ function PortfolioPage({ navigate }: { navigate: (to: RoutePath) => void }) {
       </section>
 
       <FinalCta
-        title="If a project here looks like the shape of yours, that's a good reason to talk."
-        body="Send a brief description of where the friction sits today. I will reply within two working days with whether it sounds like something I can help with."
+        title="Shape of your project here? Reason to talk."
+        body="Send the friction. Reply inside 24 hours. Yes, no, or sharper question."
         ctaLabel="Start a project"
         href={CONTACT_HREF}
       />
@@ -3448,7 +3476,7 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
             <ul className="flex flex-col gap-12">
               {sorted.map((post, index) => (
                 <li key={post.slug}>
-                  <BlogRow post={post} reversed={index % 2 === 1} />
+                  <BlogRow post={post} reversed={index % 2 === 1} navigate={navigate} />
                 </li>
               ))}
             </ul>
@@ -3466,12 +3494,45 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
   )
 }
 
-function BlogRow({ post, reversed }: { post: BlogPost; reversed: boolean }) {
+const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
+  routing: '/routing',
+}
+
+function BlogRow({
+  post,
+  reversed,
+  navigate,
+}: {
+  post: BlogPost
+  reversed: boolean
+  navigate: (to: RoutePath) => void
+}) {
+  const route = BLOG_POST_ROUTES[post.slug]
+  const isLive = Boolean(route)
+  const handleOpen = () => {
+    if (route) {
+      navigate(route)
+    }
+  }
+
   return (
     <article
+      onClick={isLive ? handleOpen : undefined}
+      onKeyDown={
+        isLive
+          ? (event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                handleOpen()
+              }
+            }
+          : undefined
+      }
+      role={isLive ? 'link' : undefined}
+      tabIndex={isLive ? 0 : undefined}
       className={`group grid grid-cols-1 gap-8 border-b border-gray-100 pb-12 md:grid-cols-12 md:gap-12 ${
         reversed ? 'md:[&>*:first-child]:order-2' : ''
-      }`}
+      } ${isLive ? 'cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal)]' : ''}`}
     >
       <div className="md:col-span-5">
         <div className="relative overflow-hidden rounded-2xl bg-gray-100">
@@ -3498,13 +3559,231 @@ function BlogRow({ post, reversed }: { post: BlogPost; reversed: boolean }) {
           {post.title}
         </h3>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-600">{post.excerpt}</p>
-        <span className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[var(--ink)]">
-          <span className="inline-block h-px w-6 bg-[var(--ember)]" />
-          Read the post
-          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} />
+        <span
+          className={`mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] ${
+            isLive ? 'text-[var(--ink)]' : 'text-gray-400'
+          }`}
+        >
+          <span className={`inline-block h-px w-6 ${isLive ? 'bg-[var(--ember)]' : 'bg-gray-300'}`} />
+          {isLive ? 'Read the post' : 'Coming soon'}
+          {isLive ? <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} /> : null}
         </span>
       </div>
     </article>
+  )
+}
+
+function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
+  const post = BLOG_POSTS.find((entry) => entry.slug === 'routing')
+
+  const sections: { heading: string; body: string[] }[] = [
+    {
+      heading: 'The setup',
+      body: [
+        'Twenty-three MCP servers wired into one operator surface. Notion, Figma, Vercel, Supabase, Linear, Gong, Granola, Slack, Stripe, Canva, Gmail, Calendar, Drive, Atlassian, HubSpot, Apify, Firecrawl, Pinecone, Context7, Zapier, plus a handful of in-house tools.',
+        'All connected by default. All loaded at the start of every conversation. The number kept climbing as new client work demanded new integrations.',
+      ],
+    },
+    {
+      heading: 'Where it broke',
+      body: [
+        'First sign was latency. Five seconds before any reply where it used to be one.',
+        'Second sign was context. A two-line task carried tool schemas for video editing, SQL migrations, and PDF parsing — none of which had anything to do with the work in front of the agent.',
+        'Third sign was cost. Tokens per session tripled inside a month with no extra output to justify the bill.',
+      ],
+    },
+    {
+      heading: 'Isolate, do not delete',
+      body: [
+        'The first instinct is to start cutting servers. That instinct is wrong. Every connector earns its place on a specific job. Removing Stripe protects the chat experience on a Monday and breaks invoice reconciliation on a Friday.',
+        'The bottleneck was never the number of tools. It was the assumption that every tool needed to be available at the start of every turn.',
+      ],
+    },
+    {
+      heading: 'The pattern that fixed it',
+      body: [
+        'Three moves changed the shape of the system.',
+        'One — defer schemas. Surface tool names only. Pull the full input schema on demand when a tool is genuinely needed for the next step.',
+        'Two — scope by plugin. Group related tools under a single namespace. Activate the namespace when the work shifts to that surface; keep the others dormant.',
+        'Three — track keys at the registry, not the prompt. API key prefixes live in a registry file. The keys themselves live in a single env file outside the repo. Nothing leaks into committed work. Rotation is a single edit.',
+      ],
+    },
+    {
+      heading: 'The result',
+      body: [
+        'Cold start dropped from five seconds to under one.',
+        'Token cost per conversation fell roughly seventy percent.',
+        'New servers connect without slowing anything already wired in. The stack grew from twenty to thirty connectors in a quarter without a single regression in response speed.',
+      ],
+    },
+    {
+      heading: 'Why it matters for a business',
+      body: [
+        'Most small operators hit the same wall around their tenth integration. Stripe plus HubSpot plus Calendar plus Slack plus Asana plus Drive, plus whatever the team adopts next. Load it all, hope for the best — that works at five tools and falls apart at fifteen.',
+        'The pattern transfers directly.',
+      ],
+    },
+  ]
+
+  const businessSteps: { label: string; body: string }[] = [
+    {
+      label: 'Inventory first',
+      body: 'List every tool actually used in the last thirty days. Cut anything below the threshold of real use.',
+    },
+    {
+      label: 'Group by surface',
+      body: 'Sales tools together. Operations tools together. Marketing tools together. Switch surfaces deliberately; do not blend them.',
+    },
+    {
+      label: 'Lazy-load configuration',
+      body: 'Connect the integration, but defer the heavy parts until a workflow asks for them. The wallet pays for active work, not idle capability.',
+    },
+    {
+      label: 'Centralise secrets',
+      body: 'One source of truth for every credential. One process to rotate. One file to audit. Documents reference key prefixes, never the keys themselves.',
+    },
+  ]
+
+  return (
+    <>
+      <section className="grain-overlay relative bg-[#EFEFEF] pb-14 pt-10 sm:pb-16 lg:pb-24 lg:pt-14">
+        <div className="mx-auto max-w-[1080px] px-5 sm:px-8 lg:px-12">
+          <button
+            type="button"
+            onClick={() => navigate('/blog')}
+            className="mb-8 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-600 transition hover:text-[var(--ink)]"
+          >
+            <span aria-hidden className="inline-block h-px w-6 bg-gray-400" />
+            Back to journal
+          </button>
+          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-700">
+            <span className="inline-block h-px w-8 bg-[var(--teal)]" />
+            <span>Studio note · Automation</span>
+          </div>
+          <h1 className="mt-6 max-w-[920px] font-display text-[clamp(2rem,5.4vw,3.6rem)] font-medium leading-[1.06] tracking-editorial text-gray-900">
+            Routing twenty MCP servers as a one-person studio.
+          </h1>
+          <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+            <span>{post ? formatBlogDate(post.date) : '10 Jun 2026'}</span>
+            <span aria-hidden className="h-px w-6 bg-gray-300" />
+            <span>{post?.readTime ?? '5 min read'}</span>
+            <span aria-hidden className="h-px w-6 bg-gray-300" />
+            <span>Stephen Mantle</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <figure className="mb-12 sm:mb-16">
+            <div className="overflow-hidden rounded-3xl bg-gray-100">
+              <img
+                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80"
+                alt="Cable patch panel — many connections, one routing surface"
+                className="block w-full"
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+              Many lines in. One routing surface.
+            </figcaption>
+          </figure>
+
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+            <aside className="md:col-span-4 md:pt-2">
+              <div className="sticky top-24 rounded-2xl border border-gray-200 bg-[#FAF8F5] p-6">
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                  In one line
+                </p>
+                <p className="mt-4 font-display text-xl leading-snug tracking-editorial text-[var(--ink)]">
+                  Tools stop being a tax when the system stops carrying everything it owns at once.
+                </p>
+                <dl className="mt-6 space-y-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                  <div className="flex justify-between gap-4">
+                    <dt>Cold start</dt>
+                    <dd className="text-[var(--ink)]">5s → &lt;1s</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt>Token cost</dt>
+                    <dd className="text-[var(--ink)]">−70%</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt>Connectors</dt>
+                    <dd className="text-[var(--ink)]">20 → 30</dd>
+                  </div>
+                </dl>
+              </div>
+            </aside>
+
+            <article className="md:col-span-8">
+              <div className="space-y-12">
+                {sections.map((section) => (
+                  <section key={section.heading}>
+                    <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
+                      {section.heading}
+                    </h2>
+                    <div className="mt-5 space-y-4 text-[15px] leading-[1.75] text-gray-700 sm:text-[16px]">
+                      {section.body.map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+
+                <section>
+                  <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
+                    Four moves for a small operator
+                  </h2>
+                  <ol className="mt-6 space-y-5">
+                    {businessSteps.map((step, index) => (
+                      <li
+                        key={step.label}
+                        className="grid grid-cols-[auto_1fr] gap-5 rounded-2xl border border-gray-200 bg-white p-5"
+                      >
+                        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <div>
+                          <p className="font-display text-lg tracking-editorial text-[var(--ink)]">
+                            {step.label}
+                          </p>
+                          <p className="mt-2 text-[14px] leading-[1.7] text-gray-600 sm:text-[15px]">
+                            {step.body}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+
+                <section>
+                  <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
+                    What changed in the studio
+                  </h2>
+                  <div className="mt-5 space-y-4 text-[15px] leading-[1.75] text-gray-700 sm:text-[16px]">
+                    <p>
+                      The studio runs more tools now than it did six months ago. The surface feels lighter. New
+                      integrations get added on a Tuesday afternoon and are in real use by Wednesday. Cost is
+                      predictable. Speed is consistent.
+                    </p>
+                    <p>
+                      Tooling stops being a tax when the system stops carrying everything it owns at once.
+                    </p>
+                  </div>
+                </section>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <FinalCta
+        title="Stack hitting the same wall?"
+        body="Send across the tools currently connected and which workflows feel slowest. The studio will reply with where the routing pattern would help first."
+        ctaLabel="Email the studio"
+        href={CONTACT_HREF}
+      />
+    </>
   )
 }
 
@@ -3594,8 +3873,12 @@ function SiteFooter({ navigate }: { navigate: (to: RoutePath) => void }) {
         <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-[1.4fr_1fr_1fr] md:gap-16">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[11px] font-bold tracking-tight text-[#1E1E1E]">
-                SM
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
+                <svg viewBox="0 0 240 250" className="h-7 w-7" aria-label="Stephen Mantle" role="img">
+                  <text x="120" y="104" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#1E1E1E">S</text>
+                  <line x1="75" y1="132" x2="165" y2="132" stroke="#2A7D6E" strokeWidth="6" />
+                  <text x="120" y="222" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#1E1E1E">M</text>
+                </svg>
               </div>
               <p className="font-serif text-[20px] leading-none tracking-[-0.01em]">Stephen Mantle</p>
             </div>
@@ -3713,10 +3996,12 @@ function SiteNav({
             navigate('/')
           }}
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-900 sm:h-10 sm:w-10">
-            <span className="text-[10px] font-bold leading-none tracking-tight text-white sm:text-[11px]">
-              SM
-            </span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2A7D6E] sm:h-10 sm:w-10">
+            <svg viewBox="0 0 240 250" className="h-6 w-6 sm:h-7 sm:w-7" aria-label="Stephen Mantle" role="img">
+              <text x="120" y="104" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#FAFAF8">S</text>
+              <line x1="75" y1="132" x2="165" y2="132" stroke="#FAFAF8" strokeWidth="6" />
+              <text x="120" y="222" fontSize="118" textAnchor="middle" fontFamily="'Libre Baskerville', serif" fill="#FAFAF8">M</text>
+            </svg>
           </div>
         </a>
 
@@ -4015,7 +4300,7 @@ function ScoreBar({
       </div>
       <div className={`h-2 overflow-hidden rounded-full ${trackColor}`}>
         <div
-          className="h-full rounded-full bg-[#F26522] transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          className="h-full rounded-full bg-[#2A7D6E] transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
           style={{ width: `${value}%` }}
         />
       </div>
