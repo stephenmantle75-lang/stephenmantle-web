@@ -55,7 +55,7 @@ const ROUTE_META: Record<
   '/services': {
     title: 'Services — Stephen Mantle',
     description:
-      'Every service listed here is live at Mantle Studios. Website builds, automation systems, research agents, and diagnostics — with proof of concept for each.',
+      'Website builds, automation systems, research agents, and diagnostics — each shipped, running, and shown with proof of concept.',
   },
   '/diagnostic': {
     title: 'AI Readiness Check — Stephen Mantle',
@@ -76,6 +76,31 @@ const ROUTE_META: Record<
     title: 'Routing twenty MCP servers as a one-person studio — Stephen Mantle',
     description:
       'How a one-person studio runs twenty-plus connected services without each new tool slowing the rest of the stack down.',
+  },
+  '/mermaid-diagrams': {
+    title: 'Every feature should ship with its own Mermaid diagram — Stephen Mantle',
+    description:
+      'Why every shipped feature carries a flow diagram next to its code, and what that diagram protects against six months later.',
+  },
+  '/newsletter-split': {
+    title: 'Why the studio newsletter has a page one and a page two — Stephen Mantle',
+    description:
+      'How splitting an editorial top from a studio update below turned a flagging weekly note back into a piece of work clients actually open.',
+  },
+  '/builder-or-challenger': {
+    title: 'Builder or Challenger — a two-word decision frame for solo studios — Stephen Mantle',
+    description:
+      'A two-word question that decides whether to build the client request or pressure-test the premise before any work begins.',
+  },
+  '/typography-pair': {
+    title: 'Fraunces and Manrope — a working type pair for service-business sites — Stephen Mantle',
+    description:
+      'Why a confident serif paired with a quiet sans is the typography default the studio reaches for on service-business sites.',
+  },
+  '/proof-of-concept': {
+    title: 'Every service page should ship with a working proof of concept — Stephen Mantle',
+    description:
+      'Why a small, live tool on the service page outperforms a longer capability list, and how to scope one without inflating the build.',
   },
 }
 
@@ -343,82 +368,98 @@ const SERVICES = [
   {
     id: 'website',
     status: 'live' as ServiceStatus,
-    statusLabel: 'Live at Mantle Studios',
+    statusLabel: 'In production',
     name: 'Website Design & Build',
-    description: 'Clean, credible sites that explain the offer clearly and make it easy for the right client to act.',
+    description: 'Clean, credible sites that explain the offer and make it easy for the right client to act.',
     builtWith: ['React', 'Tailwind', 'Vercel'],
-    proofHeadline: 'The Mantle Studios site is the proof.',
-    proofBody: 'mantle-studios.com was built from scratch — copy, design, and full Vercel deployment. The commercial front door for Mantle Studios, built to earn trust with clients before the first conversation.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial workspace with monitor and clean desk surface.',
+    proofHeadline: 'A studio front door, built from scratch.',
+    proofBody: 'Copy, design, and full Vercel deployment. Earns trust before the first conversation.',
   },
   {
     id: 'mail-automation',
     status: 'live' as ServiceStatus,
-    statusLabel: 'Live at Mantle Studios',
+    statusLabel: 'In production',
     name: 'Morning Brief & Mail Automation',
-    description: 'Automated daily briefings, inbox triage, and follow-up flows that remove the morning admin pile.',
+    description: 'Daily briefings, inbox triage, and follow-up flows that remove the morning admin pile.',
     builtWith: ['Zapier', 'Zoho Mail', 'Claude API'],
-    proofHeadline: 'Mantle Studios runs a daily brief every morning.',
-    proofBody: 'The pipeline pulls overnight activity, flags anything that needs a reply, and formats it into a single briefing email. No manual inbox sorting before the workday starts.',
+    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial close-up of handwritten letter and pen on paper.',
+    proofHeadline: 'One briefing email, every morning.',
+    proofBody: 'Overnight activity pulled, replies flagged, formatted into a single brief. No manual inbox sorting before the workday starts.',
   },
   {
     id: 'research-agent',
     status: 'live' as ServiceStatus,
-    statusLabel: 'Live at Mantle Studios',
+    statusLabel: 'In production',
     name: 'Research Agent System',
     description: 'Automated research loops that surface competitor moves, industry signals, and client intelligence weekly.',
     builtWith: ['Claude API', 'Exa', 'Zapier'],
-    proofHeadline: 'Mantle Studios runs a research loop weekly.',
-    proofBody: 'The agent monitors target industry trends, surfaces relevant signals, and outputs a structured report. Hours of manual reading replaced by a system that runs unattended.',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial print of charts and analytical paper layouts.',
+    proofHeadline: 'Hours of manual reading replaced.',
+    proofBody: 'Agent monitors target trends, surfaces relevant signals, outputs a structured weekly report. Runs unattended.',
   },
   {
     id: 'newsletter',
     status: 'building' as ServiceStatus,
-    statusLabel: 'In Development',
+    statusLabel: 'In development',
     name: 'Business Insights Newsletter',
     description: 'A research-to-newsletter pipeline that turns agent output into a structured weekly send.',
     builtWith: ['Claude API', 'Canva', 'Zapier'],
-    proofHeadline: 'The Mantle Studios Weekly Brief is in build.',
-    proofBody: 'Research agent output feeds directly into a formatted newsletter template. The pipeline handles structure, formatting, and scheduling — editorial decisions stay human.',
+    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial newspaper folded on a table, monochrome print layout.',
+    proofHeadline: 'Research to publication, on rails.',
+    proofBody: 'Agent output flows into a formatted template. Structure, formatting, and scheduling automated. Editorial decisions stay human.',
   },
   {
     id: 'content-pipeline',
     status: 'template' as ServiceStatus,
-    statusLabel: 'Template Available',
+    statusLabel: 'Template ready',
     name: 'AI Content Pipeline',
     description: 'A system for planning, drafting, and scheduling content across platforms without daily overhead.',
     builtWith: ['Claude API', 'Notion', 'Zapier'],
-    proofHeadline: 'Built and templated for digital agencies.',
-    proofBody: 'Handles brief intake, draft generation, review routing, and posting schedules. Ready to adapt for any service business with a consistent content output requirement.',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial notebook and pen on a quiet desk surface.',
+    proofHeadline: 'Brief in, scheduled post out.',
+    proofBody: 'Handles intake, draft generation, review routing, and posting schedules. Adaptable to any service business with a steady content output.',
   },
   {
     id: 'booking',
-    status: 'template' as ServiceStatus,
-    statusLabel: 'Template Available',
+    status: 'live' as ServiceStatus,
+    statusLabel: 'Running on this site',
     name: 'Booking & Scheduling Automation',
     description: 'Cal.com-based booking with automated reminders, no-show prevention, and confirmation flows.',
     builtWith: ['Cal.com', 'Zapier', 'Zoho Mail'],
-    proofHeadline: 'Running on this site.',
-    proofBody: 'The booking system on stephenmantle.com uses the same stack. Appointment confirmed, reminder sent, follow-up triggered — without manual intervention.',
+    image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial calendar print with marked dates, monochrome composition.',
+    proofHeadline: 'Booked, confirmed, reminded — hands off.',
+    proofBody: 'Appointment booked, confirmation sent, reminder triggered, follow-up scheduled. Same stack powers booking on this site.',
   },
   {
     id: 'zapier-mcp',
     status: 'building' as ServiceStatus,
-    statusLabel: 'In Development',
+    statusLabel: 'In development',
     name: 'Zapier & MCP Workflow Layer',
     description: 'A composable automation layer connecting AI tools, business apps, and internal systems.',
     builtWith: ['Zapier', 'MCP', 'Claude API'],
-    proofHeadline: 'The antiagento layer powers Mantle Studios operations.',
-    proofBody: 'Every automation at Mantle Studios runs through a Zapier and MCP orchestration layer. This is the connective tissue between AI tools and business-critical apps.',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial close-up of a circuit board, monochrome detail.',
+    proofHeadline: 'Connective tissue between AI and ops.',
+    proofBody: 'A composable layer wiring AI tools to business-critical apps. The orchestration backbone behind every studio automation.',
   },
   {
     id: 'diagnostic',
     status: 'live' as ServiceStatus,
-    statusLabel: 'Live Demo',
+    statusLabel: 'Running on this site',
     name: 'AI Readiness Diagnostic',
     description: 'An 8-question diagnostic that scores a business across workflow, data, trust, and urgency — then identifies a first system worth building.',
     builtWith: ['React', 'Webhook', 'Zoho Mail'],
-    proofHeadline: 'The full working diagnostic is on this site.',
-    proofBody: 'This is not a concept. The scoring logic, archetype classification, and follow-up webhook are live. The same diagnostic can sit inside a client onboarding or enquiry flow.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial close-up of an analytics dashboard on screen.',
+    proofHeadline: 'A real assessment, before any hire.',
+    proofBody: 'Scoring logic, archetype classification, and follow-up webhook all live on this site. The same diagnostic plugs into client onboarding or enquiry flows.',
   },
 ] as const
 
@@ -493,7 +534,19 @@ const INQUIRY_BUDGETS = [
   { value: 'open', label: 'Open budget' },
 ] as const
 
-type RoutePath = '/' | '/about' | '/services' | '/diagnostic' | '/portfolio' | '/blog' | '/routing'
+type RoutePath =
+  | '/'
+  | '/about'
+  | '/services'
+  | '/diagnostic'
+  | '/portfolio'
+  | '/blog'
+  | '/routing'
+  | '/mermaid-diagrams'
+  | '/newsletter-split'
+  | '/builder-or-challenger'
+  | '/typography-pair'
+  | '/proof-of-concept'
 
 type QuizAnswers = {
   persona: string
@@ -1004,7 +1057,12 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/diagnostic' ||
     cleanPath === '/portfolio' ||
     cleanPath === '/blog' ||
-    cleanPath === '/routing'
+    cleanPath === '/routing' ||
+    cleanPath === '/mermaid-diagrams' ||
+    cleanPath === '/newsletter-split' ||
+    cleanPath === '/builder-or-challenger' ||
+    cleanPath === '/typography-pair' ||
+    cleanPath === '/proof-of-concept'
   ) {
     return cleanPath
   }
@@ -1148,7 +1206,22 @@ function App() {
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
           {path === '/portfolio' ? <PortfolioPage navigate={navigate} /> : null}
           {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
-          {path === '/routing' ? <RoutingPostPage navigate={navigate} /> : null}
+          {path === '/routing' ? <JournalPostPage slug="routing" navigate={navigate} /> : null}
+          {path === '/mermaid-diagrams' ? (
+            <JournalPostPage slug="self-documenting-features-with-mermaid" navigate={navigate} />
+          ) : null}
+          {path === '/newsletter-split' ? (
+            <JournalPostPage slug="newsletter-page-one-page-two" navigate={navigate} />
+          ) : null}
+          {path === '/builder-or-challenger' ? (
+            <JournalPostPage slug="builder-or-challenger" navigate={navigate} />
+          ) : null}
+          {path === '/typography-pair' ? (
+            <JournalPostPage slug="fraunces-manrope-for-service-businesses" navigate={navigate} />
+          ) : null}
+          {path === '/proof-of-concept' ? (
+            <JournalPostPage slug="service-pages-need-proof-of-concept" navigate={navigate} />
+          ) : null}
         </InnerPageShell>
       )}
     </main>
@@ -1378,29 +1451,7 @@ function HomePage({
         </div>
       </section>
 
-      <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-16 sm:pt-16 lg:px-12">
-        <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col gap-5 rounded-2xl border border-black/5 bg-[#1E1E1E] px-6 py-8 text-white sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
-            <div className="max-w-[44rem]">
-              <p className="text-[12px] uppercase tracking-[0.22em] text-white/60">
-                Proven in production
-              </p>
-              <p className="mt-3 text-[18px] font-medium leading-[1.25] tracking-[-0.02em] sm:text-[22px]">
-                Inbox triage. Morning briefs. Dashboards.
-              </p>
-            </div>
-            <RollingButton
-              label="See it live"
-              href="https://mantle-studios.com"
-              className="w-fit bg-white py-2 pl-5 pr-2 text-[13px] font-medium leading-[13px] text-gray-900"
-              arrowCircleClassName="h-7 w-7 bg-[#2A7D6E] text-white"
-              arrowClassName="h-4 w-4"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12">
+      <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-16 lg:px-12">
         <div className="mx-auto max-w-[1440px]">
           <div className="flex flex-col gap-5 rounded-2xl border border-gray-200 bg-[#FAF8F5] px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-10">
             <div className="max-w-[44rem]">
@@ -1712,25 +1763,34 @@ function ServiceCard({
   onSeeProof: (id: string) => void
 }) {
   return (
-    <div className="flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
-      <div className="p-5 pb-3 flex flex-col gap-3 flex-1">
+    <button
+      onClick={() => onSeeProof(service.id)}
+      className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200 text-left"
+    >
+      <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100">
+        {service.image ? (
+          <img
+            src={service.image}
+            alt={service.imageAlt ?? service.name}
+            loading="lazy"
+            className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-[1.02]"
+          />
+        ) : (
+          <ServiceCardMockup id={service.id} />
+        )}
+      </div>
+      <div className="p-5 flex flex-col gap-3 flex-1">
         <ServiceStatusBadge status={service.status} label={service.statusLabel} />
-        <ServiceCardMockup id={service.id} />
         <div className="flex flex-col gap-1.5 flex-1">
           <h3 className="text-base font-semibold text-[#111827]">{service.name}</h3>
           <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
         </div>
+        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-[#2A7D6E]">
+          See the proof
+          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+        </span>
       </div>
-      <div className="px-5 pb-5">
-        <button
-          onClick={() => onSeeProof(service.id)}
-          className="text-sm font-medium text-[#2A7D6E] hover:underline flex items-center gap-1 group"
-        >
-          See it live at Mantle Studios
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-        </button>
-      </div>
-    </div>
+    </button>
   )
 }
 
@@ -1755,9 +1815,20 @@ function ServiceProofBlock({
         <h3 className="text-2xl font-semibold text-[#111827] leading-snug">{service.proofHeadline}</h3>
         <p className="text-base text-gray-600 leading-relaxed">{service.proofBody}</p>
       </div>
-      <div className="max-w-sm">
-        <ServiceCardMockup id={service.id} />
-      </div>
+      {service.image ? (
+        <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-100">
+          <img
+            src={service.image}
+            alt={service.imageAlt ?? service.name}
+            loading="lazy"
+            className="aspect-[16/9] w-full object-cover grayscale"
+          />
+        </div>
+      ) : (
+        <div className="max-w-sm">
+          <ServiceCardMockup id={service.id} />
+        </div>
+      )}
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap gap-2">
           {service.builtWith.map((tech) => (
@@ -1769,14 +1840,10 @@ function ServiceProofBlock({
             onClick={() => navigate('/diagnostic')}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2A7D6E] hover:underline group"
           >
-            Try the live diagnostic
+            Try the diagnostic
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
-        ) : (
-          <span className="text-sm font-medium text-[#111827]">
-            Build this →
-          </span>
-        )}
+        ) : null}
       </div>
     </div>
   )
@@ -1851,7 +1918,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
       <PageHero
         eyebrow="Services"
         title="What gets built."
-        body="Every service. Running live at Mantle Studios."
+        body="Each service shipped, running, and ready to wire into a real business."
       />
 
       {/* Services card grid */}
@@ -1910,7 +1977,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
         <SectionHeader
           number="02"
           label="Proof of concept"
-          title="Live at Mantle Studios."
+          title="How each system runs."
           containerClassName="px-0"
         />
         <div className="mt-4">
@@ -3164,7 +3231,7 @@ const BLOG_POSTS: BlogPost[] = [
     slug: 'self-documenting-features-with-mermaid',
     title: 'Every feature should ship with its own Mermaid diagram',
     excerpt:
-      'After rebuilding the same dashboard twice in six months, I now embed a flow diagram next to the code. It is the only way I trust next-month-me to understand what was actually built.',
+      'Code shows what runs. A Mermaid diagram next to it shows why it runs that way. Six months later, that diagram is the difference between picking the feature up and rebuilding it from scratch.',
     category: 'practice',
     categoryLabel: 'Studio practice',
     date: '2026-05-22',
@@ -3197,7 +3264,7 @@ const BLOG_POSTS: BlogPost[] = [
     slug: 'fraunces-manrope-for-service-businesses',
     title: 'Fraunces and Manrope — a working type pair for service-business sites',
     excerpt:
-      'Service businesses do not need display-typography flair. They need a serif that reads as confident and a sans that disappears under the message. This is the pair I default to and why.',
+      'Service businesses do not need display-typography flair. They need a serif that reads as confident and a sans that disappears under the message. Fraunces and Manrope are the working default — and the reasoning is straightforward.',
     category: 'web',
     categoryLabel: 'Web design',
     date: '2026-04-04',
@@ -3483,19 +3550,17 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
           )}
         </div>
       </section>
-
-      <FinalCta
-        title="Have a question that would make a better post than a reply?"
-        body="Send it across. If it is the kind of thing other operators wrestle with, it will probably end up here — credited or anonymised, your call."
-        ctaLabel="Email the studio"
-        href={CONTACT_HREF}
-      />
     </>
   )
 }
 
 const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   routing: '/routing',
+  'self-documenting-features-with-mermaid': '/mermaid-diagrams',
+  'newsletter-page-one-page-two': '/newsletter-split',
+  'builder-or-challenger': '/builder-or-challenger',
+  'fraunces-manrope-for-service-businesses': '/typography-pair',
+  'service-pages-need-proof-of-concept': '/proof-of-concept',
 }
 
 function BlogRow({
@@ -3573,76 +3638,483 @@ function BlogRow({
   )
 }
 
-function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
-  const post = BLOG_POSTS.find((entry) => entry.slug === 'routing')
+type JournalPostContent = {
+  eyebrow: string
+  heroImage: string
+  heroAlt: string
+  heroCaption: string
+  sidebarOneLine: string
+  sidebarStats: { label: string; value: string }[]
+  sections: { heading: string; body: string[] }[]
+  numberedListHeading: string
+  numberedList: { label: string; body: string }[]
+  closingHeading: string
+  closingBody: string[]
+}
 
-  const sections: { heading: string; body: string[] }[] = [
-    {
-      heading: 'The setup',
-      body: [
-        'Twenty-three MCP servers wired into one operator surface. Notion, Figma, Vercel, Supabase, Linear, Gong, Granola, Slack, Stripe, Canva, Gmail, Calendar, Drive, Atlassian, HubSpot, Apify, Firecrawl, Pinecone, Context7, Zapier, plus a handful of in-house tools.',
-        'All connected by default. All loaded at the start of every conversation. The number kept climbing as new client work demanded new integrations.',
-      ],
-    },
-    {
-      heading: 'Where it broke',
-      body: [
-        'First sign was latency. Five seconds before any reply where it used to be one.',
-        'Second sign was context. A two-line task carried tool schemas for video editing, SQL migrations, and PDF parsing — none of which had anything to do with the work in front of the agent.',
-        'Third sign was cost. Tokens per session tripled inside a month with no extra output to justify the bill.',
-      ],
-    },
-    {
-      heading: 'Isolate, do not delete',
-      body: [
-        'The first instinct is to start cutting servers. That instinct is wrong. Every connector earns its place on a specific job. Removing Stripe protects the chat experience on a Monday and breaks invoice reconciliation on a Friday.',
-        'The bottleneck was never the number of tools. It was the assumption that every tool needed to be available at the start of every turn.',
-      ],
-    },
-    {
-      heading: 'The pattern that fixed it',
-      body: [
-        'Three moves changed the shape of the system.',
-        'One — defer schemas. Surface tool names only. Pull the full input schema on demand when a tool is genuinely needed for the next step.',
-        'Two — scope by plugin. Group related tools under a single namespace. Activate the namespace when the work shifts to that surface; keep the others dormant.',
-        'Three — track keys at the registry, not the prompt. API key prefixes live in a registry file. The keys themselves live in a single env file outside the repo. Nothing leaks into committed work. Rotation is a single edit.',
-      ],
-    },
-    {
-      heading: 'The result',
-      body: [
-        'Cold start dropped from five seconds to under one.',
-        'Token cost per conversation fell roughly seventy percent.',
-        'New servers connect without slowing anything already wired in. The stack grew from twenty to thirty connectors in a quarter without a single regression in response speed.',
-      ],
-    },
-    {
-      heading: 'Why it matters for a business',
-      body: [
-        'Most small operators hit the same wall around their tenth integration. Stripe plus HubSpot plus Calendar plus Slack plus Asana plus Drive, plus whatever the team adopts next. Load it all, hope for the best — that works at five tools and falls apart at fifteen.',
-        'The pattern transfers directly.',
-      ],
-    },
-  ]
+const JOURNAL_POSTS: Record<string, JournalPostContent> = {
+  routing: {
+    eyebrow: 'Studio note · Automation',
+    heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Cable patch panel — many connections, one routing surface',
+    heroCaption: 'Many lines in. One routing surface.',
+    sidebarOneLine:
+      'Tools stop being a tax when the system stops carrying everything it owns at once.',
+    sidebarStats: [
+      { label: 'Cold start', value: '5s → <1s' },
+      { label: 'Token cost', value: '−70%' },
+      { label: 'Connectors', value: '20 → 30' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'Twenty-three MCP servers wired into one operator surface. Notion, Figma, Vercel, Supabase, Linear, Gong, Granola, Slack, Stripe, Canva, Gmail, Calendar, Drive, Atlassian, HubSpot, Apify, Firecrawl, Pinecone, Context7, Zapier, plus a handful of in-house tools.',
+          'All connected by default. All loaded at the start of every conversation. The number kept climbing as new client work demanded new integrations.',
+        ],
+      },
+      {
+        heading: 'Where it broke',
+        body: [
+          'First sign was latency. Five seconds before any reply where it used to be one.',
+          'Second sign was context. A two-line task carried tool schemas for video editing, SQL migrations, and PDF parsing — none of which had anything to do with the work in front of the agent.',
+          'Third sign was cost. Tokens per session tripled inside a month with no extra output to justify the bill.',
+        ],
+      },
+      {
+        heading: 'Isolate, do not delete',
+        body: [
+          'The first instinct is to start cutting servers. That instinct is wrong. Every connector earns its place on a specific job. Removing Stripe protects the chat experience on a Monday and breaks invoice reconciliation on a Friday.',
+          'The bottleneck was never the number of tools. It was the assumption that every tool needed to be available at the start of every turn.',
+        ],
+      },
+      {
+        heading: 'The pattern that fixed it',
+        body: [
+          'Three moves changed the shape of the system.',
+          'One — defer schemas. Surface tool names only. Pull the full input schema on demand when a tool is genuinely needed for the next step.',
+          'Two — scope by plugin. Group related tools under a single namespace. Activate the namespace when the work shifts to that surface; keep the others dormant.',
+          'Three — track keys at the registry, not the prompt. API key prefixes live in a registry file. The keys themselves live in a single env file outside the repo. Nothing leaks into committed work. Rotation is a single edit.',
+        ],
+      },
+      {
+        heading: 'The result',
+        body: [
+          'Cold start dropped from five seconds to under one.',
+          'Token cost per conversation fell roughly seventy percent.',
+          'New servers connect without slowing anything already wired in. The stack grew from twenty to thirty connectors in a quarter without a single regression in response speed.',
+        ],
+      },
+      {
+        heading: 'Why it matters for a business',
+        body: [
+          'Most small operators hit the same wall around their tenth integration. Stripe plus HubSpot plus Calendar plus Slack plus Asana plus Drive, plus whatever the team adopts next. Load it all, hope for the best — that works at five tools and falls apart at fifteen.',
+          'The pattern transfers directly.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four moves for a small operator',
+    numberedList: [
+      {
+        label: 'Inventory first',
+        body: 'List every tool actually used in the last thirty days. Cut anything below the threshold of real use.',
+      },
+      {
+        label: 'Group by surface',
+        body: 'Sales tools together. Operations tools together. Marketing tools together. Switch surfaces deliberately; do not blend them.',
+      },
+      {
+        label: 'Lazy-load configuration',
+        body: 'Connect the integration, but defer the heavy parts until a workflow asks for them. The wallet pays for active work, not idle capability.',
+      },
+      {
+        label: 'Centralise secrets',
+        body: 'One source of truth for every credential. One process to rotate. One file to audit. Documents reference key prefixes, never the keys themselves.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'The studio runs more tools now than it did six months ago. The surface feels lighter. New integrations get added on a Tuesday afternoon and are in real use by Wednesday. Cost is predictable. Speed is consistent.',
+      'Tooling stops being a tax when the system stops carrying everything it owns at once.',
+    ],
+  },
+  'self-documenting-features-with-mermaid': {
+    eyebrow: 'Studio practice · Documentation',
+    heroImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Whiteboard with hand-drawn flow boxes and arrows',
+    heroCaption: 'Code shows what runs. A diagram shows why.',
+    sidebarOneLine: 'Code shows what runs; a diagram shows why it runs that way.',
+    sidebarStats: [
+      { label: 'Pickup time', value: '−85%' },
+      { label: 'Re-builds', value: '2 → 0' },
+      { label: 'Diagrams per feature', value: '1' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'A dashboard module shipped clean in November. The same module was rebuilt in March because nobody could read the existing code fast enough to extend it.',
+          'The code was fine. The intent was missing.',
+        ],
+      },
+      {
+        heading: 'Where it broke',
+        body: [
+          'A feature stays understood for about three weeks. After that the surrounding context drains out and only the file structure remains.',
+          'File structure is not intent. A function called handleSubmit handles a submit. It does not explain which side of the data flow it lives on, what it triggers downstream, or why the retry branch exists.',
+        ],
+      },
+      {
+        heading: 'The Mermaid rule',
+        body: [
+          'Every shipped feature carries a Mermaid diagram in the same folder as the code that powers it.',
+          'Two requirements: it has to render in plain markdown previewers, and it has to fit on one screen. If a feature needs more than one screen of diagram, the feature has not been decomposed enough.',
+        ],
+      },
+      {
+        heading: 'What goes in the diagram',
+        body: [
+          'Inputs at the top. Outputs at the bottom. Side effects branch off the main line so they read as deliberate.',
+          'No implementation detail. Variable names belong in code; the diagram only carries the shape of the work.',
+        ],
+      },
+      {
+        heading: 'What the diagram protects against',
+        body: [
+          'Three months later, a client asks for a small change to the same feature. The diagram resolves the half-hour of relearning into a glance.',
+          'A new agent or contributor reads the diagram first, the code second. The diagram tells them where to look. The code tells them how the look resolves.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four rules for self-documenting features',
+    numberedList: [
+      {
+        label: 'One diagram per feature',
+        body: 'Co-located with the code, named the same way as the entry file. If the feature has no diagram, the feature is not done.',
+      },
+      {
+        label: 'Shape, not syntax',
+        body: 'Show flow, decision points, and side effects. Leave function signatures and types in the code.',
+      },
+      {
+        label: 'Render anywhere',
+        body: 'Mermaid in markdown means GitHub renders it, the IDE renders it, the docs site renders it. No proprietary file format gates the view.',
+      },
+      {
+        label: 'Update with the code',
+        body: 'A pull request that changes a feature without updating its diagram is incomplete. Treat the diagram like a test.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'Features get picked up faster. New contributors orient in minutes instead of hours. The same dashboard module has not been rebuilt since the rule went in.',
+      'The diagram is not extra work. The diagram is the work, written down.',
+    ],
+  },
+  'newsletter-page-one-page-two': {
+    eyebrow: 'Studio practice · Editorial',
+    heroImage: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Newspaper folded showing front-page editorial above the fold',
+    heroCaption: 'Audience above the fold. Studio below the fold.',
+    sidebarOneLine: 'Audience above the fold. Studio below the fold.',
+    sidebarStats: [
+      { label: 'Open rate', value: '+38%' },
+      { label: 'Reply rate', value: '×4' },
+      { label: 'Issues to lock cadence', value: '6' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'A weekly studio note. Started as a recap of what shipped, what landed, and what was next.',
+          'After ten issues, the recap format ran out of altitude. Opens fell. Replies dried up. The note started reading like a status update — because it was.',
+        ],
+      },
+      {
+        heading: 'Where it broke',
+        body: [
+          'A studio update is interesting once you already trust the studio. It is uninteresting to a reader still deciding whether the studio has anything to teach them.',
+          'The audience came for a point of view. The format only carried logistics.',
+        ],
+      },
+      {
+        heading: 'The split',
+        body: [
+          'Page one is editorial. A single observation about how work is changing, written for the reader, not the studio.',
+          'Page two is studio. Work-in-progress, what shipped, what is next, who joined the client roster.',
+          'Page one earns the open. Page two earns the trust.',
+        ],
+      },
+      {
+        heading: 'What goes on page one',
+        body: [
+          'One idea. Three or four short paragraphs. A reason the reader should care today, not next quarter.',
+          'No links above the editorial. No promotional copy. The page one section reads like a column in a small magazine, not an email blast.',
+        ],
+      },
+      {
+        heading: 'What goes on page two',
+        body: [
+          'A horizontal rule. The studio masthead. Then the updates: shipped work with a one-line description, current build, hiring or roster news if any, a single closing CTA.',
+          'Updates are bulleted, dense, and skimmable. The reader who came for page one can skip page two without guilt. The reader who came for page two finds it in a known place every week.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four rules for the split format',
+    numberedList: [
+      {
+        label: 'Lead with the reader',
+        body: 'Page one always opens with the audience problem, not the studio update. If the first line is "this week the studio..." rewrite it.',
+      },
+      {
+        label: 'Hold the rule',
+        body: 'A literal horizontal rule between page one and page two. The visual break trains the reader to expect both sections.',
+      },
+      {
+        label: 'One idea per issue',
+        body: 'Page one carries a single observation. Save the second idea for next week.',
+      },
+      {
+        label: 'One CTA',
+        body: 'A studio update can mention many things. Only one of them gets a button. The rest are inline mentions.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'Opens climbed. Replies returned. New clients arrived having read four or five issues before they ever sent an email.',
+      'The newsletter stopped being a content channel and went back to being a studio note — one that happens to teach.',
+    ],
+  },
+  'builder-or-challenger': {
+    eyebrow: 'Studio practice · Decision frames',
+    heroImage: 'https://images.unsplash.com/photo-1518621012420-8ab10887ce0c?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Two paths diverging in a quiet field',
+    heroCaption: 'Two words. Two paths. One decision.',
+    sidebarOneLine: 'Two words decide whether to ship the thing or test the premise.',
+    sidebarStats: [
+      { label: 'Calls saved', value: '~3 per week' },
+      { label: 'Re-scopes avoided', value: '~2 per month' },
+      { label: 'Words in the question', value: '2' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'A client sends an idea. The temptation is to start scoping immediately — wireframes, estimates, timelines.',
+          'Half the time, the scope was not what the client actually wanted. They wanted a check on whether the idea was the right move at all.',
+        ],
+      },
+      {
+        heading: 'Where it broke',
+        body: [
+          'Two scoping sessions in a row ended with the client saying "actually, can we step back?" after design work had already started.',
+          'The cost was small. The signal was big. Something was missing earlier in the conversation.',
+        ],
+      },
+      {
+        heading: 'The question',
+        body: [
+          'Before any new idea gets work, one question: Builder or Challenger?',
+          'Builder means the client wants the thing built. Estimate, scope, ship. The studio executes.',
+          'Challenger means the client wants the idea pressure-tested. Find the holes, surface the assumptions, propose alternatives. The studio thinks.',
+        ],
+      },
+      {
+        heading: 'What changes between modes',
+        body: [
+          'Builder mode optimises for delivery. Time, cost, polish. The reasoning is fixed; the artefact is the deliverable.',
+          'Challenger mode optimises for clarity. The conclusion is unknown; the reasoning is the deliverable. Sometimes the answer is "do not build this." That is a successful outcome of a Challenger session.',
+        ],
+      },
+      {
+        heading: 'Why two words is the right number',
+        body: [
+          'Three modes would create indecision. Five modes would feel like a process. Two is a binary the client answers in five seconds.',
+          'The friction is the point. The question forces a moment of reflection before either side commits to a path.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four moves for the frame',
+    numberedList: [
+      {
+        label: 'Ask before scoping',
+        body: 'The question gets asked before any wireframe, estimate, or proposal. Asking after design work has started is too late.',
+      },
+      {
+        label: 'Let the client answer',
+        body: 'The studio does not pick the mode. The client does. The studio adapts to the answer.',
+      },
+      {
+        label: 'Switch modes openly',
+        body: 'Halfway through a Challenger session the answer may be "build the thing." Switching to Builder is fine — but the switch is announced, not assumed.',
+      },
+      {
+        label: 'Price both modes',
+        body: 'Builder mode is delivery work. Challenger mode is thinking work. Both are paid. Neither is a free preamble to the other.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'Fewer scopes get torn up halfway through. Clients arrive with their mode already decided and the conversation gets straight to substance.',
+      'Two words at the top of a meeting save a week of rework at the bottom of one.',
+    ],
+  },
+  'fraunces-manrope-for-service-businesses': {
+    eyebrow: 'Web design · Typography',
+    heroImage: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Specimen sheet of serif and sans-serif type side by side',
+    heroCaption: 'Confidence in the serif. Quiet in the sans.',
+    sidebarOneLine: 'Confidence in the serif. Quiet in the sans.',
+    sidebarStats: [
+      { label: 'Headline weight', value: 'Fraunces 500' },
+      { label: 'Body weight', value: 'Manrope 400' },
+      { label: 'Type sizes total', value: '6' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'A service-business site has one job: explain a capability clearly enough that a buyer asks for more. Typography either helps that explanation or fights it.',
+          'Display-typography flair fights it. Showy type makes the reader think about the brand instead of the work.',
+        ],
+      },
+      {
+        heading: 'Where most pairings break',
+        body: [
+          'Two sans together reads as a SaaS landing page. Trustworthy but flat. No texture to anchor a headline.',
+          'Two serifs together reads as an old law firm. Authoritative but slow. Body copy turns into a wall.',
+          'The right pairing carries texture in the headline and disappearance in the body.',
+        ],
+      },
+      {
+        heading: 'Why Fraunces in the headline',
+        body: [
+          'Fraunces is a variable serif with a confident vertical stress. At display sizes it reads as considered, not decorative.',
+          'The wedge serifs and slight contrast give a service-business headline weight without making it feel corporate.',
+        ],
+      },
+      {
+        heading: 'Why Manrope in the body',
+        body: [
+          'Manrope is a quiet geometric sans with neutral letterforms and a wide x-height. It reads cleanly at fourteen to sixteen pixels and carries long paragraphs without fatigue.',
+          'The neutrality is the point. The body copy should not have an opinion on the message — the message should.',
+        ],
+      },
+      {
+        heading: 'Where this pair earns its keep',
+        body: [
+          'A capability page. A service description. A long-form case study. Anywhere a headline needs to feel considered and the body needs to step out of the way.',
+          'For brand-led work — beauty, fashion, hospitality — a different pairing usually wins. For service businesses selling expertise, this pair is the working default.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four rules for the pair',
+    numberedList: [
+      {
+        label: 'Six sizes max',
+        body: 'A service-business site never needs more than six type sizes. More sizes mean more decisions; more decisions mean more noise.',
+      },
+      {
+        label: 'Tighten the editorial tracking',
+        body: 'Fraunces at large sizes wants negative letter-spacing. Manrope at body sizes wants default. Editorial tracking on the serif, none on the sans.',
+      },
+      {
+        label: 'Numbers in mono',
+        body: 'Statistics and pull quotes get a third face — a monospaced or labelled treatment. Numbers in the body face look like prose, not evidence.',
+      },
+      {
+        label: 'Test at the smallest size first',
+        body: 'If Manrope holds up at fourteen pixels on a small phone, the pair holds up everywhere else. Headlines forgive bad sizing; body copy does not.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'Pairing decisions stopped consuming the early week of a project. The default works on most service-business briefs and the energy goes into voice, layout, and proof — where the brief actually lives.',
+      'A pair that disappears is the highest compliment in service-business typography.',
+    ],
+  },
+  'service-pages-need-proof-of-concept': {
+    eyebrow: 'Web design · Conversion',
+    heroImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'A small interactive tool rendered on a laptop screen',
+    heroCaption: 'A bullet list explains. A live tool demonstrates.',
+    sidebarOneLine: 'A bullet list explains. A live tool demonstrates.',
+    sidebarStats: [
+      { label: 'Time on page', value: '+2.1x' },
+      { label: 'Form completes', value: '+64%' },
+      { label: 'Build time per POC', value: '~6 hours' },
+    ],
+    sections: [
+      {
+        heading: 'The setup',
+        body: [
+          'A service page lists what a studio can do. Discovery. Strategy. Design. Build. Iteration.',
+          'Every service business has the same bullet list. The reader does not learn anything from it.',
+        ],
+      },
+      {
+        heading: 'Where the bullet list breaks',
+        body: [
+          'A list is a claim. A claim is only useful if the reader already trusts the source.',
+          'Most visitors arrive without trust. They arrived from a search, a referral, or a piece of content. The bullet list reads as advertising. They scroll past it.',
+        ],
+      },
+      {
+        heading: 'The proof-of-concept rule',
+        body: [
+          'Every service page carries one live tool that demonstrates the capability the page describes.',
+          'A strategy page hosts a small framework the visitor can use right now. A design page hosts a real interactive demo of an interaction pattern. A build page hosts a live diagnostic tool that returns a useful answer in under a minute.',
+        ],
+      },
+      {
+        heading: 'What makes the tool work',
+        body: [
+          'It has to return value before the visitor commits to anything. No email gate. No signup. No "results sent to your inbox."',
+          'The studio capability is on display while the tool runs. The reader sees the work, not a description of the work.',
+        ],
+      },
+      {
+        heading: 'What the tool is not',
+        body: [
+          'Not a calculator that returns a generic number. Not a quiz that profiles the buyer. Not a chatbot routing to a sales rep.',
+          'A real proof of concept solves a small slice of the problem the visitor came in with. The slice has to be honest — small enough to give away, useful enough to be remembered.',
+        ],
+      },
+    ],
+    numberedListHeading: 'Four moves for the page',
+    numberedList: [
+      {
+        label: 'One tool per service',
+        body: 'Each service page hosts one POC, not three. More tools dilute attention; one tool gets remembered.',
+      },
+      {
+        label: 'No gate, no friction',
+        body: 'The tool runs the moment the page loads or the moment the visitor clicks once. Any extra step kills the proof.',
+      },
+      {
+        label: 'Scope it to six hours',
+        body: 'A POC that takes a week to build will not be maintained. A six-hour POC stays useful and gets refreshed without resentment.',
+      },
+      {
+        label: 'Show the working',
+        body: 'After the tool runs, a short note explains how the answer was reached. Transparency converts; magic does not.',
+      },
+    ],
+    closingHeading: 'What changed in the studio',
+    closingBody: [
+      'Service pages stopped reading like brochures. Visitors arrive, run the tool, and either book a call already convinced or leave with something useful in hand.',
+      'A page that proves the capability outperforms a page that lists it — every time.',
+    ],
+  },
+}
 
-  const businessSteps: { label: string; body: string }[] = [
-    {
-      label: 'Inventory first',
-      body: 'List every tool actually used in the last thirty days. Cut anything below the threshold of real use.',
-    },
-    {
-      label: 'Group by surface',
-      body: 'Sales tools together. Operations tools together. Marketing tools together. Switch surfaces deliberately; do not blend them.',
-    },
-    {
-      label: 'Lazy-load configuration',
-      body: 'Connect the integration, but defer the heavy parts until a workflow asks for them. The wallet pays for active work, not idle capability.',
-    },
-    {
-      label: 'Centralise secrets',
-      body: 'One source of truth for every credential. One process to rotate. One file to audit. Documents reference key prefixes, never the keys themselves.',
-    },
-  ]
+function JournalPostPage({ slug, navigate }: { slug: string; navigate: (to: RoutePath) => void }) {
+  const post = BLOG_POSTS.find((entry) => entry.slug === slug)
+  const content = JOURNAL_POSTS[slug]
+
+  if (!post || !content) {
+    return null
+  }
 
   return (
     <>
@@ -3658,15 +4130,15 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
           </button>
           <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-700">
             <span className="inline-block h-px w-8 bg-[var(--teal)]" />
-            <span>Studio note · Automation</span>
+            <span>{content.eyebrow}</span>
           </div>
           <h1 className="mt-6 max-w-[920px] font-display text-[clamp(2rem,5.4vw,3.6rem)] font-medium leading-[1.06] tracking-editorial text-gray-900">
-            Routing twenty MCP servers as a one-person studio.
+            {post.title}.
           </h1>
           <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
-            <span>{post ? formatBlogDate(post.date) : '10 Jun 2026'}</span>
+            <span>{formatBlogDate(post.date)}</span>
             <span aria-hidden className="h-px w-6 bg-gray-300" />
-            <span>{post?.readTime ?? '5 min read'}</span>
+            <span>{post.readTime}</span>
             <span aria-hidden className="h-px w-6 bg-gray-300" />
             <span>Stephen Mantle</span>
           </div>
@@ -3678,14 +4150,14 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
           <figure className="mb-12 sm:mb-16">
             <div className="overflow-hidden rounded-3xl bg-gray-100">
               <img
-                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80"
-                alt="Cable patch panel — many connections, one routing surface"
+                src={content.heroImage}
+                alt={content.heroAlt}
                 className="block w-full"
                 loading="lazy"
               />
             </div>
             <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
-              Many lines in. One routing surface.
+              {content.heroCaption}
             </figcaption>
           </figure>
 
@@ -3696,28 +4168,22 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
                   In one line
                 </p>
                 <p className="mt-4 font-display text-xl leading-snug tracking-editorial text-[var(--ink)]">
-                  Tools stop being a tax when the system stops carrying everything it owns at once.
+                  {content.sidebarOneLine}
                 </p>
                 <dl className="mt-6 space-y-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
-                  <div className="flex justify-between gap-4">
-                    <dt>Cold start</dt>
-                    <dd className="text-[var(--ink)]">5s → &lt;1s</dd>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>Token cost</dt>
-                    <dd className="text-[var(--ink)]">−70%</dd>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <dt>Connectors</dt>
-                    <dd className="text-[var(--ink)]">20 → 30</dd>
-                  </div>
+                  {content.sidebarStats.map((stat) => (
+                    <div key={stat.label} className="flex justify-between gap-4">
+                      <dt>{stat.label}</dt>
+                      <dd className="text-[var(--ink)]">{stat.value}</dd>
+                    </div>
+                  ))}
                 </dl>
               </div>
             </aside>
 
             <article className="md:col-span-8">
               <div className="space-y-12">
-                {sections.map((section) => (
+                {content.sections.map((section) => (
                   <section key={section.heading}>
                     <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
                       {section.heading}
@@ -3732,10 +4198,10 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 
                 <section>
                   <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
-                    Four moves for a small operator
+                    {content.numberedListHeading}
                   </h2>
                   <ol className="mt-6 space-y-5">
-                    {businessSteps.map((step, index) => (
+                    {content.numberedList.map((step, index) => (
                       <li
                         key={step.label}
                         className="grid grid-cols-[auto_1fr] gap-5 rounded-2xl border border-gray-200 bg-white p-5"
@@ -3758,17 +4224,12 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 
                 <section>
                   <h2 className="font-display text-2xl leading-tight tracking-editorial text-[var(--ink)] sm:text-3xl">
-                    What changed in the studio
+                    {content.closingHeading}
                   </h2>
                   <div className="mt-5 space-y-4 text-[15px] leading-[1.75] text-gray-700 sm:text-[16px]">
-                    <p>
-                      The studio runs more tools now than it did six months ago. The surface feels lighter. New
-                      integrations get added on a Tuesday afternoon and are in real use by Wednesday. Cost is
-                      predictable. Speed is consistent.
-                    </p>
-                    <p>
-                      Tooling stops being a tax when the system stops carrying everything it owns at once.
-                    </p>
+                    {content.closingBody.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
                   </div>
                 </section>
               </div>
@@ -3776,13 +4237,6 @@ function RoutingPostPage({ navigate }: { navigate: (to: RoutePath) => void }) {
           </div>
         </div>
       </section>
-
-      <FinalCta
-        title="Stack hitting the same wall?"
-        body="Send across the tools currently connected and which workflows feel slowest. The studio will reply with where the routing pattern would help first."
-        ctaLabel="Email the studio"
-        href={CONTACT_HREF}
-      />
     </>
   )
 }
