@@ -1384,51 +1384,45 @@ function HomePage({
         <div className="mx-auto max-w-[1440px]">
           <SectionHeader
             number="02"
-            label="From the journal"
-            title="Notes from inside the studio."
+            label="Services"
+            title="Two systems, running today."
             containerClassName="px-5 sm:px-8 lg:px-12"
             borderClassName="border-gray-300"
           />
 
           <div className="grid grid-cols-1 gap-5 px-5 sm:gap-6 sm:px-8 md:grid-cols-2 lg:px-12">
-            {[...BLOG_POSTS]
-              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-              .slice(0, 2)
-              .map((post) => {
-                const route = BLOG_POST_ROUTES[post.slug]
-                return (
-                  <button
-                    key={post.slug}
-                    type="button"
-                    onClick={() => navigate(route ?? '/blog')}
-                    className="flex flex-col overflow-hidden rounded-2xl bg-white text-left shadow-[0_12px_40px_rgba(0,0,0,0.05)] transition-shadow hover:shadow-[0_16px_50px_rgba(0,0,0,0.08)]"
-                  >
-                    <div className="aspect-[16/9] overflow-hidden bg-gray-100">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-3 p-5 sm:p-6">
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500">
-                        {formatBlogDate(post.date)} · {post.readTime}
-                      </p>
-                      <h3 className="text-[18px] font-medium leading-[1.25] tracking-[-0.01em] text-gray-900 sm:text-[20px]">
-                        {post.title}
-                      </h3>
-                      <p className="text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
-                        {post.excerpt}
-                      </p>
-                      <span className="mt-1 text-[12px] uppercase tracking-[0.18em] text-[#2A7D6E]">
-                        Read post →
-                      </span>
-                    </div>
-                  </button>
-                )
-              })}
+            {SERVICES.filter((s) => s.id === 'website' || s.id === 'mail-automation').map((service) => (
+              <button
+                key={service.id}
+                type="button"
+                onClick={() => navigate('/services')}
+                className="flex flex-col overflow-hidden rounded-2xl bg-white text-left shadow-[0_12px_40px_rgba(0,0,0,0.05)] transition-shadow hover:shadow-[0_16px_50px_rgba(0,0,0,0.08)]"
+              >
+                <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+                  <img
+                    src={service.image}
+                    alt={service.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col gap-3 p-5 sm:p-6">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                    {service.statusLabel}
+                  </p>
+                  <h3 className="text-[18px] font-medium leading-[1.25] tracking-[-0.01em] text-gray-900 sm:text-[20px]">
+                    {service.name}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
+                    {service.description}
+                  </p>
+                  <span className="mt-1 text-[12px] uppercase tracking-[0.18em] text-[#2A7D6E]">
+                    View service →
+                  </span>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
