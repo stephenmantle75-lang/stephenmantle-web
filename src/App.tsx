@@ -3195,14 +3195,12 @@ function BlogRow({
     >
       <div className="md:col-span-5">
         <div className="relative overflow-hidden rounded-2xl bg-gray-100">
-          <div className="aspect-[5/4] w-full">
-            <img
-              src={post.image}
-              alt={post.title}
-              loading="lazy"
-              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-            />
-          </div>
+          <img
+            src={post.image}
+            alt={post.title}
+            loading="lazy"
+            className="block w-full transition duration-700 group-hover:scale-[1.03]"
+          />
           <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink)] backdrop-blur">
             {post.categoryLabel}
           </span>
