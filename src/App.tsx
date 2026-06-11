@@ -69,10 +69,10 @@ const ROUTE_META: Record<
     description:
       'How a one-person studio drives twenty-plus AI tools from a single workspace without each new tool slowing the others down.',
   },
-  '/mermaid-diagrams': {
-    title: 'Every feature should ship with its own Mermaid diagram — Stephen Mantle',
+  '/excalidraw-diagrams': {
+    title: 'Ask AI for an Excalidraw diagram before you trust the answer — Stephen Mantle',
     description:
-      'Why every shipped feature carries a flow diagram next to its code, and what that diagram protects against six months later.',
+      'Prompting AI to explain itself with an Excalidraw diagram turns jargon into a step-by-step visual you can actually follow. The under-the-hood view, sketched.',
   },
   '/newsletter-split': {
     title: 'Why the studio newsletter has a page one and a page two — Stephen Mantle',
@@ -541,7 +541,7 @@ type RoutePath =
   | '/diagnostic'
   | '/blog'
   | '/ai-tool-stack'
-  | '/mermaid-diagrams'
+  | '/excalidraw-diagrams'
   | '/newsletter-split'
   | '/ai-thought-partner'
   | '/typography-pair'
@@ -1052,7 +1052,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/diagnostic' ||
     cleanPath === '/blog' ||
     cleanPath === '/ai-tool-stack' ||
-    cleanPath === '/mermaid-diagrams' ||
+    cleanPath === '/excalidraw-diagrams' ||
     cleanPath === '/newsletter-split' ||
     cleanPath === '/ai-thought-partner' ||
     cleanPath === '/typography-pair' ||
@@ -1200,8 +1200,8 @@ function App() {
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
           {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
           {path === '/ai-tool-stack' ? <JournalPostPage slug="ai-tool-stack" navigate={navigate} /> : null}
-          {path === '/mermaid-diagrams' ? (
-            <JournalPostPage slug="self-documenting-features-with-mermaid" navigate={navigate} />
+          {path === '/excalidraw-diagrams' ? (
+            <JournalPostPage slug="excalidraw-process-maps" navigate={navigate} />
           ) : null}
           {path === '/newsletter-split' ? (
             <JournalPostPage slug="newsletter-page-one-page-two" navigate={navigate} />
@@ -2979,10 +2979,10 @@ type BlogPost = {
 
 const BLOG_POSTS: BlogPost[] = [
   {
-    slug: 'self-documenting-features-with-mermaid',
-    title: 'Every feature should ship with its own Mermaid diagram',
+    slug: 'excalidraw-process-maps',
+    title: 'Ask AI for an Excalidraw diagram before you trust the answer',
     excerpt:
-      'Code shows what runs. A Mermaid diagram next to it shows why it runs that way. Six months later, that diagram is the difference between picking the feature up and rebuilding it from scratch.',
+      'Prompting AI to sketch its reasoning as an Excalidraw flow turns dense jargon into a step-by-step picture. The under-the-hood view, drawn by hand, in under a minute.',
     category: 'practice',
     categoryLabel: 'Studio practice',
     date: '2026-05-22',
@@ -3150,7 +3150,7 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 
 const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   'ai-tool-stack': '/ai-tool-stack',
-  'self-documenting-features-with-mermaid': '/mermaid-diagrams',
+  'excalidraw-process-maps': '/excalidraw-diagrams',
   'newsletter-page-one-page-two': '/newsletter-split',
   'ai-thought-partner': '/ai-thought-partner',
   'fraunces-manrope-for-service-businesses': '/typography-pair',
@@ -3332,77 +3332,77 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
       'Tooling stops being a tax when the workspace stops carrying everything it owns at once.',
     ],
   },
-  'self-documenting-features-with-mermaid': {
-    eyebrow: 'Studio practice · Documentation',
+  'excalidraw-process-maps': {
+    eyebrow: 'Studio practice · Visual thinking',
     heroImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'Whiteboard with hand-drawn flow boxes and arrows',
-    heroCaption: 'Code shows what runs. A diagram shows why.',
-    sidebarOneLine: 'Code shows what runs; a diagram shows why it runs that way.',
+    heroAlt: 'Hand-drawn Excalidraw-style flow diagram on a whiteboard, boxes and arrows mapping a process step by step',
+    heroCaption: 'Ask the AI to draw it. Read the picture before trusting the answer.',
+    sidebarOneLine: 'Prompt the AI for an Excalidraw flow. Jargon turns into a step-by-step picture.',
     sidebarStats: [
-      { label: 'Pickup time', value: '−85%' },
-      { label: 'Re-builds', value: '2 → 0' },
-      { label: 'Diagrams per feature', value: '1' },
+      { label: 'Time to understand', value: '−80%' },
+      { label: 'Jargon words decoded', value: '0 → 12' },
+      { label: 'Diagram per feature', value: '1' },
     ],
     sections: [
       {
         heading: 'The setup',
         body: [
-          'A dashboard module shipped clean in November. The same module was rebuilt in March because nobody could read the existing code fast enough to extend it.',
-          'The code was fine. The intent was missing.',
+          'AI answers in paragraphs. Paragraphs hide the steps. Paragraphs hide the wiring.',
+          'Asking for an Excalidraw-style diagram flips the answer from prose into a hand-drawn flow. Inputs, decisions, side effects — all visible at once.',
         ],
       },
       {
-        heading: 'Where it broke',
+        heading: 'The prompt',
         body: [
-          'A feature stays understood for about three weeks. After that the surrounding context drains out and only the file structure remains.',
-          'File structure is not intent. A function called handleSubmit handles a submit. It does not explain which side of the data flow it lives on, what it triggers downstream, or why the retry branch exists.',
+          'Same shape every time. "Draw this as an Excalidraw flow. Inputs at the top, outputs at the bottom, one box per step. Label every arrow. Mark side effects with a dashed line."',
+          'The diagram comes back as plain text the AI can render, copy into Excalidraw, or sketch in a few seconds. No proprietary tool. No design skill needed.',
         ],
       },
       {
-        heading: 'The Mermaid rule',
+        heading: 'What it does to jargon',
         body: [
-          'Every shipped feature carries a Mermaid diagram in the same folder as the code that powers it.',
-          'Two requirements: it has to render in plain markdown previewers, and it has to fit on one screen. If a feature needs more than one screen of diagram, the feature has not been decomposed enough.',
+          'A term like "retrieval-augmented generation" stays opaque in a paragraph. The same term in a diagram becomes three boxes: question in, lookup, answer out.',
+          'Every label on the diagram is a piece of jargon translated into a verb or a noun the eye can hold. The diagram is the glossary.',
         ],
       },
       {
-        heading: 'What goes in the diagram',
+        heading: 'Under the hood, visible',
         body: [
-          'Inputs at the top. Outputs at the bottom. Side effects branch off the main line so they read as deliberate.',
-          'No implementation detail. Variable names belong in code; the diagram only carries the shape of the work.',
+          'The diagram shows where the AI is guessing and where it is reading. Where the data enters. Where the model decides. Where the answer leaves.',
+          'Once the flow is on screen, the next question writes itself — which step is wrong, which step is missing, which step costs money.',
         ],
       },
       {
-        heading: 'What the diagram protects against',
+        heading: 'Why hand-drawn',
         body: [
-          'Three months later, a client asks for a small change to the same feature. The diagram resolves the half-hour of relearning into a glance.',
-          'A new agent or contributor reads the diagram first, the code second. The diagram tells them where to look. The code tells them how the look resolves.',
+          'Excalidraw looks rough on purpose. Rough means "this is a sketch, argue with it" instead of "this is final, accept it".',
+          'A polished diagram invites passive reading. A hand-drawn diagram invites editing — by the human, by the next AI prompt, by the next version of the feature.',
         ],
       },
     ],
-    numberedListHeading: 'Four rules for self-documenting features',
+    numberedListHeading: 'Four rules for asking AI to draw the process',
     numberedList: [
       {
-        label: 'One diagram per feature',
-        body: 'Co-located with the code, named the same way as the entry file. If the feature has no diagram, the feature is not done.',
+        label: 'One diagram per question',
+        body: 'Ask for a single flow per concept. If two flows are needed, the concept has not been split yet.',
       },
       {
         label: 'Shape, not syntax',
-        body: 'Show flow, decision points, and side effects. Leave function signatures and types in the code.',
+        body: 'Boxes for steps. Arrows for direction. Dashed lines for side effects. No code, no acronyms left undefined.',
       },
       {
-        label: 'Render anywhere',
-        body: 'Mermaid in markdown means GitHub renders it, the IDE renders it, the docs site renders it. No proprietary file format gates the view.',
+        label: 'Label every arrow',
+        body: 'An unlabelled arrow hides the work. The label is where the jargon gets translated into plain English.',
       },
       {
-        label: 'Update with the code',
-        body: 'A pull request that changes a feature without updating its diagram is incomplete. Treat the diagram like a test.',
+        label: 'Sketch first, polish never',
+        body: 'Keep the Excalidraw look. Rough beats final, because rough invites the next correction.',
       },
     ],
     closingHeading: 'What changed in the studio',
     closingBody: [
-      'Features get picked up faster. New contributors orient in minutes instead of hours. The same dashboard module has not been rebuilt since the rule went in.',
-      'The diagram is not extra work. The diagram is the work, written down.',
+      'Every AI feature now ships with an Excalidraw flow next to the code. Clients read the picture, not the paragraph. New tools get understood in one glance instead of one afternoon.',
+      'The diagram is not a sketch about the work. The diagram is the work, drawn first.',
     ],
   },
   'newsletter-page-one-page-two': {
