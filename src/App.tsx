@@ -1818,7 +1818,21 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 
     try {
       if (!DIAGNOSTIC_WEBHOOK_URL) {
-        await new Promise((r) => setTimeout(r, 800))
+        const subject = `New services inquiry — ${inquiry.name}`
+        const lines = [
+          `Submission ID: ${submissionId}`,
+          `Name: ${inquiry.name}`,
+          `Email: ${inquiry.email}`,
+          `Services: ${inquiry.services.join(', ')}`,
+          `Project type: ${inquiry.projectType}`,
+          `Timeline: ${inquiry.timeline}`,
+          `Budget: ${inquiry.budget || '—'}`,
+          '',
+          'Note:',
+          inquiry.note || '—',
+        ]
+        const mailto = `mailto:hello@stephenmantle.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`
+        window.location.href = mailto
         setSubmitStatus('success')
         return
       }
