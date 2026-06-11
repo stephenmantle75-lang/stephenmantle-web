@@ -1762,16 +1762,12 @@ function ServiceCard({
       className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200 text-left"
     >
       <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100">
-        {service.image ? (
-          <img
-            src={service.image}
-            alt={service.imageAlt ?? service.name}
-            loading="lazy"
-            className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-[1.02]"
-          />
-        ) : (
-          <ServiceCardMockup id={service.id} />
-        )}
+        <img
+          src={service.image}
+          alt={service.imageAlt}
+          loading="lazy"
+          className="h-full w-full object-cover grayscale transition duration-500 group-hover:grayscale-0 group-hover:scale-[1.02]"
+        />
       </div>
       <div className="p-5 flex flex-col gap-3 flex-1">
         <ServiceStatusBadge status={service.status} label={service.statusLabel} />
@@ -1809,20 +1805,14 @@ function ServiceProofBlock({
         <h3 className="text-2xl font-semibold text-[#111827] leading-snug">{service.proofHeadline}</h3>
         <p className="text-base text-gray-600 leading-relaxed">{service.proofBody}</p>
       </div>
-      {service.image ? (
-        <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-100">
-          <img
-            src={service.image}
-            alt={service.imageAlt ?? service.name}
-            loading="lazy"
-            className="aspect-[16/9] w-full object-cover grayscale"
-          />
-        </div>
-      ) : (
-        <div className="max-w-sm">
-          <ServiceCardMockup id={service.id} />
-        </div>
-      )}
+      <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-100">
+        <img
+          src={service.image}
+          alt={service.imageAlt}
+          loading="lazy"
+          className="aspect-[16/9] w-full object-cover grayscale"
+        />
+      </div>
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex flex-wrap gap-2">
           {service.builtWith.map((tech) => (
