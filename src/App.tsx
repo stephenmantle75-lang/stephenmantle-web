@@ -84,10 +84,10 @@ const ROUTE_META: Record<
     description:
       'Walking an idea through an AI partner surfaces bottlenecks and hidden assumptions before any code gets written. The flow diagram falls out of the chat.',
   },
-  '/typography-pair': {
-    title: 'Fraunces and Manrope — a working type pair for service-business sites — Stephen Mantle',
+  '/first-email-sent': {
+    title: 'The first email that actually sent — Stephen Mantle',
     description:
-      'Why a confident serif paired with a quiet sans is the typography default the studio reaches for on service-business sites.',
+      'Two paths to a working newsletter automation — AI prompts inside a chatbot versus a terminal and a few free APIs. What one teaches that the other does not.',
   },
   '/proof-of-concept': {
     title: 'Every service page should ship with a working proof of concept — Stephen Mantle',
@@ -544,7 +544,7 @@ type RoutePath =
   | '/excalidraw-diagrams'
   | '/thirty-day-rule'
   | '/ai-thought-partner'
-  | '/typography-pair'
+  | '/first-email-sent'
   | '/proof-of-concept'
 
 type QuizAnswers = {
@@ -1055,7 +1055,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/excalidraw-diagrams' ||
     cleanPath === '/thirty-day-rule' ||
     cleanPath === '/ai-thought-partner' ||
-    cleanPath === '/typography-pair' ||
+    cleanPath === '/first-email-sent' ||
     cleanPath === '/proof-of-concept'
   ) {
     return cleanPath
@@ -1209,8 +1209,8 @@ function App() {
           {path === '/ai-thought-partner' ? (
             <JournalPostPage slug="ai-thought-partner" navigate={navigate} />
           ) : null}
-          {path === '/typography-pair' ? (
-            <JournalPostPage slug="fraunces-manrope-for-service-businesses" navigate={navigate} />
+          {path === '/first-email-sent' ? (
+            <JournalPostPage slug="first-email-that-actually-sent" navigate={navigate} />
           ) : null}
           {path === '/proof-of-concept' ? (
             <JournalPostPage slug="service-pages-need-proof-of-concept" navigate={navigate} />
@@ -3012,15 +3012,15 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'fraunces-manrope-for-service-businesses',
-    title: 'Fraunces and Manrope — a working type pair for service-business sites',
+    slug: 'first-email-that-actually-sent',
+    title: 'The first email that actually sent',
     excerpt:
-      'Service businesses do not need display-typography flair. They need a serif that reads as confident and a sans that disappears under the message. Fraunces and Manrope are the working default — and the reasoning is straightforward.',
-    category: 'web',
-    categoryLabel: 'Web design',
-    date: '2026-04-04',
+      'Two paths to a working newsletter automation — AI prompts inside a chatbot versus a terminal and a few free APIs. One felt like magic. The other taught the studio how the magic actually works.',
+    category: 'automation',
+    categoryLabel: 'Automation',
+    date: '2026-06-11',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
+    image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=80',
   },
   {
     slug: 'ai-tool-stack',
@@ -3153,7 +3153,7 @@ const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   'excalidraw-process-maps': '/excalidraw-diagrams',
   'thirty-day-rule-systems-teach-themselves': '/thirty-day-rule',
   'ai-thought-partner': '/ai-thought-partner',
-  'fraunces-manrope-for-service-businesses': '/typography-pair',
+  'first-email-that-actually-sent': '/first-email-sent',
   'service-pages-need-proof-of-concept': '/proof-of-concept',
 }
 
@@ -3561,78 +3561,85 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
       'Confidence going into a build is higher because the bad versions of the idea were already killed in conversation.',
     ],
   },
-  'fraunces-manrope-for-service-businesses': {
-    eyebrow: 'Web design · Typography',
-    heroImage: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'Specimen sheet of serif and sans-serif type side by side',
-    heroCaption: 'Confidence in the serif. Quiet in the sans.',
-    sidebarOneLine: 'Confidence in the serif. Quiet in the sans.',
+  'first-email-that-actually-sent': {
+    eyebrow: 'Automation · Build log',
+    heroImage: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'A terminal window open on a laptop, mid-script',
+    heroCaption: 'Slower path. Louder lesson.',
+    sidebarOneLine: 'Two paths to the same inbox. One felt like magic. The other taught the studio how the magic actually works.',
     sidebarStats: [
-      { label: 'Headline weight', value: 'Fraunces 500' },
-      { label: 'Body weight', value: 'Manrope 400' },
-      { label: 'Type sizes total', value: '6' },
+      { label: 'Time to first send', value: '6 days' },
+      { label: 'Monthly cost', value: '$14' },
+      { label: 'First recipients', value: '1 — myself' },
     ],
     sections: [
       {
         heading: 'The setup',
         body: [
-          'A service-business site has one job: explain a capability clearly enough that a buyer asks for more. Typography either helps that explanation or fights it.',
-          'Display-typography flair fights it. Showy type makes the reader think about the brand instead of the work.',
+          'The studio wanted its own mail. Welcome sequences. A newsletter that readers actually open. Nothing rented from Mailchimp or Substack — something the studio owned end to end.',
+          'Two paths sat open. Path one: stay inside a chatbot, ask for the wiring, paste config files, hope. Path two: open a terminal, read the docs, glue free APIs together with a small script.',
         ],
       },
       {
-        heading: 'Where most pairings break',
+        heading: 'Path one — the prompt route',
         body: [
-          'Two sans together reads as a SaaS landing page. Trustworthy but flat. No texture to anchor a headline.',
-          'Two serifs together reads as an old law firm. Authoritative but slow. Body copy turns into a wall.',
-          'The right pairing carries texture in the headline and disappearance in the body.',
+          'Faster start. Cleaner output. The chatbot named the variables, generated the YAML, even wrote a polite README.',
+          'Seventy percent of the build landed in an afternoon. The last thirty percent stayed stuck. Errors came back as suggestions the chatbot had not seen before — and the patch-and-pray loop took longer than reading the docs would have.',
         ],
       },
       {
-        heading: 'Why Fraunces in the headline',
+        heading: 'Path two — the terminal route',
         body: [
-          'Fraunces is a variable serif with a confident vertical stress. At display sizes it reads as considered, not decorative.',
-          'The wedge serifs and slight contrast give a service-business headline weight without making it feel corporate.',
+          'Slower. A Postmark trial. A cron job. A shell script that read a markdown file and sent it. Fourteen dollars a month. Every error message read in full.',
+          'Painful for the first three days. Worth it on the fourth — the moment a misfire surfaced a typo in the env file instead of a black-box failure.',
         ],
       },
       {
-        heading: 'Why Manrope in the body',
+        heading: 'The moment it landed',
         body: [
-          'Manrope is a quiet geometric sans with neutral letterforms and a wide x-height. It reads cleanly at fourteen to sixteen pixels and carries long paragraphs without fatigue.',
-          'The neutrality is the point. The body copy should not have an opinion on the message — the message should.',
+          'The first test mail arrived in the inbox on day six. Subject line spelled wrong. Footer link broken. Body copy rendered cleanly.',
+          'Hard to overstate the feeling. A piece of software built by hand sat in an inbox addressed by name. The studio owned the pipe end to end. Cheap, ugly, working.',
         ],
       },
       {
-        heading: 'Where this pair earns its keep',
+        heading: 'What the prompts taught',
         body: [
-          'A capability page. A service description. A long-form case study. Anywhere a headline needs to feel considered and the body needs to step out of the way.',
-          'For brand-led work — beauty, fashion, hospitality — a different pairing usually wins. For service businesses selling expertise, this pair is the working default.',
+          'Speed. Scaffolding. Naming things well. The prompt route was the fastest way from blank page to working draft.',
+          'For greenfield wiring with no prior knowledge, prompts beat docs-reading every time. The first version exists in minutes, not hours.',
+        ],
+      },
+      {
+        heading: 'What the terminal taught',
+        body: [
+          'Failure modes. Environment variables. What a queue actually is. Why retries matter. What a bounced email costs in sender reputation.',
+          'The terminal route forced understanding of every line. The prompt route quietly skipped the parts that did not break — until they broke later, in production, with no chatbot in the loop.',
         ],
       },
     ],
-    numberedListHeading: 'Four rules for the pair',
+    numberedListHeading: 'Four things the terminal route gave that the prompt route did not',
     numberedList: [
       {
-        label: 'Six sizes max',
-        body: 'A service-business site never needs more than six type sizes. More sizes mean more decisions; more decisions mean more noise.',
+        label: 'A real error message',
+        body: 'An exit code. A stack trace. A line number. Something to grep — not something to paraphrase back to a chatbot and hope.',
       },
       {
-        label: 'Tighten the editorial tracking',
-        body: 'Fraunces at large sizes wants negative letter-spacing. Manrope at body sizes wants default. Editorial tracking on the serif, none on the sans.',
+        label: 'A repeatable run',
+        body: 'The same command, the same output, every time. No drift between sessions. No chatbot reinventing the script halfway through a conversation.',
       },
       {
-        label: 'Numbers in mono',
-        body: 'Statistics and pull quotes get a third face — a monospaced or labelled treatment. Numbers in the body face look like prose, not evidence.',
+        label: 'A bill that made sense',
+        body: 'Postmark pricing per thousand. A cron job at zero. The studio could see exactly where each dollar of automation went — and where it was being wasted.',
       },
       {
-        label: 'Test at the smallest size first',
-        body: 'If Manrope holds up at fourteen pixels on a small phone, the pair holds up everywhere else. Headlines forgive bad sizing; body copy does not.',
+        label: 'A system explainable in one sentence',
+        body: 'Markdown file in. Postmark API out. Cron triggers the send. Three pieces. Future-Stephen reads it once and gets it in thirty seconds — the 30-day rule applied to automations.',
       },
     ],
-    closingHeading: 'What changed in the studio',
+    closingHeading: 'What the studio uses now',
     closingBody: [
-      'Pairing decisions stopped consuming the early week of a project. The default works on most service-business briefs and the energy goes into voice, layout, and proof — where the brief actually lives.',
-      'A pair that disappears is the highest compliment in service-business typography.',
+      'Hybrid. Prompts to scaffold the first draft of a new automation. Terminal to verify, debug, and ship. Both required. Neither sufficient alone.',
+      'Every new automation now starts the same way: ask the chatbot to draft, run it in a terminal, break it on purpose, fix what breaks, and only then trust it with a real send.',
+      'The first email that actually sent was the cheapest tuition the studio has paid.',
     ],
   },
   'service-pages-need-proof-of-concept': {
