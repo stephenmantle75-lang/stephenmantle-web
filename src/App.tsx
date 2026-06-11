@@ -74,10 +74,10 @@ const ROUTE_META: Record<
     description:
       'Prompting AI to explain itself with an Excalidraw diagram turns jargon into a step-by-step visual you can actually follow. The under-the-hood view, sketched.',
   },
-  '/newsletter-split': {
-    title: 'Why the studio newsletter has a page one and a page two — Stephen Mantle',
+  '/thirty-day-rule': {
+    title: 'The 30-day rule — every system must teach itself — Stephen Mantle',
     description:
-      'How splitting an editorial top from a studio update below turned a flagging weekly note back into a piece of work clients actually open.',
+      'Build every feature so future-you, six weeks later, understands it in thirty seconds. Surface view, flow view, architecture view, plain-English line — every shipped thing carries all four.',
   },
   '/ai-thought-partner': {
     title: 'Using AI as a thought partner — how one hour of chat replaces a week of rework — Stephen Mantle',
@@ -542,7 +542,7 @@ type RoutePath =
   | '/blog'
   | '/ai-tool-stack'
   | '/excalidraw-diagrams'
-  | '/newsletter-split'
+  | '/thirty-day-rule'
   | '/ai-thought-partner'
   | '/typography-pair'
   | '/proof-of-concept'
@@ -1053,7 +1053,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/blog' ||
     cleanPath === '/ai-tool-stack' ||
     cleanPath === '/excalidraw-diagrams' ||
-    cleanPath === '/newsletter-split' ||
+    cleanPath === '/thirty-day-rule' ||
     cleanPath === '/ai-thought-partner' ||
     cleanPath === '/typography-pair' ||
     cleanPath === '/proof-of-concept'
@@ -1203,8 +1203,8 @@ function App() {
           {path === '/excalidraw-diagrams' ? (
             <JournalPostPage slug="excalidraw-process-maps" navigate={navigate} />
           ) : null}
-          {path === '/newsletter-split' ? (
-            <JournalPostPage slug="newsletter-page-one-page-two" navigate={navigate} />
+          {path === '/thirty-day-rule' ? (
+            <JournalPostPage slug="thirty-day-rule-systems-teach-themselves" navigate={navigate} />
           ) : null}
           {path === '/ai-thought-partner' ? (
             <JournalPostPage slug="ai-thought-partner" navigate={navigate} />
@@ -2990,15 +2990,15 @@ const BLOG_POSTS: BlogPost[] = [
     image: '/excalidraw-diagram.png',
   },
   {
-    slug: 'newsletter-page-one-page-two',
-    title: 'Why the studio newsletter has a page one and a page two',
+    slug: 'thirty-day-rule-systems-teach-themselves',
+    title: 'The 30-day rule — every system must teach itself',
     excerpt:
-      'Editorial up top, work-in-progress below. The split is what stopped the weekly note becoming a content channel and turned it back into a studio update.',
+      'Build every feature so future-you, six weeks later, gets it in thirty seconds. Surface view, flow view, architecture view, plain-English line — every shipped thing carries all four.',
     category: 'practice',
     categoryLabel: 'Studio practice',
     date: '2026-05-09',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
   },
   {
     slug: 'ai-thought-partner',
@@ -3151,7 +3151,7 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   'ai-tool-stack': '/ai-tool-stack',
   'excalidraw-process-maps': '/excalidraw-diagrams',
-  'newsletter-page-one-page-two': '/newsletter-split',
+  'thirty-day-rule-systems-teach-themselves': '/thirty-day-rule',
   'ai-thought-partner': '/ai-thought-partner',
   'fraunces-manrope-for-service-businesses': '/typography-pair',
   'service-pages-need-proof-of-concept': '/proof-of-concept',
@@ -3403,78 +3403,87 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
       'The diagram is not a sketch about the work. The diagram is the work, drawn first.',
     ],
   },
-  'newsletter-page-one-page-two': {
-    eyebrow: 'Studio practice · Editorial',
-    heroImage: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'Newspaper folded showing front-page editorial above the fold',
-    heroCaption: 'Audience above the fold. Studio below the fold.',
-    sidebarOneLine: 'Audience above the fold. Studio below the fold.',
+  'thirty-day-rule-systems-teach-themselves': {
+    eyebrow: 'Studio practice · Documentation',
+    heroImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'A workbench of notes and sketches mapping out a system',
+    heroCaption: 'Future-you is a stranger. Build for the stranger.',
+    sidebarOneLine: 'Future-you is a stranger to current-you. Ship for the stranger.',
     sidebarStats: [
-      { label: 'Open rate', value: '+38%' },
-      { label: 'Reply rate', value: '×4' },
-      { label: 'Issues to lock cadence', value: '6' },
+      { label: 'Re-grok time', value: '30s' },
+      { label: 'Views per feature', value: '4' },
+      { label: 'Memory half-life', value: '~30 days' },
     ],
     sections: [
       {
         heading: 'The setup',
         body: [
-          'A weekly studio note. Started as a recap of what shipped, what landed, and what was next.',
-          'After ten issues, the recap format ran out of altitude. Opens fell. Replies dried up. The note started reading like a status update — because it was.',
+          'Every studio system gets revisited. Some after a week. Some after six months. Memory of why it works that way decays fast.',
+          'The 30-day rule: assume future-you forgets how this feature works inside a month. Design it now for that future stranger.',
         ],
       },
       {
-        heading: 'Where it broke',
+        heading: 'Why thirty days',
         body: [
-          'A studio update is interesting once you already trust the studio. It is uninteresting to a reader still deciding whether the studio has anything to teach them.',
-          'The audience came for a point of view. The format only carried logistics.',
+          'A month is the rough half-life of "I just built this." Beyond it, the wiring reads as foreign. Variable names that felt obvious turn into puzzle pieces.',
+          'Documentation written for current-you is wasted. Documentation written for the stranger is the only kind that survives.',
         ],
       },
       {
-        heading: 'The split',
+        heading: 'The four views',
         body: [
-          'Page one is editorial. A single observation about how work is changing, written for the reader, not the studio.',
-          'Page two is studio. Work-in-progress, what shipped, what is next, who joined the client roster.',
-          'Page one earns the open. Page two earns the trust.',
+          'Every shipped feature carries surface, flow, architecture, and a plain-English line. Skip one and the feature stops teaching itself.',
+          'Four views is the floor, not the ceiling. The point is that none of them are optional.',
         ],
       },
       {
-        heading: 'What goes on page one',
+        heading: 'What each view does',
         body: [
-          'One idea. Three or four short paragraphs. A reason the reader should care today, not next quarter.',
-          'No links above the editorial. No promotional copy. The page one section reads like a column in a small magazine, not an email blast.',
+          'Surface view: a screenshot of where the feature lives in the product. What the user sees. Where the click lands.',
+          'Flow view: a diagram of inputs to outputs. Trigger on the left, result on the right. Drawn, not described.',
+          'Architecture view: which files, which services, which keys, which routes. A map of the wiring.',
+          'Plain-English line: one paragraph a non-developer could read. No jargon, no framework names, no acronyms.',
         ],
       },
       {
-        heading: 'What goes on page two',
+        heading: 'What it costs to skip',
         body: [
-          'A horizontal rule. The studio masthead. Then the updates: shipped work with a one-line description, current build, hiring or roster news if any, a single closing CTA.',
-          'Updates are bulleted, dense, and skimmable. The reader who came for page one can skip page two without guilt. The reader who came for page two finds it in a known place every week.',
+          'Skipping the four views means re-onboarding to your own code every revisit. A two-minute fix becomes a forty-minute archaeology dig.',
+          'Worse for contractors and collaborators. They see only the code. The why is locked in a head that has already forgotten.',
+        ],
+      },
+      {
+        heading: 'What it pays back',
+        body: [
+          'Future-you opens the file, reads the four views, ships the fix in minutes.',
+          'A contractor joining for a single task gets onboarded by the file itself.',
+          'A client asking "what does this do?" gets the plain-English line, not a meeting.',
         ],
       },
     ],
-    numberedListHeading: 'Four rules for the split format',
+    numberedListHeading: 'Four views, every shipped feature',
     numberedList: [
       {
-        label: 'Lead with the reader',
-        body: 'Page one always opens with the audience problem, not the studio update. If the first line is "this week the studio..." rewrite it.',
+        label: 'Surface view first',
+        body: 'Screenshot the live feature where it lives. No abstract mockup. No reconstruction. The actual pixels the user sees on the actual screen.',
       },
       {
-        label: 'Hold the rule',
-        body: 'A literal horizontal rule between page one and page two. The visual break trains the reader to expect both sections.',
+        label: 'Flow view next',
+        body: 'A diagram, not a paragraph. Inputs on the left, outputs on the right. Hand-drawn or Excalidraw — anything that shows the steps as shapes.',
       },
       {
-        label: 'One idea per issue',
-        body: 'Page one carries a single observation. Save the second idea for next week.',
+        label: 'Architecture map',
+        body: 'Name the files, services, keys, and routes. Where the wiring lives. A future stranger should find the moving parts inside thirty seconds.',
       },
       {
-        label: 'One CTA',
-        body: 'A studio update can mention many things. Only one of them gets a button. The rest are inline mentions.',
+        label: 'Plain-English line',
+        body: 'One paragraph a thirteen-year-old could follow. What it does. Why it exists. What goes in. What comes out. No framework names.',
       },
     ],
     closingHeading: 'What changed in the studio',
     closingBody: [
-      'Opens climbed. Replies returned. New clients arrived having read four or five issues before they ever sent an email.',
-      'The newsletter stopped being a content channel and went back to being a studio note — one that happens to teach.',
+      'Every dashboard tile, every skill, every command now ships with the four views. Re-onboarding cost dropped from forty minutes to thirty seconds.',
+      'Features stopped being knowledge that lives in one head. They became artefacts that teach themselves on every read.',
     ],
   },
   'ai-thought-partner': {
