@@ -1870,13 +1870,18 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
     setSubmitError('')
 
     const submissionId = `INQ-${Date.now().toString(36).toUpperCase()}`
-    const payload = {
+    const payload = new URLSearchParams({
       source: 'stephenmantle-services-inquiry',
       submissionId,
-      ...inquiry,
+      name: inquiry.name,
+      email: inquiry.email,
       services: inquiry.services.join(', '),
+      projectType: inquiry.projectType,
+      timeline: inquiry.timeline,
+      budget: inquiry.budget,
+      note: inquiry.note,
       submittedAt: new Date().toISOString(),
-    }
+    })
 
     try {
       if (!DIAGNOSTIC_WEBHOOK_URL) {
@@ -1886,10 +1891,10 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
       }
       const res = await fetch(DIAGNOSTIC_WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        mode: 'no-cors',
+        body: payload,
       })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      if (res.type !== 'opaque' && !res.ok) throw new Error(`HTTP ${res.status}`)
       setSubmitStatus('success')
     } catch {
       setSubmitStatus('error')
