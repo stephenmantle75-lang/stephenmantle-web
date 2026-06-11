@@ -3334,8 +3334,8 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
   },
   'excalidraw-process-maps': {
     eyebrow: 'Studio practice · Visual thinking',
-    heroImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'Hand-drawn Excalidraw-style flow diagram on a whiteboard, boxes and arrows mapping a process step by step',
+    heroImage: '/excalidraw-diagram.png',
+    heroAlt: 'Excalidraw process diagram — hand-drawn boxes and arrows mapping the flow step by step',
     heroCaption: 'Ask the AI to draw it. Read the picture before trusting the answer.',
     sidebarOneLine: 'Prompt the AI for an Excalidraw flow. Jargon turns into a step-by-step picture.',
     sidebarStats: [
