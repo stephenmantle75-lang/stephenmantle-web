@@ -89,10 +89,10 @@ const ROUTE_META: Record<
     description:
       'Two paths to a working newsletter automation — AI prompts inside a chatbot versus a terminal and a few free APIs. What one teaches that the other does not.',
   },
-  '/proof-of-concept': {
-    title: 'Every service page should ship with a working proof of concept — Stephen Mantle',
+  '/canva-marketing': {
+    title: 'Canva is the digital marketing tool the studio reaches for first — Stephen Mantle',
     description:
-      'Why a small, live tool on the service page outperforms a longer capability list, and how to scope one without inflating the build.',
+      'Carousels, decks, social posts, lead magnets — how one tool covers ninety percent of the marketing surface a small studio actually ships.',
   },
 }
 
@@ -545,7 +545,7 @@ type RoutePath =
   | '/thirty-day-rule'
   | '/ai-thought-partner'
   | '/first-email-sent'
-  | '/proof-of-concept'
+  | '/canva-marketing'
 
 type QuizAnswers = {
   persona: string
@@ -1056,7 +1056,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/thirty-day-rule' ||
     cleanPath === '/ai-thought-partner' ||
     cleanPath === '/first-email-sent' ||
-    cleanPath === '/proof-of-concept'
+    cleanPath === '/canva-marketing'
   ) {
     return cleanPath
   }
@@ -1212,8 +1212,8 @@ function App() {
           {path === '/first-email-sent' ? (
             <JournalPostPage slug="first-email-that-actually-sent" navigate={navigate} />
           ) : null}
-          {path === '/proof-of-concept' ? (
-            <JournalPostPage slug="service-pages-need-proof-of-concept" navigate={navigate} />
+          {path === '/canva-marketing' ? (
+            <JournalPostPage slug="canva-as-marketing-tool" navigate={navigate} />
           ) : null}
         </InnerPageShell>
       )}
@@ -2975,6 +2975,7 @@ type BlogPost = {
   date: string
   readTime: string
   image: string
+  video?: string
 }
 
 const BLOG_POSTS: BlogPost[] = [
@@ -3034,15 +3035,16 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'service-pages-need-proof-of-concept',
-    title: 'Every service page should ship with a working proof of concept',
+    slug: 'canva-as-marketing-tool',
+    title: 'Canva is the digital marketing tool the studio reaches for first',
     excerpt:
-      'A bullet list of capabilities convinces nobody. A small live tool that demonstrates the capability convinces visitors before they ever reach a contact form.',
-    category: 'web',
-    categoryLabel: 'Web design',
-    date: '2026-03-02',
-    readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
+      'Carousels, decks, social posts, lead magnets — one tool covers ninety percent of the marketing surface a small studio actually ships. A live look at a Canva carousel coming together.',
+    category: 'practice',
+    categoryLabel: 'Studio practice',
+    date: '2026-06-09',
+    readTime: '4 min read',
+    image: '/blog/canva-carousel.jpg',
+    video: '/blog/canva-carousel.mp4',
   },
 ]
 
@@ -3154,7 +3156,7 @@ const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   'thirty-day-rule-systems-teach-themselves': '/thirty-day-rule',
   'ai-thought-partner': '/ai-thought-partner',
   'first-email-that-actually-sent': '/first-email-sent',
-  'service-pages-need-proof-of-concept': '/proof-of-concept',
+  'canva-as-marketing-tool': '/canva-marketing',
 }
 
 function BlogRow({
@@ -3195,12 +3197,26 @@ function BlogRow({
     >
       <div className="md:col-span-5">
         <div className="relative overflow-hidden rounded-2xl bg-gray-100">
-          <img
-            src={post.image}
-            alt={post.title}
-            loading="lazy"
-            className="block w-full transition duration-700 group-hover:scale-[1.03]"
-          />
+          {post.video ? (
+            <video
+              src={post.video}
+              poster={post.image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={post.title}
+              className="block w-full transition duration-700 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <img
+              src={post.image}
+              alt={post.title}
+              loading="lazy"
+              className="block w-full transition duration-700 group-hover:scale-[1.03]"
+            />
+          )}
           <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink)] backdrop-blur">
             {post.categoryLabel}
           </span>
@@ -3233,6 +3249,7 @@ function BlogRow({
 type JournalPostContent = {
   eyebrow: string
   heroImage: string
+  heroVideo?: string
   heroAlt: string
   heroCaption: string
   sidebarOneLine: string
@@ -3574,23 +3591,31 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
     ],
     sections: [
       {
-        heading: 'The setup',
+        heading: 'Where it started — two YouTube tabs',
         body: [
-          'The studio wanted its own mail. Welcome sequences. A newsletter that readers actually open. Nothing rented from Mailchimp or Substack — something the studio owned end to end.',
-          'Two paths sat open. Path one: stay inside a chatbot, ask for the wiring, paste config files, hope. Path two: open a terminal, read the docs, glue free APIs together with a small script.',
+          'Jack Roberts on one tab. Nick Saraev on the other. Two AI automation creators wiring up real workflows on camera — newsletters, lead pipes, agents that drafted emails before the kettle finished boiling.',
+          'Watching them was the first crack. AI was not a chatbot in a sidebar. It was a way to stitch ordinary tools together — a script, an API, a schedule — and let them run while the studio did other work.',
+          'The studio wanted the same thing for itself. Own mail. Welcome sequences. A newsletter that readers actually open. Nothing rented from Mailchimp or Substack — something owned end to end.',
+        ],
+      },
+      {
+        heading: 'Two paths to try it',
+        body: [
+          'Jack Roberts mostly built with prompts and no-code glue. Nick Saraev mostly built closer to the metal — terminals, scripts, raw APIs. Two flavours of the same idea.',
+          'So both got tested. Path one: stay inside a chatbot, ask for the wiring, paste config files, hope. Path two: open a terminal, read the docs, glue free APIs together with a small script.',
         ],
       },
       {
         heading: 'Path one — the prompt route',
         body: [
-          'Faster start. Cleaner output. The chatbot named the variables, generated the YAML, even wrote a polite README.',
+          'Closer to the Jack Roberts route. Faster start. Cleaner output. The chatbot named the variables, generated the YAML, even wrote a polite README.',
           'Seventy percent of the build landed in an afternoon. The last thirty percent stayed stuck. Errors came back as suggestions the chatbot had not seen before — and the patch-and-pray loop took longer than reading the docs would have.',
         ],
       },
       {
         heading: 'Path two — the terminal route',
         body: [
-          'Slower. A Postmark trial. A cron job. A shell script that read a markdown file and sent it. Fourteen dollars a month. Every error message read in full.',
+          'Closer to the Nick Saraev route. Slower. A Postmark trial. A cron job. A shell script that read a markdown file and sent it. Fourteen dollars a month. Every error message read in full.',
           'Painful for the first three days. Worth it on the fourth — the moment a misfire surfaced a typo in the env file instead of a black-box failure.',
         ],
       },
@@ -3642,77 +3667,82 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
       'The first email that actually sent was the cheapest tuition the studio has paid.',
     ],
   },
-  'service-pages-need-proof-of-concept': {
-    eyebrow: 'Web design · Conversion',
-    heroImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'A small interactive tool rendered on a laptop screen',
-    heroCaption: 'A bullet list explains. A live tool demonstrates.',
-    sidebarOneLine: 'A bullet list explains. A live tool demonstrates.',
+  'canva-as-marketing-tool': {
+    eyebrow: 'Design · Marketing',
+    heroImage: '/blog/canva-carousel.jpg',
+    heroVideo: '/blog/canva-carousel.mp4',
+    heroAlt: 'Stephen building a Canva carousel for Mantle Studios',
+    heroCaption: 'Canva carousel from blank to ready in under two minutes.',
+    sidebarOneLine: 'Canva is the cheapest, fastest path from idea to publishable marketing asset a small studio can run.',
     sidebarStats: [
-      { label: 'Time on page', value: '+2.1x' },
-      { label: 'Form completes', value: '+64%' },
-      { label: 'Build time per POC', value: '~6 hours' },
+      { label: 'Build time per asset', value: '~3 min' },
+      { label: 'Monthly cost', value: 'Free tier' },
+      { label: 'Surfaces covered', value: '9+' },
     ],
     sections: [
       {
-        heading: 'The setup',
+        heading: 'Why Canva over Figma for marketing',
         body: [
-          'A service page lists what a studio can do. Discovery. Strategy. Design. Build. Iteration.',
-          'Every service business has the same bullet list. The reader does not learn anything from it.',
+          'Figma is the studio tool for product UI — shared components, dev handoff, pixel control. Marketing assets do not need any of that.',
+          'Canva ships templates, brand kits, and resizes already wired in. A carousel that would take forty minutes in Figma takes three in Canva. The studio time goes into the words and the offer, not the chrome.',
         ],
       },
       {
-        heading: 'Where the bullet list breaks',
+        heading: 'The carousel loop',
         body: [
-          'A list is a claim. A claim is only useful if the reader already trusts the source.',
-          'Most visitors arrive without trust. They arrived from a search, a referral, or a piece of content. The bullet list reads as advertising. They scroll past it.',
+          'Pick a template. Drop in the studio brand kit. Type the hook on slide one. Rewrite each slide until the thumb-stop reads honest. Export. Post.',
+          'No new file format. No version drift. No "where is the latest." The post leaves Canva ready for LinkedIn, Instagram, and a PDF download — same source, three surfaces.',
         ],
       },
       {
-        heading: 'The proof-of-concept rule',
+        heading: 'Templates as scaffolding',
         body: [
-          'Every service page carries one live tool that demonstrates the capability the page describes.',
-          'A strategy page hosts a small framework the visitor can use right now. A design page hosts a real interactive demo of an interaction pattern. A build page hosts a live diagnostic tool that returns a useful answer in under a minute.',
+          'Templates are not the answer. Templates are the starting frame. The studio voice replaces the placeholder copy, the brand colours replace the stock palette, and a real screenshot replaces the stock photo.',
+          'A template that ships unedited reads generic. A template the studio rebuilt in fifteen minutes reads like the studio.',
         ],
       },
       {
-        heading: 'What makes the tool work',
+        heading: 'Brand kit as guardrail',
         body: [
-          'It has to return value before the visitor commits to anything. No email gate. No signup. No "results sent to your inbox."',
-          'The studio capability is on display while the tool runs. The reader sees the work, not a description of the work.',
+          'One brand kit. Two fonts. Three colours. Logo lock-up. Every Canva design pulls from the same kit, so a Tuesday carousel and a Friday lead magnet read like siblings.',
+          'The guardrail keeps the speed honest. Fast assets that drift off-brand cost more than slow assets that stay on-brand.',
         ],
       },
       {
-        heading: 'What the tool is not',
+        heading: 'Where Canva stops being enough',
         body: [
-          'Not a calculator that returns a generic number. Not a quiz that profiles the buyer. Not a chatbot routing to a sales rep.',
-          'A real proof of concept solves a small slice of the problem the visitor came in with. The slice has to be honest — small enough to give away, useful enough to be remembered.',
+          'Product UI. Live web pages. Anything a developer has to ship. Canva exports are flat — useful for socials, decks, and PDFs, useless for components that need state.',
+          'The line is clean: Canva for marketing surfaces, Figma for product surfaces, Vercel for the live site. No tool tries to be all three.',
         ],
       },
     ],
-    numberedListHeading: 'Four moves for the page',
+    numberedListHeading: 'Five marketing surfaces Canva ships in a day',
     numberedList: [
       {
-        label: 'One tool per service',
-        body: 'Each service page hosts one POC, not three. More tools dilute attention; one tool gets remembered.',
+        label: 'LinkedIn carousel',
+        body: 'Eight-to-ten slide carousel from a single template. Hook, body, payoff, CTA. Posted same morning.',
       },
       {
-        label: 'No gate, no friction',
-        body: 'The tool runs the moment the page loads or the moment the visitor clicks once. Any extra step kills the proof.',
+        label: 'Instagram post and story set',
+        body: 'Resize the carousel into a 1:1 grid post plus a 9:16 story set. One source, two surfaces, fifteen minutes.',
       },
       {
-        label: 'Scope it to six hours',
-        body: 'A POC that takes a week to build will not be maintained. A six-hour POC stays useful and gets refreshed without resentment.',
+        label: 'Pitch deck',
+        body: 'A short discovery deck for a prospect call. Brand kit on, stock photos off, real screenshots in. Twenty minutes from open to PDF export.',
       },
       {
-        label: 'Show the working',
-        body: 'After the tool runs, a short note explains how the answer was reached. Transparency converts; magic does not.',
+        label: 'Lead magnet PDF',
+        body: 'A one-page checklist or framework readers actually save. Same brand kit. Exports straight to a download link on the site.',
+      },
+      {
+        label: 'Email header strip',
+        body: 'A clean header image for the newsletter so the inbox preview reads like the studio. Built once, reused weekly.',
       },
     ],
-    closingHeading: 'What changed in the studio',
+    closingHeading: 'What the studio uses now',
     closingBody: [
-      'Service pages stopped reading like brochures. Visitors arrive, run the tool, and either book a call already convinced or leave with something useful in hand.',
-      'A page that proves the capability outperforms a page that lists it — every time.',
+      'Canva for speed — socials, decks, lead magnets, anything that has to ship today. Figma for product UI. Vercel for the live site.',
+      'The stack stays small because each tool earns its slot. Canva earned its slot the morning a carousel went live before the coffee finished brewing.',
     ],
   },
 }
@@ -3758,12 +3788,26 @@ function JournalPostPage({ slug, navigate }: { slug: string; navigate: (to: Rout
         <div className="mx-auto max-w-[1080px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <figure className="mb-12 sm:mb-16">
             <div className="overflow-hidden rounded-3xl bg-gray-100">
-              <img
-                src={content.heroImage}
-                alt={content.heroAlt}
-                className="block w-full"
-                loading="lazy"
-              />
+              {content.heroVideo ? (
+                <video
+                  src={content.heroVideo}
+                  poster={content.heroImage}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={content.heroAlt}
+                  className="block w-full"
+                />
+              ) : (
+                <img
+                  src={content.heroImage}
+                  alt={content.heroAlt}
+                  className="block w-full"
+                  loading="lazy"
+                />
+              )}
             </div>
             <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">
               {content.heroCaption}
