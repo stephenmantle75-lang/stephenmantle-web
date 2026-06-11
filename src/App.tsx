@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
   ArrowRight,
   Check,
@@ -3115,31 +3115,38 @@ function BlogRow({
 }) {
   const route = BLOG_POST_ROUTES[post.slug]
   const isLive = Boolean(route)
-  const handleOpen = () => {
-    if (route) {
-      navigate(route)
-    }
-  }
+  const className = `group grid grid-cols-1 gap-8 border-b border-gray-100 pb-12 md:grid-cols-12 md:gap-12 ${
+    reversed ? 'md:[&>*:first-child]:order-2' : ''
+  } ${isLive ? 'cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal)]' : ''}`
+
+  const Wrapper = ({ children }: { children: ReactNode }) =>
+    isLive && route ? (
+      <a
+        href={route}
+        onClick={(event) => {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          ) {
+            return
+          }
+          event.preventDefault()
+          navigate(route)
+        }}
+        className={`block no-underline text-inherit ${className}`}
+      >
+        {children}
+      </a>
+    ) : (
+      <article className={className}>{children}</article>
+    )
 
   return (
-    <article
-      onClick={isLive ? handleOpen : undefined}
-      onKeyDown={
-        isLive
-          ? (event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault()
-                handleOpen()
-              }
-            }
-          : undefined
-      }
-      role={isLive ? 'link' : undefined}
-      tabIndex={isLive ? 0 : undefined}
-      className={`group grid grid-cols-1 gap-8 border-b border-gray-100 pb-12 md:grid-cols-12 md:gap-12 ${
-        reversed ? 'md:[&>*:first-child]:order-2' : ''
-      } ${isLive ? 'cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal)]' : ''}`}
-    >
+    <Wrapper>
       <div className="md:col-span-5">
         <div className="relative overflow-hidden rounded-2xl bg-gray-100">
           {post.video ? (
@@ -3187,7 +3194,7 @@ function BlogRow({
           {isLive ? <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} /> : null}
         </span>
       </div>
-    </article>
+    </Wrapper>
   )
 }
 
