@@ -79,10 +79,10 @@ const ROUTE_META: Record<
     description:
       'How splitting an editorial top from a studio update below turned a flagging weekly note back into a piece of work clients actually open.',
   },
-  '/builder-or-challenger': {
-    title: 'Builder or Challenger — a two-word decision frame for solo studios — Stephen Mantle',
+  '/ai-thought-partner': {
+    title: 'Using AI as a thought partner — how one hour of chat replaces a week of rework — Stephen Mantle',
     description:
-      'A two-word question that decides whether to build the client request or pressure-test the premise before any work begins.',
+      'Walking an idea through an AI partner surfaces bottlenecks and hidden assumptions before any code gets written. The flow diagram falls out of the chat.',
   },
   '/typography-pair': {
     title: 'Fraunces and Manrope — a working type pair for service-business sites — Stephen Mantle',
@@ -543,7 +543,7 @@ type RoutePath =
   | '/routing'
   | '/mermaid-diagrams'
   | '/newsletter-split'
-  | '/builder-or-challenger'
+  | '/ai-thought-partner'
   | '/typography-pair'
   | '/proof-of-concept'
 
@@ -1054,7 +1054,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/routing' ||
     cleanPath === '/mermaid-diagrams' ||
     cleanPath === '/newsletter-split' ||
-    cleanPath === '/builder-or-challenger' ||
+    cleanPath === '/ai-thought-partner' ||
     cleanPath === '/typography-pair' ||
     cleanPath === '/proof-of-concept'
   ) {
@@ -1206,8 +1206,8 @@ function App() {
           {path === '/newsletter-split' ? (
             <JournalPostPage slug="newsletter-page-one-page-two" navigate={navigate} />
           ) : null}
-          {path === '/builder-or-challenger' ? (
-            <JournalPostPage slug="builder-or-challenger" navigate={navigate} />
+          {path === '/ai-thought-partner' ? (
+            <JournalPostPage slug="ai-thought-partner" navigate={navigate} />
           ) : null}
           {path === '/typography-pair' ? (
             <JournalPostPage slug="fraunces-manrope-for-service-businesses" navigate={navigate} />
@@ -3001,15 +3001,15 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'builder-or-challenger',
-    title: 'Builder or Challenger — a two-word decision frame for solo studios',
+    slug: 'ai-thought-partner',
+    title: 'Using AI as a thought partner — how one hour of chat replaces a week of rework',
     excerpt:
-      'When a client floats an idea, the first move is asking which mode they want from you. It changes whether you ship the thing or pressure-test the premise first.',
+      'Walking an idea through an AI partner before any wireframe surfaces bottlenecks and hidden assumptions inside an hour. The flow diagram falls out of the chat. Build time drops by an order of magnitude.',
     category: 'practice',
     categoryLabel: 'Studio practice',
     date: '2026-04-22',
-    readTime: '4 min read',
-    image: 'https://images.unsplash.com/photo-1518621012420-8ab10887ce0c?auto=format&fit=crop&w=1600&q=80',
+    readTime: '5 min read',
+    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1600&q=80',
   },
   {
     slug: 'fraunces-manrope-for-service-businesses',
@@ -3152,7 +3152,7 @@ const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
   routing: '/routing',
   'self-documenting-features-with-mermaid': '/mermaid-diagrams',
   'newsletter-page-one-page-two': '/newsletter-split',
-  'builder-or-challenger': '/builder-or-challenger',
+  'ai-thought-partner': '/ai-thought-partner',
   'fraunces-manrope-for-service-businesses': '/typography-pair',
   'service-pages-need-proof-of-concept': '/proof-of-concept',
 }
@@ -3479,78 +3479,79 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
       'The newsletter stopped being a content channel and went back to being a studio note — one that happens to teach.',
     ],
   },
-  'builder-or-challenger': {
-    eyebrow: 'Studio practice · Decision frames',
-    heroImage: 'https://images.unsplash.com/photo-1518621012420-8ab10887ce0c?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'Two paths diverging in a quiet field',
-    heroCaption: 'Two words. Two paths. One decision.',
-    sidebarOneLine: 'Two words decide whether to ship the thing or test the premise.',
+  'ai-thought-partner': {
+    eyebrow: 'Studio practice · Working with AI',
+    heroImage: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1600&q=80',
+    heroAlt: 'Sticky notes and arrows mapping a process flow on a wall',
+    heroCaption: 'A flow diagram falls out of a one-hour chat.',
+    sidebarOneLine: 'One hour of pre-build chat replaces a week of mid-build rework.',
     sidebarStats: [
-      { label: 'Calls saved', value: '~3 per week' },
-      { label: 'Re-scopes avoided', value: '~2 per month' },
-      { label: 'Words in the question', value: '2' },
+      { label: 'Pre-build chat', value: '~1 hour' },
+      { label: 'Rework avoided', value: '~1 week per project' },
+      { label: 'Productivity multiplier', value: '10x' },
     ],
     sections: [
       {
         heading: 'The setup',
         body: [
-          'A client sends an idea. The temptation is to start scoping immediately — wireframes, estimates, timelines.',
-          'Half the time, the scope was not what the client actually wanted. They wanted a check on whether the idea was the right move at all.',
+          'An idea lands. Old habit was to open Figma, sketch screens, start building. Momentum felt productive.',
+          'Three days in, an assumption no one had questioned would surface. The build would unwind. The week would reset.',
         ],
       },
       {
-        heading: 'Where it broke',
+        heading: 'What changed',
         body: [
-          'Two scoping sessions in a row ended with the client saying "actually, can we step back?" after design work had already started.',
-          'The cost was small. The signal was big. Something was missing earlier in the conversation.',
+          'Now nothing gets built until the idea has been walked through a chat with an AI partner first.',
+          'Goal in plain language. Inputs. Outputs. Edge cases. Who touches it. What happens when it fails.',
+          'The AI does not agree. It questions every assumption, points at gaps in the logic, asks what was deliberately left out.',
         ],
       },
       {
-        heading: 'The question',
+        heading: 'What surfaces',
         body: [
-          'Before any new idea gets work, one question: Builder or Challenger?',
-          'Builder means the client wants the thing built. Estimate, scope, ship. The studio executes.',
-          'Challenger means the client wants the idea pressure-tested. Find the holes, surface the assumptions, propose alternatives. The studio thinks.',
+          'Bottlenecks become visible in twenty minutes that would have taken three days of building to hit.',
+          'Hidden assumptions get named. The thing that was "obvious" turns out to be a choice — one of several — and the choice gets made consciously.',
+          'A process-flow diagram falls out of the conversation. By the end of the chat, the build is already half-designed.',
         ],
       },
       {
-        heading: 'What changes between modes',
+        heading: 'Why this is ten times faster',
         body: [
-          'Builder mode optimises for delivery. Time, cost, polish. The reasoning is fixed; the artefact is the deliverable.',
-          'Challenger mode optimises for clarity. The conclusion is unknown; the reasoning is the deliverable. Sometimes the answer is "do not build this." That is a successful outcome of a Challenger session.',
+          'A week of building to discover a bad assumption costs a week. A one-hour chat to discover the same assumption costs an hour.',
+          'The chat is the cheap end of the build. Mistakes made in conversation are free. Mistakes made in code are not.',
         ],
       },
       {
-        heading: 'Why two words is the right number',
+        heading: 'What the AI is not',
         body: [
-          'Three modes would create indecision. Five modes would feel like a process. Two is a binary the client answers in five seconds.',
-          'The friction is the point. The question forces a moment of reflection before either side commits to a path.',
+          'Not the decision-maker. Not the designer. Not the strategist.',
+          'The AI is a partner that asks the question the room has stopped asking. Its value is in the friction, not the agreement.',
         ],
       },
     ],
-    numberedListHeading: 'Four moves for the frame',
+    numberedListHeading: 'Four moves for using AI as a thought partner',
     numberedList: [
       {
-        label: 'Ask before scoping',
-        body: 'The question gets asked before any wireframe, estimate, or proposal. Asking after design work has started is too late.',
+        label: 'State the goal in plain language',
+        body: 'No jargon, no framework names. If the goal cannot survive plain language, it is not ready to build.',
       },
       {
-        label: 'Let the client answer',
-        body: 'The studio does not pick the mode. The client does. The studio adapts to the answer.',
+        label: 'Force step-by-step reasoning',
+        body: 'Ask the AI to walk the flow forward, one step at a time. The gaps appear in the seams between steps.',
       },
       {
-        label: 'Switch modes openly',
-        body: 'Halfway through a Challenger session the answer may be "build the thing." Switching to Builder is fine — but the switch is announced, not assumed.',
+        label: 'Ask "what could break this?"',
+        body: 'The most useful prompt. The AI surfaces the failure modes that confirmation bias has been hiding.',
       },
       {
-        label: 'Price both modes',
-        body: 'Builder mode is delivery work. Challenger mode is thinking work. Both are paid. Neither is a free preamble to the other.',
+        label: 'Save the flow diagram before any code',
+        body: 'The output of the chat is a process-flow diagram. That diagram is the spec. Coding starts from it, not before it.',
       },
     ],
     closingHeading: 'What changed in the studio',
     closingBody: [
-      'Fewer scopes get torn up halfway through. Clients arrive with their mode already decided and the conversation gets straight to substance.',
-      'Two words at the top of a meeting save a week of rework at the bottom of one.',
+      'Build time dropped by an order of magnitude. The same week now ships what used to take a month.',
+      'Confidence going into a build is higher because the bad versions of the idea were already killed in conversation.',
     ],
   },
   'fraunces-manrope-for-service-businesses': {
