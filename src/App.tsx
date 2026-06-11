@@ -5,24 +5,43 @@ import {
   Clock,
   Instagram,
   Linkedin,
-  Link as LinkIcon,
   Menu,
   Twitter,
   X,
 } from 'lucide-react'
 import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react'
 
+function LinktreeIcon({ size = 16, strokeWidth = 1.8 }: { size?: number; strokeWidth?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3v18" />
+      <path d="M4.5 7.5l15 9" />
+      <path d="M19.5 7.5l-15 9" />
+    </svg>
+  )
+}
+
 const CONTACT_HREF = 'mailto:hello@stephenmantle.com'
 const BOOKING_HREF = 'https://www.cal.eu/stephen-mantle/meeting?user=stephen-mantle&overlayCalendar=true'
 const DIAGNOSTIC_WEBHOOK_URL = import.meta.env.VITE_DIAGNOSTIC_WEBHOOK_URL ?? ''
 const PORTRAIT_IMAGE = '/stephen.png'
 
-const LINKTREE_HREF = 'https://linktr.ee/stephenmantle'
+const LINKTREE_HREF = 'https://linktr.ee/mantlestudios'
 const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/stephenmantle/', Icon: Linkedin },
   { label: 'Instagram', href: 'https://instagram.com/mantle_studios', Icon: Instagram },
   { label: 'X / Twitter', href: 'https://x.com/stephenmantle', Icon: Twitter },
-  { label: 'All links', href: LINKTREE_HREF, Icon: LinkIcon },
+  { label: 'All links', href: LINKTREE_HREF, Icon: LinktreeIcon },
 ] as const
 
 const NAV_LINKS = [
@@ -3993,7 +4012,7 @@ function SiteFooter({ navigate }: { navigate: (to: RoutePath) => void }) {
               rel="noreferrer noopener"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[13px] leading-[13px] text-white/80 transition-colors hover:border-white/60 hover:text-white"
             >
-              <LinkIcon size={14} strokeWidth={1.8} />
+              <LinktreeIcon size={14} strokeWidth={1.8} />
               <span>All links · Linktree</span>
             </a>
           </div>
