@@ -2987,7 +2987,7 @@ const BLOG_POSTS: BlogPost[] = [
     categoryLabel: 'Studio practice',
     date: '2026-05-22',
     readTime: '5 min read',
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1600&q=80',
+    image: '/excalidraw-diagram.png',
   },
   {
     slug: 'newsletter-page-one-page-two',
