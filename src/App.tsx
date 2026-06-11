@@ -6,7 +6,6 @@ import {
   Instagram,
   Linkedin,
   Menu,
-  Twitter,
   X,
 } from 'lucide-react'
 import { ChromaFlow, FilmGrain, FlutedGlass, Shader, Swirl } from 'shaders/react'
@@ -40,7 +39,6 @@ const LINKTREE_HREF = 'https://linktr.ee/mantlestudios'
 const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/stephenmantle/', Icon: Linkedin },
   { label: 'Instagram', href: 'https://instagram.com/mantle_studios', Icon: Instagram },
-  { label: 'X / Twitter', href: 'https://x.com/stephenmantle', Icon: Twitter },
   { label: 'All links', href: LINKTREE_HREF, Icon: LinktreeIcon },
 ] as const
 
@@ -1858,13 +1856,17 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
       </section>
 
       {/* Inquiry form */}
-      <section className="py-16">
+      <section className="mt-10 bg-[#F4EFE5] py-16 sm:mt-14 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <SectionHeader
           number="01"
           label="Get in touch"
           title="What are you working on?"
           containerClassName="px-0"
         />
+        <p className="-mt-6 mb-4 max-w-[40rem] text-[15px] leading-[1.7] text-gray-600 sm:-mt-10 sm:text-[16px] lg:-mt-14">
+          Quick four-step brief. Pick the service, share project shape, set timing, leave contact details. Reply inside one working day — no follow-up funnel.
+        </p>
         <div className="mt-10 max-w-2xl">
           {submitStatus === 'success' ? (
             <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
@@ -2041,6 +2043,7 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
               {submitError && <p className="mt-3 text-sm text-red-600">{submitError}</p>}
             </>
           )}
+        </div>
         </div>
       </section>
 
@@ -3963,18 +3966,6 @@ function SiteFooter({ navigate }: { navigate: (to: RoutePath) => void }) {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="/diagnostic"
-                  onClick={(event) => {
-                    event.preventDefault()
-                    navigate('/diagnostic')
-                  }}
-                  className="transition-colors hover:text-white"
-                >
-                  AI Readiness Check
-                </a>
-              </li>
             </ul>
           </div>
 
