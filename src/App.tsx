@@ -3021,7 +3021,8 @@ const BLOG_POSTS: BlogPost[] = [
     categoryLabel: 'Automation',
     date: '2026-06-11',
     readTime: '6 min read',
-    image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=80',
+    image: '/blog/automated-newsletter.jpg',
+    video: '/blog/automated-newsletter.mp4',
   },
   {
     slug: 'ai-tool-stack',
@@ -3580,9 +3581,10 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
   },
   'first-email-that-actually-sent': {
     eyebrow: 'Automation · Build log',
-    heroImage: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1600&q=80',
-    heroAlt: 'A terminal window open on a laptop, mid-script',
-    heroCaption: 'Slower path. Louder lesson.',
+    heroImage: '/blog/automated-newsletter.jpg',
+    heroVideo: '/blog/automated-newsletter.mp4',
+    heroAlt: 'Screen recording of the automated newsletter sending live',
+    heroCaption: 'The newsletter sending itself — same script that runs every Tuesday.',
     sidebarOneLine: 'Two paths to the same inbox. One felt like magic. The other taught the studio how the magic actually works.',
     sidebarStats: [
       { label: 'Time to first send', value: '6 days' },
