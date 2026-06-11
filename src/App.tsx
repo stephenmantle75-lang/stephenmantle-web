@@ -110,7 +110,7 @@ const ABOUT_BACKGROUND = [
   },
   {
     title: 'Data & reporting',
-    body: 'Accenture data consulting. I built reporting layers for non-technical leaders. Most of the work was translation, not SQL.',
+    body: 'Years at Accenture in Excel. Data reporting for marketing teams, growing the internal side of the business. Most of the work was translation, not SQL.',
   },
   {
     title: 'Under the hood',
@@ -1450,8 +1450,8 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="I kept finding the same problem in every business I worked in."
-        body="It was never the tools. It was how the work moved between people."
+        title="I want to help small businesses with what I learned the slow way."
+        body="Years inside LVMH and Accenture. Excel, data reporting, helping marketing teams and growing the internal side of the business. The patterns kept repeating. The fixes were rarely the software."
       />
 
       <section className="overflow-hidden bg-white pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-24 lg:pt-28">
@@ -1466,9 +1466,9 @@ function AboutPage() {
           <div className="grid gap-5 px-5 sm:px-8 lg:grid-cols-[0.75fr_1fr] lg:px-12">
             <div className="rounded-2xl bg-[#F5F5F5] p-5 sm:p-6">
               <p className="text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
-                I spent years inside LVMH brands watching premium operations up close.
-                Then years at Accenture building reporting layers for people who needed
-                numbers in plain English, not pivot tables.
+                Years inside LVMH brands watching premium operations up close.
+                Then years at Accenture in Excel — data reporting for marketing teams,
+                helping the internal side of the business grow.
               </p>
               <p className="mt-4 text-[15px] font-medium leading-[1.7] text-gray-900 sm:text-[17px]">
                 Two very different worlds. The same pattern underneath. The polish on
