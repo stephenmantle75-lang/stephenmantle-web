@@ -1560,13 +1560,6 @@ function AboutPage() {
           </div>
         </div>
       </section>
-
-      <FinalCta
-        title="Busier than the business should be? It's almost never the software."
-        body="Let's map the workflow first. Build only what's missing."
-        ctaLabel="Book a free intro call"
-        href={BOOKING_HREF}
-      />
     </>
   )
 }
