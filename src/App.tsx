@@ -415,8 +415,8 @@ const SERVICES = [
     name: 'Research Agent System',
     description: 'Automated research loops that surface competitor moves, industry signals, and client intelligence weekly.',
     builtWith: ['Claude API', 'Exa', 'Zapier'],
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
-    imageAlt: 'Editorial print of charts and analytical paper layouts.',
+    image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Editorial overhead of open books and notes, research workspace.',
     proofHeadline: 'Hours of manual reading replaced.',
     proofBody: 'Agent monitors target trends, surfaces relevant signals, outputs a structured weekly report. Runs unattended.',
   },
@@ -1751,16 +1751,11 @@ function ServiceCardMockup({ id }: { id: string }) {
 
 function ServiceCard({
   service,
-  onSeeProof,
 }: {
   service: typeof SERVICES[number]
-  onSeeProof: (id: string) => void
 }) {
   return (
-    <button
-      onClick={() => onSeeProof(service.id)}
-      className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200 text-left"
-    >
+    <div className="group flex flex-col bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden text-left">
       <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100">
         <img
           src={service.image}
@@ -1775,59 +1770,6 @@ function ServiceCard({
           <h3 className="text-base font-semibold text-[#111827]">{service.name}</h3>
           <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
         </div>
-        <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-[#2A7D6E]">
-          See the proof
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-        </span>
-      </div>
-    </button>
-  )
-}
-
-function ServiceProofBlock({
-  service,
-  index,
-  navigate,
-}: {
-  service: typeof SERVICES[number]
-  index: number
-  navigate?: (to: RoutePath) => void
-}) {
-  return (
-    <div className="flex flex-col gap-6 py-12 border-t border-gray-100" id={`proof-${service.id}`}>
-      <div className="flex flex-col gap-2 max-w-2xl">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
-            Service {String(index + 1).padStart(2, '0')} — {service.name}
-          </span>
-          <ServiceStatusBadge status={service.status} label={service.statusLabel} />
-        </div>
-        <h3 className="text-2xl font-semibold text-[#111827] leading-snug">{service.proofHeadline}</h3>
-        <p className="text-base text-gray-600 leading-relaxed">{service.proofBody}</p>
-      </div>
-      <div className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-100">
-        <img
-          src={service.image}
-          alt={service.imageAlt}
-          loading="lazy"
-          className="aspect-[16/9] w-full object-cover grayscale"
-        />
-      </div>
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex flex-wrap gap-2">
-          {service.builtWith.map((tech) => (
-            <span key={tech} className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">{tech}</span>
-          ))}
-        </div>
-        {service.id === 'diagnostic' && navigate ? (
-          <button
-            onClick={() => navigate('/diagnostic')}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2A7D6E] hover:underline group"
-          >
-            Try the diagnostic
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </button>
-        ) : null}
       </div>
     </div>
   )
@@ -1839,13 +1781,6 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
   const [submitStatus, setSubmitStatus] = useState<InquirySubmitStatus>('idle')
   const [submitError, setSubmitError] = useState('')
   const INQUIRY_STEPS = 4
-
-  const scrollToProof = (id: string) => {
-    const el = document.getElementById(`proof-${id}`)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
 
   const toggleService = (id: string) => {
     setInquiry((prev) => ({
@@ -1917,7 +1852,6 @@ function ServicesPage({ navigate }: { navigate: (to: RoutePath) => void }) {
             <ServiceCard
               key={service.id}
               service={service}
-              onSeeProof={scrollToProof}
             />
           ))}
         </div>
