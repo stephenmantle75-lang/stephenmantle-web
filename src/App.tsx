@@ -64,10 +64,10 @@ const ROUTE_META: Record<
     description:
       'Notes on building practical software, web design, and automation systems for service businesses.',
   },
-  '/routing': {
-    title: 'Routing twenty MCP servers as a one-person studio — Stephen Mantle',
+  '/ai-tool-stack': {
+    title: 'Running twenty AI tools from one workspace — Stephen Mantle',
     description:
-      'How a one-person studio runs twenty-plus connected services without each new tool slowing the rest of the stack down.',
+      'How a one-person studio drives twenty-plus AI tools from a single workspace without each new tool slowing the others down.',
   },
   '/mermaid-diagrams': {
     title: 'Every feature should ship with its own Mermaid diagram — Stephen Mantle',
@@ -118,7 +118,7 @@ const ABOUT_BACKGROUND = [
   },
   {
     title: 'AI developer tools',
-    body: "Cursor, Claude, MCP, agentic workflows. I use them every day now. Not as a headline — as the cheapest way I've ever found to put operational ideas in front of a real business.",
+    body: "AI tools, design tools, automation tools. I use them every day now. Not as a headline — as the cheapest way I've ever found to put operational ideas in front of a real business.",
   },
 ] as const
 
@@ -438,12 +438,12 @@ const SERVICES = [
     proofBody: 'Appointment booked, confirmation sent, reminder triggered, follow-up scheduled. Same stack powers booking on this site.',
   },
   {
-    id: 'zapier-mcp',
+    id: 'automation-layer',
     status: 'building' as ServiceStatus,
     statusLabel: 'In development',
-    name: 'Zapier & MCP Workflow Layer',
+    name: 'AI Workflow Layer',
     description: 'A composable automation layer connecting AI tools, business apps, and internal systems.',
-    builtWith: ['Zapier', 'MCP', 'Claude API'],
+    builtWith: ['Zapier', 'AI tools', 'Claude'],
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Editorial close-up of a circuit board, monochrome detail.',
     proofHeadline: 'Connective tissue between AI and ops.',
@@ -540,7 +540,7 @@ type RoutePath =
   | '/services'
   | '/diagnostic'
   | '/blog'
-  | '/routing'
+  | '/ai-tool-stack'
   | '/mermaid-diagrams'
   | '/newsletter-split'
   | '/ai-thought-partner'
@@ -1051,7 +1051,7 @@ function normalizePath(pathname: string): RoutePath {
     cleanPath === '/services' ||
     cleanPath === '/diagnostic' ||
     cleanPath === '/blog' ||
-    cleanPath === '/routing' ||
+    cleanPath === '/ai-tool-stack' ||
     cleanPath === '/mermaid-diagrams' ||
     cleanPath === '/newsletter-split' ||
     cleanPath === '/ai-thought-partner' ||
@@ -1199,7 +1199,7 @@ function App() {
           {path === '/services' ? <ServicesPage navigate={navigate} /> : null}
           {path === '/diagnostic' ? <DiagnosticPage /> : null}
           {path === '/blog' ? <BlogPage navigate={navigate} /> : null}
-          {path === '/routing' ? <JournalPostPage slug="routing" navigate={navigate} /> : null}
+          {path === '/ai-tool-stack' ? <JournalPostPage slug="ai-tool-stack" navigate={navigate} /> : null}
           {path === '/mermaid-diagrams' ? (
             <JournalPostPage slug="self-documenting-features-with-mermaid" navigate={navigate} />
           ) : null}
@@ -1698,7 +1698,7 @@ function ServiceCardMockup({ id }: { id: string }) {
       </div>
     )
   }
-  if (id === 'zapier-mcp') {
+  if (id === 'automation-layer') {
     return (
       <div className="h-36 rounded-xl overflow-hidden bg-[#111827] p-3 flex flex-col gap-2">
         <div className="flex items-center gap-2">
@@ -3023,10 +3023,10 @@ const BLOG_POSTS: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=80',
   },
   {
-    slug: 'routing',
-    title: 'Routing twenty MCP servers as a one-person studio',
+    slug: 'ai-tool-stack',
+    title: 'Running twenty AI tools from one workspace',
     excerpt:
-      'Notes from wiring Notion, Figma, Vercel, Supabase, and a dozen others into a single agent surface — without each new connector slowing the rest of the stack down.',
+      'Notes from driving Notion, Figma, Vercel, Gmail, Calendar, and a dozen others from a single AI workspace — without each new tool slowing the others down.',
     category: 'automation',
     categoryLabel: 'Automation',
     date: '2026-06-10',
@@ -3149,7 +3149,7 @@ function BlogPage({ navigate }: { navigate: (to: RoutePath) => void }) {
 }
 
 const BLOG_POST_ROUTES: Partial<Record<string, RoutePath>> = {
-  routing: '/routing',
+  'ai-tool-stack': '/ai-tool-stack',
   'self-documenting-features-with-mermaid': '/mermaid-diagrams',
   'newsletter-page-one-page-two': '/newsletter-split',
   'ai-thought-partner': '/ai-thought-partner',
@@ -3247,62 +3247,62 @@ type JournalPostContent = {
 }
 
 const JOURNAL_POSTS: Record<string, JournalPostContent> = {
-  routing: {
+  'ai-tool-stack': {
     eyebrow: 'Studio note · Automation',
     heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80',
     heroAlt: 'Cable patch panel — many connections, one routing surface',
-    heroCaption: 'Many lines in. One routing surface.',
+    heroCaption: 'Many lines in. One workspace.',
     sidebarOneLine:
-      'Tools stop being a tax when the system stops carrying everything it owns at once.',
+      'Tools stop being a tax when the workspace stops carrying everything it owns at once.',
     sidebarStats: [
-      { label: 'Cold start', value: '5s → <1s' },
-      { label: 'Token cost', value: '−70%' },
-      { label: 'Connectors', value: '20 → 30' },
+      { label: 'Reply time', value: '5s → <1s' },
+      { label: 'Running cost', value: '−70%' },
+      { label: 'Tools wired in', value: '20 → 30' },
     ],
     sections: [
       {
         heading: 'The setup',
         body: [
-          'Twenty-three MCP servers wired into one operator surface. Notion, Figma, Vercel, Supabase, Linear, Gong, Granola, Slack, Stripe, Canva, Gmail, Calendar, Drive, Atlassian, HubSpot, Apify, Firecrawl, Pinecone, Context7, Zapier, plus a handful of in-house tools.',
-          'All connected by default. All loaded at the start of every conversation. The number kept climbing as new client work demanded new integrations.',
+          'Twenty-plus AI tools all driven from one workspace. Notion for docs, Figma for design, Vercel for deploys, Gmail and Calendar for inbox and scheduling, Slack for chat, Stripe for invoicing, Canva for visuals, HubSpot for client records, plus a handful of research and writing helpers.',
+          'All connected by default. All loaded at the start of every conversation. The number kept climbing as new client work demanded new tools.',
         ],
       },
       {
         heading: 'Where it broke',
         body: [
-          'First sign was latency. Five seconds before any reply where it used to be one.',
-          'Second sign was context. A two-line task carried tool schemas for video editing, SQL migrations, and PDF parsing — none of which had anything to do with the work in front of the agent.',
-          'Third sign was cost. Tokens per session tripled inside a month with no extra output to justify the bill.',
+          'First sign was speed. Five seconds before any reply where it used to be one.',
+          'Second sign was focus. A two-line request dragged in tools for video editing, database work, and PDF parsing — none of which had anything to do with the task at hand.',
+          'Third sign was cost. The running bill tripled in a month with no extra output to show for it.',
         ],
       },
       {
-        heading: 'Isolate, do not delete',
+        heading: 'Cut nothing, calm everything',
         body: [
-          'The first instinct is to start cutting servers. That instinct is wrong. Every connector earns its place on a specific job. Removing Stripe protects the chat experience on a Monday and breaks invoice reconciliation on a Friday.',
-          'The bottleneck was never the number of tools. It was the assumption that every tool needed to be available at the start of every turn.',
+          'The first instinct is to start removing tools. That instinct is wrong. Every tool earns its place on a specific job. Removing Stripe protects the chat experience on a Monday and breaks invoice reconciliation on a Friday.',
+          'The bottleneck was never the number of tools. It was the assumption that every tool needed to be awake at the start of every turn.',
         ],
       },
       {
         heading: 'The pattern that fixed it',
         body: [
-          'Three moves changed the shape of the system.',
-          'One — defer schemas. Surface tool names only. Pull the full input schema on demand when a tool is genuinely needed for the next step.',
-          'Two — scope by plugin. Group related tools under a single namespace. Activate the namespace when the work shifts to that surface; keep the others dormant.',
-          'Three — track keys at the registry, not the prompt. API key prefixes live in a registry file. The keys themselves live in a single env file outside the repo. Nothing leaks into committed work. Rotation is a single edit.',
+          'Three moves changed the shape of the workspace.',
+          'One — keep tools asleep until needed. Show the workspace what tools exist, not how each one works. Load the full instructions only when a tool is genuinely called on.',
+          'Two — group by job. Sales tools together. Operations tools together. Marketing tools together. Wake the group that matches the work; keep the others quiet.',
+          'Three — keep credentials in one place. Logins and keys live in a single secure file outside any project. Nothing leaks into shared work. Rotating a password is one edit.',
         ],
       },
       {
         heading: 'The result',
         body: [
-          'Cold start dropped from five seconds to under one.',
-          'Token cost per conversation fell roughly seventy percent.',
-          'New servers connect without slowing anything already wired in. The stack grew from twenty to thirty connectors in a quarter without a single regression in response speed.',
+          'Reply time dropped from five seconds to under one.',
+          'Running cost per conversation fell roughly seventy percent.',
+          'New tools wire in without slowing anything already connected. The stack grew from twenty to thirty in a quarter without a single regression in response speed.',
         ],
       },
       {
         heading: 'Why it matters for a business',
         body: [
-          'Most small operators hit the same wall around their tenth integration. Stripe plus HubSpot plus Calendar plus Slack plus Asana plus Drive, plus whatever the team adopts next. Load it all, hope for the best — that works at five tools and falls apart at fifteen.',
+          'Most small operators hit the same wall around their tenth tool. Stripe plus HubSpot plus Calendar plus Slack plus Asana plus Drive, plus whatever the team adopts next. Load it all, hope for the best — that works at five tools and falls apart at fifteen.',
           'The pattern transfers directly.',
         ],
       },
@@ -3314,22 +3314,22 @@ const JOURNAL_POSTS: Record<string, JournalPostContent> = {
         body: 'List every tool actually used in the last thirty days. Cut anything below the threshold of real use.',
       },
       {
-        label: 'Group by surface',
-        body: 'Sales tools together. Operations tools together. Marketing tools together. Switch surfaces deliberately; do not blend them.',
+        label: 'Group by job',
+        body: 'Sales tools together. Operations tools together. Marketing tools together. Switch contexts deliberately; do not blend them.',
       },
       {
-        label: 'Lazy-load configuration',
-        body: 'Connect the integration, but defer the heavy parts until a workflow asks for them. The wallet pays for active work, not idle capability.',
+        label: 'Load on demand',
+        body: 'Connect the tool, but keep the heavy parts asleep until a workflow asks for them. The wallet pays for active work, not idle capability.',
       },
       {
-        label: 'Centralise secrets',
-        body: 'One source of truth for every credential. One process to rotate. One file to audit. Documents reference key prefixes, never the keys themselves.',
+        label: 'Centralise logins',
+        body: 'One source of truth for every credential. One process to rotate. One file to audit. Shared docs reference the tool name, never the password itself.',
       },
     ],
     closingHeading: 'What changed in the studio',
     closingBody: [
-      'The studio runs more tools now than it did six months ago. The surface feels lighter. New integrations get added on a Tuesday afternoon and are in real use by Wednesday. Cost is predictable. Speed is consistent.',
-      'Tooling stops being a tax when the system stops carrying everything it owns at once.',
+      'The studio runs more AI tools now than it did six months ago. The workspace feels lighter. New tools get added on a Tuesday afternoon and are in real use by Wednesday. Cost is predictable. Speed is consistent.',
+      'Tooling stops being a tax when the workspace stops carrying everything it owns at once.',
     ],
   },
   'self-documenting-features-with-mermaid': {
