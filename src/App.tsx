@@ -1444,8 +1444,8 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="I want to help small businesses with what I learned the slow way."
-        body="Years inside LVMH and Accenture. Excel, data reporting, helping marketing teams and growing the internal side of the business. The patterns kept repeating. The fixes were rarely the software."
+        title="AI changed how I see what's possible — for my own projects, and for any business that harnesses it right."
+        body="No longer a question of when it arrives. It's here. Years inside LVMH and Accenture taught me where the real friction lives — the fixes were rarely the software. AI is finally the leverage that closes that gap."
       />
 
       <section className="overflow-hidden bg-white pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pb-24 lg:pt-28">
