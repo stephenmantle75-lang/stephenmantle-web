@@ -1329,55 +1329,24 @@ function HomePage({
           />
 
           <div className="px-5 sm:px-8 lg:px-12">
-            <div className="overflow-hidden rounded-2xl bg-[#1E1E1E] p-6 sm:p-10 lg:p-14">
-              <svg
-                viewBox="0 0 1200 560"
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-auto w-full"
-                role="img"
-                aria-label="Diagram: inbox, bookings and spreadsheets flow into one dashboard, which gives back hours."
-              >
-                <defs>
-                  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                    <path d="M0,0 L10,5 L0,10 z" fill="#2A7D6E" />
-                  </marker>
-                </defs>
-
-                <g fontFamily="Manrope, sans-serif" fill="#FAF8F5">
-                  <g>
-                    <rect x="60" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
-                    <text x="200" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your inbox</text>
-                    <text x="200" y="145" textAnchor="middle" fontSize="14" opacity="0.6">enquiries, quotes, follow-ups</text>
-                  </g>
-                  <g>
-                    <rect x="460" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
-                    <text x="600" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your bookings</text>
-                    <text x="600" y="145" textAnchor="middle" fontSize="14" opacity="0.6">calendar, confirmations, no-shows</text>
-                  </g>
-                  <g>
-                    <rect x="860" y="60" width="280" height="110" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" />
-                    <text x="1000" y="115" textAnchor="middle" fontSize="22" fontWeight="500">Your spreadsheets</text>
-                    <text x="1000" y="145" textAnchor="middle" fontSize="14" opacity="0.6">invoices, suppliers, jobs done</text>
-                  </g>
-
-                  <path d="M200 170 L590 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
-                  <path d="M600 170 L600 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
-                  <path d="M1000 170 L610 260" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
-
-                  <g>
-                    <rect x="380" y="270" width="440" height="120" rx="14" fill="#2A7D6E" />
-                    <text x="600" y="320" textAnchor="middle" fontSize="24" fontWeight="600" fill="#FAF8F5">One place to see it all</text>
-                    <text x="600" y="355" textAnchor="middle" fontSize="14" fill="#FAF8F5" opacity="0.85">a small dashboard built around the way the business actually runs</text>
-                  </g>
-
-                  <path d="M600 390 L600 460" stroke="#2A7D6E" strokeWidth="2" fill="none" markerEnd="url(#arrow)" />
-
-                  <g>
-                    <rect x="320" y="470" width="560" height="70" rx="14" fill="none" stroke="#FAF8F5" strokeWidth="1.5" strokeDasharray="6 6" />
-                    <text x="600" y="513" textAnchor="middle" fontSize="20" fontWeight="500" fill="#FAF8F5">Hours back. Fewer dropped balls.</text>
-                  </g>
-                </g>
-              </svg>
+            <div className="overflow-hidden rounded-2xl bg-[#1E1E1E]">
+              <video
+                src="/ai-readiness-hero.mp4"
+                poster="/ai-readiness-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Animated explainer showing AI readiness, workflow clarity, automations, and business outcomes."
+                className="block aspect-video w-full object-cover motion-reduce:hidden"
+              />
+              <img
+                src="/ai-readiness-poster.jpg"
+                alt="AI readiness explainer showing scattered work becoming one clear operating system."
+                loading="lazy"
+                className="hidden aspect-video w-full object-cover motion-reduce:block"
+              />
             </div>
 
             <p className="mt-8 max-w-[640px] text-[15px] leading-relaxed text-gray-700 sm:text-[16px]">

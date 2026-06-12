@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "render:hero": "remotion render src/remotion/index.ts AiReadinessHero public/ai-readiness-hero.mp4 --codec=h264 --crf=23 --pixel-format=yuv420p --muted",
+    "render:hero:poster": "remotion still src/remotion/index.ts AiReadinessHero public/ai-readiness-poster.jpg --frame=720"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
@@ -21,6 +23,8 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.17",
+    "@remotion/cli": "4.0.475",
+    "remotion": "4.0.475",
     "typescript": "^5.6.2",
     "vite": "^4.5.5"
   }
